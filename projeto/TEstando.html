@@ -106,6 +106,42 @@
   <p>In rutrum turpis ac ligula consectetur semper. Sed congue id mauris eu pulvinar. Nulla sed interdum lorem, vel facilisis lorem. Phasellus nec lacus id purus molestie vehicula. Nullam dictum aliquam eros. Phasellus aliquam diam eu metus faucibus, suscipit aliquet nunc tempus. In hac habitasse platea dictumst. Fusce finibus diam eu maximus ornare. Maecenas ac lacinia lectus, nec semper neque. Fusce vitae tortor quis sapien consectetur facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam dignissim nunc quis neque sodales faucibus. Etiam interdum lectus sit amet lacus facilisis luctus. Nulla at arcu eros. Nullam iaculis, mi ac viverra aliquet, nulla nunc lobortis enim, a porta ante enim a dui. Aenean dapibus sem quis feugiat tempus.</p>
 </div>
 
+  <!--butão para redirecionar ao topo-->
+  <button onclick="topFunction()" id="myBtn" title="Go to top">Topo</button>
+  <script>
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+
+  <!--Rodapé-->
+  <div class="footer">
+    <a href="https://www.facebook.com/patavoluntariamcz/" style="color: white; padding-right: 10px"><i class="fa fa-facebook-square" style="padding-right: 3px"></i>Facebook</a>
+    <a href="https://www.instagram.com/patavoluntaria/?hl=pt-br" style="color: white; padding-right: 10px"><i class="fa fa-instagram" style="padding-right: 3px"></i>Instagram</a>
+    <a href="" style="color: white; padding-right: 10px" onclick="myFunction()"><i class="fa fa-google" style="padding-right: 3px"></i>G-mail</a>
+
+      <script>
+          function myFunction() {
+          alert("G-mail - lucas.ala1999@gmail.com");
+      }
+      </script>
+
+
+    <a  style="color: white; padding-right: 10px"><i class="fa fa-whatsapp" style="padding-right: 3px"></i>contato: (+55) 82 00000-0000</a>
+
+
+
 
 
     <!-- Bootstrap core JavaScript
