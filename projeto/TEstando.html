@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <head>
 
-  <title>Bootstrap Example</title>
+  <title>GerartIFAL - Pagina Inicial</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -10,8 +10,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="csszin.css">
-  <link rel="stylesheet" type="text/css" href="cssnavcolor.css">
+
+
+  <link rel="stylesheet" type="text/css" href="css/csszin.css">
+  <link rel="stylesheet" type="text/css" href="css/cssnavcolor.css">
 
 </head>
 
@@ -24,7 +26,7 @@
 
     <nav class="navbar navbar-expand-sm bg-success navbar-light sticky-top ">
 <!-- Logo -->
-	<a class="navbar-brand" href="TEstando.html">Home Gerart</a>
+	<a class="navbar-brand" href="TEstando.html">GERARTIFAL</a>
 
 <!-- Toggler/collapsibe Button -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -35,17 +37,26 @@
 	<div class="collapse navbar-collapse  " id="collapsibleNavbar">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Active</a>
+				<a class="nav-link" href="#" >Página Inicial</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
+				<a class="nav-link" href="#">Projetos e Grupos Artísticos</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
+				<a class="nav-link disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Inscrições On-Line</a>
 			</li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Histórico de Eventos</a>
+      </li>
 			<li class="nav-item">
-				<a class="nav-link disabled" href="#">Disabled</a>
+				<a class="nav-link disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
 			</li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Sobre o Site</a>
+      </li>
 		</ul>
   </div>
 	<form class="navbar-form " action="/action_page.php" id="pesquisa">
@@ -58,7 +69,8 @@
 	</form>
 </nav>
 
-<div class="container">
+<br>
+<div class="container" >
 <div id="demo" class="carousel slide" data-ride="carousel">
 
   <!-- Indicators -->
@@ -66,29 +78,48 @@
     <li data-target="#demo" data-slide-to="0" class="active"></li>
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li>
+    <li data-target="#demo" data-slide-to="4"></li>
   </ul>
 
   <!-- The slideshow -->
-  <div class="carousel-inner crop" align="center">
+  <div class="carousel-inner " align="center">
     <div class="carousel-item active">
-      <img class="img-responsive" src="batatadoce.jpg" alt="Los Angeles">
-	  <div class="carousel-caption d-none d-md-block text-dark">
-    <h5>Gordo Vencedor</h5>
+      <a href="#"><img src="img/batatadoce.jpg" alt="Primeira"></a>
+	  <div class="carousel-caption d-none d-md-block ">
+    <h4>Gordo Vencedor</h4>
     <p>Gordo Ganhou o Concurso De Melhor Gordo Do Ano</p>
   </div>
     </div>
     <div class="carousel-item">
-      <img class="img-responsive" src="Toquio_ultrajando2.jpg" alt="Chicago">
-	  <div class="carousel-caption d-none d-md-block text-dark">
-	  <h5>Judeoul Vencedor</h5>
+      <a href="#"><img src="img/Toquio_ultrajando2.jpg" alt="Segunda"></a>
+	  <div class="carousel-caption d-none d-md-block ">
+	  <h4>Judeoul Vencedor</h4>
     <p>Judeoul Ganhou o Concurso De Melhor Judeoul Do Ano</p>
 	</div>
     </div>
     <div class="carousel-item">
-      <img class="img-responsive" src="filhodofausto.jpg" alt="New York">
+      <a href="#"><img src="img/clavedesol.jpg" alt="Terceira"></a>
+    <div class="carousel-caption d-none d-md-block ">
+    <h4>Musica Livre</h4>
+    <p>Já Pensou em poder tocar em qualquer lugar?</p>
+    </div>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="img/cursoteatro.jpg" alt="Quarta"></a>
+    <div class="carousel-caption d-none d-md-block ">
+    <h4>Curso Novos Musicais</h4>
+    <p> Se Inscreva Clicando Nessa Imagem</p>
+    </div>
+    </div>
+    <div class="carousel-item">
+      <a href="#"><img src="img/kaneki.png" alt="Quinta"></a>
+    <div class="carousel-caption d-none d-md-block ">
+    <h4>Kaneki</h4>
+    <p>Só o kaneki msm</p>
+    </div>
     </div>
   </div>
-
   <!-- Left and right controls -->
   <a class="carousel-control-prev" href="#demo" data-slide="prev">
     <span class="carousel-control-prev-icon"></span>
@@ -98,49 +129,36 @@
   </a>
 </div>
 </div>
-
-<div class="container-fluid" align="center"><br>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt massa mi, quis tristique eros tincidunt ac. Maecenas nec turpis ornare, elementum neque a, vulputate urna. Donec nec pellentesque erat. Pellentesque leo enim, fringilla scelerisque tortor et, efficitur tincidunt eros. Fusce interdum odio et interdum semper. Maecenas ut odio vitae mauris dignissim iaculis. Praesent finibus quis eros accumsan ultricies. Nunc ac augue imperdiet, fringilla metus ut, iaculis leo. Praesent luctus blandit dolor. Vivamus eu vehicula risus. In gravida lorem odio, id euismod ex tincidunt eu. Mauris vel dapibus risus. Morbi pulvinar nisl congue, fermentum ligula eget, eleifend sem.</p>
-  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras lobortis nibh venenatis diam sollicitudin, sed cursus odio vulputate. In velit augue, malesuada vel nibh at, volutpat volutpat purus. In porta venenatis orci, quis laoreet quam malesuada ac. Nullam hendrerit porttitor lorem, eu dapibus elit blandit eget. Phasellus eu sem fermentum, varius risus eget, pulvinar erat. Duis fermentum gravida est. Curabitur tortor justo, vehicula ac lectus at, tincidunt imperdiet sapien. Donec auctor, lectus ac placerat lacinia, metus neque fringilla turpis, ut sollicitudin ipsum dolor malesuada magna. Sed et orci non nisl accumsan dignissim. Cras lobortis ex nibh, sit amet blandit eros hendrerit sit amet. Nullam tincidunt, mi non vehicula rhoncus, mauris ipsum vehicula diam, eu sodales nunc eros eu augue. Quisque tellus nunc, placerat nec accumsan sit amet, luctus nec ipsum. Phasellus lobortis consectetur dictum. Donec dui purus, sodales a odio a, blandit tincidunt sapien. Nunc ac enim nulla.</p>
-  <p>Aliquam quis nibh et turpis aliquet sodales. Etiam ac fringilla erat, at dapibus sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In gravida elit nec enim varius, sed auctor nisi volutpat. Sed sed ante sit amet urna mattis consequat. Fusce justo elit, pulvinar ut massa eget, dapibus faucibus nisl. Fusce tristique lectus ut elit rutrum venenatis.</p>
-  <p>In rutrum turpis ac ligula consectetur semper. Sed congue id mauris eu pulvinar. Nulla sed interdum lorem, vel facilisis lorem. Phasellus nec lacus id purus molestie vehicula. Nullam dictum aliquam eros. Phasellus aliquam diam eu metus faucibus, suscipit aliquet nunc tempus. In hac habitasse platea dictumst. Fusce finibus diam eu maximus ornare. Maecenas ac lacinia lectus, nec semper neque. Fusce vitae tortor quis sapien consectetur facilisis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam dignissim nunc quis neque sodales faucibus. Etiam interdum lectus sit amet lacus facilisis luctus. Nulla at arcu eros. Nullam iaculis, mi ac viverra aliquet, nulla nunc lobortis enim, a porta ante enim a dui. Aenean dapibus sem quis feugiat tempus.</p>
+<br>
+<br>
+<hr>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-12 col-md-6" align="center">
+    <h2>Sobre ArtIFAL</h2>
+    <a href="#"><img class="img-responsive rounded" src="img/Toquio_ultrajando2.jpg"></a>
+    <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi.</p>
+  </div>
+  <div class="col-12 col-md-6" align="center">
+    <a href="#"><h3>Noticias</h3></a>
+    <a href="#"><img class="img-responsive rounded img-thumbnail" src="img/cursoteatro.jpg"></a><br>
+    <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi. Quisque sollicitudin ligula et arcu sodales lobortis.</p>
 </div>
-
-  <!--butão para redirecionar ao topo-->
-  <button onclick="topFunction()" id="myBtn" title="Go to top">Topo</button>
-  <script>
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("myBtn").style.display = "block";
-        } else {
-            document.getElementById("myBtn").style.display = "none";
-        }
-    }
-
-    function topFunction() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-  </script>
-
-  <!--Rodapé-->
-  <div class="footer">
-    <a href="https://www.facebook.com/patavoluntariamcz/" style="color: white; padding-right: 10px"><i class="fa fa-facebook-square" style="padding-right: 3px"></i>Facebook</a>
-    <a href="https://www.instagram.com/patavoluntaria/?hl=pt-br" style="color: white; padding-right: 10px"><i class="fa fa-instagram" style="padding-right: 3px"></i>Instagram</a>
-    <a href="" style="color: white; padding-right: 10px" onclick="myFunction()"><i class="fa fa-google" style="padding-right: 3px"></i>G-mail</a>
-
-      <script>
-          function myFunction() {
-          alert("G-mail - lucas.ala1999@gmail.com");
-      }
-      </script>
-
-
-    <a  style="color: white; padding-right: 10px"><i class="fa fa-whatsapp" style="padding-right: 3px"></i>contato: (+55) 82 00000-0000</a>
-
-
+</div>
+<hr>
+<div class="row">
+  <div class="col-12 col-md-6" align="center">
+    <h3>Noticias</h3>
+    <a href="#"><img class="img-responsive rounded img-thumbnail" src="img/cursoteatro.jpg"></a><br>
+    <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi. Quisque sollicitudin ligula et arcu sodales lobortis.</p>
+  </div>
+  <div class="col-12 col-md-6" align="center">
+    <h2>Inscrições</h2>
+    <a href="#"><img class="img-responsive rounded" src="img/inscricoes.jpg"></a>
+    <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi.</p>
+  </div>
+</div>
+<hr>
 
 
 
