@@ -143,3 +143,9 @@ html {
 @media only screen and (min-width: 1200px) {
 
 }
+
+.footer {
+    background-color: #04ba31;
+    padding: 10px;
+    text-align: center;
+}
