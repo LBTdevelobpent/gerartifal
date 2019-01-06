@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+
+    <title>Pagina Inicial</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+<!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/csszin.css">
+    <link rel="stylesheet" type="text/css" href="css/cssnavcolor.css">
+    <link rel="stylesheet" href="css/Footer-with-map.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+
+  </head>
+
+  <body>
+
+    <section class="first">
+      <div class="container-fluid"></div>
+    </section>
+
+
+    <nav class="navbar navbar-expand-sm navbar-light sticky-top ">
+<!-- Logo -->
+      <a class="navbar-brand" href="TEstando.html">GERARTIFAL</a>
+
+<!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+<!-- Botões Que Ficarão dentro da barrinha-->
+      <div class="collapse navbar-collapse  " id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link d-none d-lg-block" href="#" >Página Inicial</a>
+            <a class="nav-link d-md-block d-lg-none" href="#" >Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-none d-lg-block" href="#">Projetos e Grupos Artísticos</a>
+            <a class="nav-link d-md-block d-lg-none" href="#">Projetos e Grupos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-none d-lg-block" href="#">Histórico de Eventos</a>
+            <a class="nav-link d-md-block d-lg-none" href="#">Eventos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled d-md-none" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled d-md-none" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mais
+              </button>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Inscrições On-Line</a>
+                <a class="dropdown-item disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
+                <a class="dropdown-item disabled" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
+                <a class="dropdown-item" href="#">Sobre o Site</a>
+              </div>
+            </div>
+          </li>
+		    </ul>
+      </div>
+
+<!-- Barra De Pesquisa -->
+      <form class="navbar-form" action="/action_page.php" id="pesquisa">
+        <div class="input-group" id="barra">
+          <div class = "input-group-prepend">
+				    <span class="input-group-text">§</span>
+          </div>
+          <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar">
+        </div>
+      </form>
+    </nav>
+    <br>
+<!-- Carrossel-->
+    <div class="container" >
+      <div id="demo" class="carousel slide" data-ride="carousel">
+
+<!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+          <li data-target="#demo" data-slide-to="3"></li>
+          <li data-target="#demo" data-slide-to="4"></li>
+        </ul>
+
+  <!-- The slideshow -->
+        <div class="carousel-inner " align="center">
+          <div class="carousel-item active">
+            <a href="#"><img src="img/batatadoce.jpg" alt="Primeira"></a>
+            <div class="carousel-caption d-none d-md-block ">
+              <h4>Gordo Vencedor</h4>
+              <p>Gordo Ganhou o Concurso De Melhor Gordo Do Ano</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="#"><img src="img/Toquio_ultrajando2.jpg" alt="Segunda"></a>
+            <div class="carousel-caption d-none d-md-block ">
+              <h4>Judeoul Vencedor</h4>
+              <p>Judeoul Ganhou o Concurso De Melhor Judeoul Do Ano</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="#"><img src="img/clavedesol.jpg" alt="Terceira"></a>
+            <div class="carousel-caption d-none d-md-block ">
+              <h4>Musica Livre</h4>
+              <p>Já Pensou em poder tocar em qualquer lugar?</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="#"><img src="img/ViloãoCompleto.jpg" alt="Quarta"></a>
+            <div class="carousel-caption d-none d-md-block ">
+              <h4>Curso Novos Musicais</h4>
+              <p> Se Inscreva Clicando Nessa Imagem</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <a href="#"><img src="img/kaneki.png" alt="Quinta"></a>
+            <div class="carousel-caption d-none d-md-block ">
+              <h4>Kaneki</h4>
+              <p>Só o kaneki msm</p>
+            </div>
+          </div>
+        </div>
+  <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+
+<!-- Noticias -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-6" align="center">
+          <h2>Sobre ArtIFAL</h2>
+          <a href="#"><img class="img-responsive rounded" src="img/Toquio_ultrajando2.jpg"></a>
+          <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi.</p>
+        </div>
+        <div class="col-12 col-md-6" align="center">
+          <a href="#"><h3>Noticias</h3></a>
+          <a href="#"><img class="img-responsive rounded img-thumbnail" src="img/cursoteatro.jpg"></a><br>
+          <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi. Quisque sollicitudin ligula et arcu sodales lobortis.</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12 col-md-6 d-none d-md-block" align="center">
+          <h3>Noticias</h3>
+          <a href="#"><img class="img-responsive rounded img-thumbnail" src="img/cursoteatro.jpg"></a><br>
+          <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi. Quisque sollicitudin ligula et arcu sodales lobortis.</p>
+        </div>
+        <div class="col-12 col-md-6" align="center">
+          <h2>Inscrições</h2>
+          <a href="#"><img class="img-responsive rounded" src="img/inscricoes.jpg"></a>
+          <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla imperdiet volutpat lectus, ut dictum nisi tempor sed. Cras varius, metus vitae tempor rutrum, eros nisi hendrerit lacus, ac tempus massa dolor nec elit. Integer ac tortor non erat placerat maximus ullamcorper eget nisl. Proin sed lectus quis augue convallis rhoncus sed non sem. In ac quam ex. Nulla facilisi.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+
+<!--Rodapé-->
+    <footer id="myFooter">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <h5>Get started</h5>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Sign up</a></li>
+              <li><a href="#">Downloads</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <h5>About us</h5>
+            <ul>
+              <li><a href="#">Company Information</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Reviews</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <h5>Support</h5>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Help desk</a></li>
+              <li><a href="#">Forums</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <h5>Legal</h5>
+            <ul>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+<!-- Here we use the Google Embed API to show Google Maps. -->
+        <iframe class="d-none d-md-block" id="map-container" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.1989023512087!2d-35.732519584780675!3d-9.664039593081965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701457996307ad5%3A0x1d22c2c44f26f853!2sInstituto+Federal+de+Alagoas+-+Campus+Macei%C3%B3!5e0!3m2!1spt-BR!2sbr!4v1545226271030" >
+        </iframe>
+      </div>
+      <div class="social-networks">
+        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+      </div>
+      <div class="footer-copyright" id="copy">
+        <p>© 2018 Copyright Text </p>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
