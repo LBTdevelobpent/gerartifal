@@ -3,8 +3,9 @@ const app = require('../src/app');
 const http = require('http');
 const debug = require('debug')('nodestr:server');
 const express = require('express');
+const path = require('path');
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '8080');
 
 const server = http.createServer(app);
 const router = express.Router();
