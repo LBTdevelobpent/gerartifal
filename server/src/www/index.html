@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-language" content="pt-br" />
+  <title>Site teste</title>
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/controllers/controller.js"></script>
+
+
+
+
+</head>
+<body>
+  <h1>isso é um site idiota</h1>
+
+  <form action="/auth/register" method="post">
+    user: <input type="text" name="name" placeholder="nome de usuario"><br>
+    email: <input type="text" name="email" placeholder="email"><br>
+    pass: <input type="text" name="password" placeholder="senha"><br>
+    <input type="submit" value="submit" id="submit">
+  </form>
+
+
+  <div class="container" ng-controller="Users">
+    <div id="listUser">
+      <table class="table">
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+        </tr>
+
+      <tr ng-repeat="user in users">
+
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+
+      </tr>
+      </table>
+    </div>
+
+  </div>
+
+
+
+  
+</body>
+</html>
