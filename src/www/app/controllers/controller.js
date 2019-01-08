@@ -1,6 +1,6 @@
 var app = angular.module('app', []); 
 
-app.controller('register', function($scope, $http){
+app.controller('register', function($scope, $http, $window){
     $scope.submit = function(){
         name = $scope.name;
         password = $scope.password;
@@ -15,7 +15,11 @@ app.controller('register', function($scope, $http){
         else{
             $http.post('/auth/register', data)
             .success(function(response){
-                console.log(response);
+                alert("Registrado com sucesso\nRedirecionando...");
+                $window.localStorage.clear();
+                $window.localStorage.setItem('user', JSON.stringify(response.user));
+                $window.localStorage.setItem('token', response.token);
+                $window.location.href = "/";
             })
             .error(function(response){
                 alert(response.error);
