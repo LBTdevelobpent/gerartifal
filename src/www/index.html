@@ -42,7 +42,7 @@
       </button>
 
 <!-- Botões Que Ficarão dentro do menuBar-->
-      <div class="collapse navbar-collapse  " id="collapsibleNavbar">
+      <div ng-controller="session" class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link d-none d-lg-block" href="#" >Página Inicial</a>
@@ -56,14 +56,14 @@
             <a class="nav-link d-md-block d-lg-none" href="#">Eventos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled d-md-none" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
+            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled d-md-none" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
+            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
           </li>
           <li class="nav-item d-none d-md-block">
             <div class="dropdown">
-              <button class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Mais
               </button>
 
