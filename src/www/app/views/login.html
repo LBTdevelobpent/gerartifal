@@ -23,7 +23,7 @@
 
   </head>
 
-  <body>
+  <body ng-controller="check" ng-init="check()">
       <div class="login-page" id="Tela">
           <div class="form" ng-controller="register">
             <form id="form-cadastro" class="register-form needs-validation">
@@ -39,9 +39,9 @@
 
           <div class="form" ng-controller="login">
             <form class="needs-validation">
-                <input class="form-control" type="text" placeholder="username" required>
-                <input class="form-control" type="password" placeholder="password" required>
-                <button type="submit">login</button>
+                <input class="form-control" type="text" placeholder="username" ng-model="name" required>
+                <input class="form-control" type="password" placeholder="password" ng-model="password" required>
+                <button type="submit" ng-click="submit()">login</button>
                 <p class="message">Not registered? <a href="#Tela">Create an account</a></p>
             </form>
           </div>

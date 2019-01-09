@@ -3,7 +3,10 @@ var app = angular.module('app', []);
 app.controller("auth", function($scope, $http,$window){
     $scope.session = function(){
         token = $window.localStorage.getItem('token');
-        
+        if(!token){
+            console.log("no session");
+            return;
+        }
         $http.get("/valid", { 
             headers:{'Authorization': 'Bearer '+token+''}
         })
