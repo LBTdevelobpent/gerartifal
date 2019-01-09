@@ -17,7 +17,8 @@ app.use(express.static('www'));
 const router = express.Router();
 
 
-require("./controllers/authController")(app);
-require("./controllers/validedSession")(app);
+require("./controllers/index.js")(app);
+
+
 
 app.listen(3000);

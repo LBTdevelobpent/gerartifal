@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const authMiddleware = require("../middlewares/auth.js");
 const authConfig = require('../config/auth.json');
 const User = require('../models/user.js'); //Call do model mongo, por ele que se faz as buscas no mongo
 
@@ -73,6 +74,39 @@ router.post('/authenticate', async(req, res) => {
 
 });
 //-------------------------------------------------------------------------//
+
+router.use(authMiddleware);
+
+router.put('/modify', async(req,res) => {
+
+    const userM = req.body;
+    const userId = req.userId;
+    const user = await User.findOne({_id: userId}).select('+password');
+    
+    if(!user){
+        return res.status(400).send({ error: "Usuario inexistente" });
+    }
+
+    if(!await bcrypt.compare(userM.password, user.password)){
+        return res.status(400).send({ error: "Senhas não batem"});
+    }
+    
+    const hash = await bcrypt.hash(userM.Npassword, 10);
+  
+
+    User.findOneAndUpdate({ _id: userId }, {$set: { name: userM.name, password: hash }}, {upsert: true}, (err, user) =>{
+        if(err){
+            return res.status(400).send({ error: "Não foi possivel atualizar" });
+        }
+        return res.send({ user , 
+            ok: true, 
+            token: generateToken({id: user.id}), 
+        });
+    });
+    
+});
+
+
 
 router.get('/getAll', async(req,res)=> {
 
