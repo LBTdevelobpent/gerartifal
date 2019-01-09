@@ -9,7 +9,7 @@ const User = require('../models/user.js'); //Call do model mongo, por ele que se
 
 //-----------------Gera Um token de Autenticação----------------//
 function generateToken(params = {}){
-    return jwt.sign(params, authConfig.secret,{
+    return jwt.sign(params, authConfig.secret,{ //KELLYMEUAMOR
         expiresIn: 86400,
     });
 }
@@ -20,12 +20,17 @@ const router = express.Router(); //Chamada de uma rota
 //-------------------------Registro no DB--------------------//
 router.post('/register', async(req, res) => {
 
-    const { email } = req.body;
+    const { email, name } = req.body;
 
     try{
         //Check para ver se já tem usuario cadastrado
         if(await User.findOne({ email })){
-            return res.status(400).send({ error: "Usuario já cadastrado"});         
+            return res.status(400).send({ error: "Email já existe"});         
+
+        }
+        
+        if(await User.findOne({ name })){
+            return res.status(400).send({ error: "Nome de Usario já existe"});
         }
 
         const user = await User.create(req.body); //Criar O Doc no MongoDB
@@ -48,16 +53,15 @@ router.post('/register', async(req, res) => {
 
 //-------------------------------Login--------------------------------------//
 router.post('/authenticate', async(req, res) => {
-    const { email, password } = req.body;
+    const { name , password } = req.body;
 
-    const user = await User.findOne({ email }).select('+password'); 
+    const user = await User.findOne({ name }).select('+password'); 
     
-    //Check se usuario existe
-    if(!user){
+    if(!user){ //Check se usuario existe
         return res.status(400).send({ error: "Usuario inexistente"});
     }
 
-    if(!await bcrypt.compare(password, user.password)){
+    if(!await bcrypt.compare(password, user.password)){ //Está comparando as senhas, a que o usuario fez login e a do BD
         return res.status(400).send({ error: "Senhas não batem"});
     }
 

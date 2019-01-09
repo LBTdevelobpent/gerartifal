@@ -18,5 +18,6 @@ const router = express.Router();
 
 
 require("./controllers/authController")(app);
+require("./controllers/validedSession")(app);
 
 app.listen(3000);
