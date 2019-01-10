@@ -1,4 +1,4 @@
-const mongoose = require("../database");
+const mongoose = require("../../database");
 const bcrypt = require('bcrypt');
 
 //Criação do Schema do usuario
@@ -18,6 +18,16 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         require: true,
+        select: false,
+    },
+
+    passwordResetToken: {
+        type: String,
+        select: false,
+    },
+
+    passwordResetExpires: {
+        type: Date,
         select: false,
     },
 
