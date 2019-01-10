@@ -17,7 +17,7 @@ app.use(express.static('www'));
 const router = express.Router();
 
 
-require("./controllers/index.js")(app);
+require("./app/controllers/index.js")(app);
 
 
 
