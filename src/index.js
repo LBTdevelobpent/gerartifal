@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false} ));
 app.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/www/index.html'));
 });
-app.use(express.static('www'));
+app.use(express.static(path.join(__dirname+'/www')));
 //-----------------------------------------------//
 
 const router = express.Router();
