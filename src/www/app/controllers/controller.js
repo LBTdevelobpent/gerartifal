@@ -25,11 +25,8 @@ app.controller('register', function($scope, $http, $window){
         else{
             $http.post('/auth/register', data)
             .success(function(response){
-                alert("Registrado com sucesso\nRedirecionando...");
-                $window.localStorage.clear();
-                $window.localStorage.setItem('user', JSON.stringify(response.user));
-                $window.localStorage.setItem('token', response.token);
-                $window.location.href = "/";
+                alert("Registrado com sucesso, verifique sua conta");
+                console.log(response);
             })
             .error(function(response){
                 alert(response.error);
@@ -48,6 +45,12 @@ app.controller('login', function($scope, $http, $window){
         }else{
             $http.post('/auth/authenticate', data)
             .success(function(response){
+                user = response.user;
+                
+                if(user.verified == false){
+                    console.log("Email não verificado, porfavor verifique");
+                    return 0;
+                }
                 console.log("sou um easterEgg, oi :)");
                 alert("Logado com sucesso\nRedirecionando...");
                 $window.localStorage.clear();

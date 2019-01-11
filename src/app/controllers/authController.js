@@ -20,6 +20,7 @@ function generateToken(params = {}){
 
 const router = express.Router(); //Chamada de uma rota
 
+
 //-------------------------Registro no DB--------------------//
 router.post('/register', async(req, res) => {
 
@@ -38,13 +39,38 @@ router.post('/register', async(req, res) => {
 
         const user = await User.create(req.body); //Criar O Doc no MongoDB
 
+        
+        //----------------Parte de envio de email----------------//
+        const token = crypto.randomBytes(20).toString('hex');
+
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+
+        await User.findByIdAndUpdate(user.id, {
+            '$set': {
+                passwordResetToken: token,
+                passwordResetExpires: now,
+            }
+        });
+
+        mailer.sendMail({
+
+            to: email,
+            from: "nigga@reallyNigga.com",
+            template: "verifyEmail",
+            context: { token, email }, //Coloca no email uma varivel 
+
+        }, (err) =>{
+
+            if(err){
+                return res.status(400).send({ error: "Error no envio de email"});
+            }
+        });
+        //------------------------------------------------------//
+
+
         user.password = undefined; //Não retornar a senha para o usuario
-        
-        
-        return res.send({ 
-            user,
-            token: generateToken({ id: user.id }),
-         }); //Caso não tenha erro, vai retornar o usuario
+        return res.send({ ok: true }); 
          
 
     }catch (err){
@@ -52,6 +78,47 @@ router.post('/register', async(req, res) => {
     }
 });
 //----------------------------------------------------------//
+
+
+router.post('/register_verify', async(req, res) =>{
+    const { email, token } = req.body;
+
+    try {
+
+        const user = await User.findOne({ email })
+        .select("+passwordResetToken passwordResetExpires verified");
+
+        if(!user){
+            return res.status(400).send({ error: "Usuario inexistente" });
+        }
+
+        if(token !== user.passwordResetToken ){
+            return res.status(400).send({ error: "Token Invalido" });
+        }
+
+        const now = new Date();
+
+        if(now > user.passwordResetExpires){
+            await User.findByIdAndDelete({ email });
+            return res.status(400).send({ error: "O tempo de vericação expirou, tente se cadastrar novamente" });
+        }
+
+        await User.findOneAndUpdate({email:  email }, {
+            '$set': {
+                verified: true,
+            }
+        });
+        
+
+        return res.send({ok: true });
+        
+        
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send({ error: "Erro no verificar o email" });        
+    }
+});
+
 
 
 //-------------------------------Login--------------------------------------//
@@ -77,6 +144,7 @@ router.post('/authenticate', async(req, res) => {
 });
 //-------------------------------------------------------------------------//
 
+//--------------------------Esquecimento de senha------------------------//
 router.post('/forgot_password', async (req, res) =>{
     const { email } = req.body;
     try {
@@ -104,7 +172,7 @@ router.post('/forgot_password', async (req, res) =>{
             to: email,
             from: "nigga@reallyNigga.com",
             template: "mail",
-            context: { token }, //Coloca no email uma varivel 
+            context: { token, email }, //Coloca no email uma varivel 
 
         }, (err) =>{
 
@@ -155,7 +223,7 @@ router.post("/reset_password", async (req,res) =>{
     }
 
 });
-
+//-----------------------------------------------------------------------//
 router.use(authMiddleware);
 
 router.put('/modify', async(req,res) => {
