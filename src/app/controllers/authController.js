@@ -99,7 +99,7 @@ router.post('/register_verify', async(req, res) =>{
         const now = new Date();
 
         if(now > user.passwordResetExpires){
-            await User.findByIdAndDelete({ email });
+            await User.findOneAndDelete({ email });
             return res.status(400).send({ error: "O tempo de vericação expirou, tente se cadastrar novamente" });
         }
 
