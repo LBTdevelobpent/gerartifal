@@ -22,8 +22,8 @@ const router = express.Router();
 require("./app/controllers/index.js")(app);
 
 
-
-app.listen(3000);
+const port = normalizePort(process.env.PORT || '3000');
+app.listen(port);
 
 //--------------------------Apagar diariamente contas não verificadas------------------
 function sleep(h) {
@@ -48,3 +48,16 @@ async function demo() {
 }
 demo()
 //----------------------------------------------------------------------------------
+
+//function para encontrar porta disponível
+function normalizePort(val){
+  const port = parseInt(val, 10);
+
+  if(isNaN(port)){
+    return val;
+  }
+  if(port >= 0){
+    return port;
+  }
+  return false;
+}
