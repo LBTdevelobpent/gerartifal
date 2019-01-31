@@ -1,4 +1,4 @@
-var app = angular.module('app', []); 
+var app = angular.module('app', []);
 
 
 app.controller('options', function($scope, $http, $window){
@@ -9,12 +9,12 @@ app.controller('options', function($scope, $http, $window){
             $window.location.href = '/';
         }
 
-        $http.get("/valid", { 
+        $http.get("/valid", {
             headers:{'Authorization': 'Bearer '+token+''}
         })
         .success(function(response) {
             user = JSON.parse($window.localStorage.getItem('user'));
-            $window.localStorage.setItem('validSession', JSON.stringify(response.ok));         
+            $window.localStorage.setItem('validSession', JSON.stringify(response.ok));
             $scope.name = user.name;
 
         })
@@ -27,13 +27,13 @@ app.controller('options', function($scope, $http, $window){
 
     $scope.submit = function() {
 
-        token = $window.localStorage.getItem('token');        
+        token = $window.localStorage.getItem('token');
         name = $scope.name;
         password = $scope.password;
         Npassword = $scope.Newpassword;
         RNpassword = $scope.RNewpassword;
-        
-        
+
+
 
         if(name == "" || password,Npassword,RNpassword == undefined){
             console.log("há campos vazios");
@@ -44,8 +44,8 @@ app.controller('options', function($scope, $http, $window){
             return 0;
         }
         data = JSON.parse('{ "name": "'+name+'", "password": "'+password+'", "Npassword": "'+Npassword+'"}');
-        
-        $http.put("/auth/modify", data,{ 
+
+        $http.put("/options/modify", data,{
             headers:{'Authorization': 'Bearer '+token+''}
         })
         .success(function(response) {
@@ -53,15 +53,15 @@ app.controller('options', function($scope, $http, $window){
             $window.localStorage.setItem('user', JSON.stringify(response.user));
             $window.localStorage.setItem('token', response.token);
             $window.location.href = "/";
-            
+
         })
         .error(function (response) {
             console.log(response);
         });
 
-        
-             
 
-        
+
+
+
     };
 });

@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 const mailer = require('../../module/mailer.js');
-const authMiddleware = require('../middlewares/auth.js');
 const authConfig = require('../../config/auth.json');
 const User = require('../models/user.js'); // Call do model mongo, por ele que se faz as buscas no mongo
 
@@ -12,7 +11,7 @@ const User = require('../models/user.js'); // Call do model mongo, por ele que s
 // -----------------Gera Um token de Autenticação----------------//
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret, { // KELLYMEUAMOR
-    expiresIn: 86400,
+    expiresIn: 3600,
   });
 }
 // ------------------------------------------------------------//
@@ -22,7 +21,7 @@ const router = express.Router(); // Chamada de uma rota
 
 // -------------------------Registro no DB--------------------//
 router.post('/register', async (req, res) => {
-  const { email, name } = req.body;
+  const { name, email } = req.body;
 
   try {
     // Check para ver se já tem usuario cadastrado
@@ -36,7 +35,6 @@ router.post('/register', async (req, res) => {
 
     const user = await User.create(req.body); // Criar O Doc no MongoDB
 
-
     // ----------------Parte de envio de email----------------//
     const token = crypto.randomBytes(20).toString('hex');
 
@@ -47,7 +45,7 @@ router.post('/register', async (req, res) => {
       $set: {
         passwordResetToken: token,
         passwordResetExpires: now,
-      }
+      },
     });
 
     mailer.sendMail({
@@ -92,20 +90,19 @@ router.post('/register_verify', async (req, res) => {
     const now = new Date();
 
     if (now > user.passwordResetExpires) {
-      await User.findOneAndDelete({ email });
+      await User.findOneAndRemove({ email });
       return res.status(400).send({ error: 'O tempo de vericação expirou, tente se cadastrar novamente' });
     }
 
-    await User.findOneAndUpdate({ email:  email }, {
+    await User.findOneAndUpdate({ email: email }, {
       $set: {
         verified: true,
-      }
+      },
     });
 
 
     return res.send({ ok: true });
   } catch (err) {
-    console.log(err);
     return res.status(400).send({ error: 'Erro no verificar o email' });
   }
 });
@@ -118,6 +115,9 @@ router.post('/authenticate', async (req, res) => {
 
   if (!user) { // Check se usuario existe
     return res.status(400).send({ error: 'Usuario inexistente' });
+  }
+  if (user.verified === false) {
+    return res.status(400).send({ error: 'Email não verificado' });
   }
   // Está comparando as senhas, a que o usuario fez login e a do BD
   if (!await bcrypt.compare(password, user.password)) {
@@ -149,7 +149,7 @@ router.post('/forgot_password', async (req, res) => {
       $set: {
         passwordResetToken: token,
         passwordResetExpires: now,
-      }
+      },
     });
 
     mailer.sendMail({
@@ -182,7 +182,7 @@ router.post('/reset_password', async (req, res) => {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
 
-    if (token !== user.passwordResetToken ) {
+    if (token !== user.passwordResetToken) {
       return res.status(400).send({ error: 'Token Invalido' });
     }
 
@@ -202,33 +202,6 @@ router.post('/reset_password', async (req, res) => {
   }
 });
 // -----------------------------------------------------------------------//
-router.use(authMiddleware);
-
-router.put('/modify', async (req, res) => {
-  const userM = req.body;
-  const { userId } = req.userId;
-  const user = await User.findOne({ _id: userId }).select('+password');
-  try {
-    if (!user) {
-      return res.status(400).send({ error: 'Usuario inexistente' });
-    }
-
-    if (!await bcrypt.compare(userM.password, user.password)) {
-      return res.status(400).send({ error: 'Senhas não batem' });
-    }
-
-    user.name = userM.name;
-    user.password = userM.password;
-
-    await user.save();
-
-    user.password = undefined;
-
-    return res.send({ user, ok: true, token: generateToken({ id: user.id }) });
-  } catch (err) {
-    return res.status(400).send({ error: 'Não foi possivel atualizar' });
-  }
-});
 
 router.get('/getAll', async (req, res) => {
   const user = await User.find();

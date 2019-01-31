@@ -39,14 +39,18 @@ const UserSchema = new mongoose.Schema({
   createAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 // Codigo para encryptação da senha do Usuario
-UserSchema.pre('save', async (next) => {
-  const hash = await bcrypt.hash(this.password, 10);
-  this.password = hash;
-  next();
+UserSchema.pre('save', function (next) {
+  bcrypt.hash(this.password, 10, (err, hash) => {
+    if (err) {
+      throw err;
+    }
+    this.password = hash;
+    next();
+  });
 });
 // ----------------------------------------//
 

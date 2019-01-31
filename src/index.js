@@ -39,7 +39,7 @@ async function demo() {
   }
   for (let c = 0; c < users.length; c++) {
     if (now > users[c].passwordResetExpires) {
-      await User.findByIdAndDelete(users[c]._id);
+      await User.findByIdAndRemove(users[c]._id);
     }
   }
   demo();
@@ -49,15 +49,14 @@ demo();
 // ----------------------------------------------------------------------------------
 
 // function para encontrar porta disponível
-function normalizePort (val) {
+function normalizePort(val) {
   const port = parseInt(val, 10);
 
-  if(isNaN(port)){
+  if (isNaN(port)) {
     return val;
   }
-  if(port >= 0){
+  if (port >= 0) {
     return port;
   }
   return false;
 }
-
