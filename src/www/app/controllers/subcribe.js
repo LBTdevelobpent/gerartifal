@@ -86,11 +86,7 @@ app.controller('subcribe', ($scope, $http, $window) => {
       headers: { Authorization: `Bearer ${token}` },
     }).success((response) => {
       const { subcribe } = response;
-      for (let c = 0; c < subcribe.length; c += 1) {
-        $scope.nome = subcribe[c].name;
-        $scope.idade = subcribe[c].age;
-        $scope.cpf = subcribe[c].cpf;
-      }
+      $scope.subcribe = subcribe;
     }).error((response) => {
       console.log(response.error);
     });

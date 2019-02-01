@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 const mailer = require('../../module/mailer.js');
-const authConfig = require('../../config/auth.json');
+const { secret } = require('../../config/auth.json');
 const User = require('../models/user.js'); // Call do model mongo, por ele que se faz as buscas no mongo
 
 
 // -----------------Gera Um token de Autenticação----------------//
 function generateToken(params = {}) {
-  return jwt.sign(params, authConfig.secret, { // KELLYMEUAMOR
+  return jwt.sign(params, secret, { // KELLYMEUAMOR
     expiresIn: 3600,
   });
 }
@@ -202,14 +202,5 @@ router.post('/reset_password', async (req, res) => {
   }
 });
 // -----------------------------------------------------------------------//
-
-router.get('/getAll', async (req, res) => {
-  const user = await User.find();
-  if (!user) {
-    return res.status(400).send({ error: 'Não existe nenhum usuario' });
-  }
-  return res.send({ user });
-});
-
 
 module.exports = app => app.use('/auth', router);
