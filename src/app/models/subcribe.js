@@ -1,6 +1,6 @@
 const mongoose = require('../../database');
 
-// Criação do Schema do usuario
+// Criação do Schema de Incrição
 const subcribeSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -18,7 +18,7 @@ const subcribeSchema = new mongoose.Schema({
   },
 
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId, // Relação com a coleção de usuarios
     ref: 'User',
     required: true,
   },

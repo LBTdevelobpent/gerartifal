@@ -3,7 +3,7 @@ const app = angular.module('app', []);
 app.controller('subcribe', ($scope, $http, $window) => {
   const token = $window.localStorage.getItem('token');
 
-  // validação de sessão como adm
+  // Validação de sessão como adm
   $scope.sessionAdm = () => {
     if (!token) {
       $window.localStorage.clear();
@@ -20,7 +20,7 @@ app.controller('subcribe', ($scope, $http, $window) => {
       $window.location.href = '/';
     });
   };
-  // validação de sessão
+  // Validação de sessão
   $scope.session = () => {
     if (!token) {
       $window.localStorage.clear();
@@ -41,7 +41,6 @@ app.controller('subcribe', ($scope, $http, $window) => {
   $scope.submit = () => {
     const { name, age, cpf } = $scope;
     const data = JSON.parse(`{ "name": "${name}", "age": ${age}, "cpf": ${cpf} }`);
-    // Create
 
     $http.post('/subcribe/create', data, {
       headers: { Authorization: `Bearer ${token}` },
@@ -79,16 +78,33 @@ app.controller('subcribe', ($scope, $http, $window) => {
       console.log(response.error);
     });
   };
-  // Mostrar todas as fichas
 
+  // ----------------------------ADM APENAS --------------------------
   $scope.showAllSub = () => {
-    $http.get('/subcribe/findAll', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).success((response) => {
-      const { subcribe } = response;
-      $scope.subcribe = subcribe;
-    }).error((response) => {
-      console.log(response.error);
-    });
+    const { nome, cpf } = $scope;
+
+    // Caso não tenha nos campos de Busca, ele pega todas as fichas
+    if (nome === '' && cpf === undefined) {
+      $http.get('/subcribe/findAll', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success((response) => {
+        const { subcribe } = response;
+        $scope.subcribe = subcribe;
+      }).error((response) => {
+        console.log(response.error);
+      });
+      // Pega fichas específicas
+    } else {
+      const data = JSON.parse(`{ "nome": "${nome}", "CPF": ${cpf !== undefined ? cpf : 0} }`);
+      $http.put('/subcribe/find_subscription', data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .success((response) => {
+          const { subcribe } = response;
+          $scope.subcribe = subcribe;
+        }).error((response) => {
+          console.log(response);
+        });
+    }
   };
 });

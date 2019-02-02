@@ -7,10 +7,12 @@ const router = express.Router();
 
 router.use(authMiddleware); // verifica se o token é valido
 
+// Valida uma sessão
 router.get('/', (req, res) => {
   res.send({ ok: true, user: req.userId });
 });
 
+// Valida uma sessão de ADM
 router.post('/adm', async (req, res) => {
   const { adm, email, _id } = req.body;
   if (!adm) {
