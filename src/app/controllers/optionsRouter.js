@@ -20,6 +20,7 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+// Modifica informações do Usuario
 router.put('/modify', async (req, res) => {
   const userM = req.body;
   const { userId } = req.userId;

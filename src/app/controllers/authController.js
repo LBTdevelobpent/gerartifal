@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
 const mailer = require('../../module/mailer.js');
-const { secret } = require('../../config/auth.json');
-const User = require('../models/user.js'); // Call do model mongo, por ele que se faz as buscas no mongo
+const { secret } = require('../../config/auth.json');// KELLYMEUAMOR é o secret ( Eu gosto de esterEggs, são divertidos)
+const User = require('../models/user.js'); // Chamada do model mongo, por ele que se faz as buscas no mongo
 
 
 // -----------------Gera Um token de Autenticação----------------//
 function generateToken(params = {}) {
-  return jwt.sign(params, secret, { // KELLYMEUAMOR
+  return jwt.sign(params, secret, {
     expiresIn: 3600,
   });
 }
@@ -32,12 +32,15 @@ router.post('/register', async (req, res) => {
     if (await User.findOne({ name })) {
       return res.status(400).send({ error: 'Nome de Usario já existe' });
     }
+    // ----------------------------------------------------------
 
     const user = await User.create(req.body); // Criar O Doc no MongoDB
 
     // ----------------Parte de envio de email----------------//
-    const token = crypto.randomBytes(20).toString('hex');
 
+    const token = crypto.randomBytes(20).toString('hex'); // Cria um Token para o MAIL
+
+    // Determina a validade do MAIL
     const now = new Date();
     now.setHours(now.getHours() + 1);
 
@@ -47,7 +50,7 @@ router.post('/register', async (req, res) => {
         passwordResetExpires: now,
       },
     });
-
+    // -----------------------------------
     mailer.sendMail({
 
       to: email,
@@ -72,7 +75,7 @@ router.post('/register', async (req, res) => {
 });
 // ----------------------------------------------------------//
 
-
+// -------------------- Verificação do Email ------------------------
 router.post('/register_verify', async (req, res) => {
   const { email, token } = req.body;
 
@@ -82,18 +85,20 @@ router.post('/register_verify', async (req, res) => {
     if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
-
+    // Verifica a Validade do Token
     if (token !== user.passwordResetToken) {
       return res.status(400).send({ error: 'Token Invalido' });
     }
 
+    // Verifica se o Token expirou
     const now = new Date();
-
     if (now > user.passwordResetExpires) {
       await User.findOneAndRemove({ email });
       return res.status(400).send({ error: 'O tempo de vericação expirou, tente se cadastrar novamente' });
     }
+    // ----------------------------
 
+    // Modifica o Verificado para True, assim verificando de fato o email
     await User.findOneAndUpdate({ email: email }, {
       $set: {
         verified: true,
@@ -119,7 +124,7 @@ router.post('/authenticate', async (req, res) => {
   if (user.verified === false) {
     return res.status(400).send({ error: 'Email não verificado' });
   }
-  // Está comparando as senhas, a que o usuario fez login e a do BD
+  // Compara a Senha do enviada com a do Banco
   if (!await bcrypt.compare(password, user.password)) {
     return res.status(400).send({ error: 'Senhas não batem' });
   }
@@ -140,8 +145,9 @@ router.post('/forgot_password', async (req, res) => {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
 
-    const token = crypto.randomBytes(20).toString('hex');
+    const token = crypto.randomBytes(20).toString('hex'); // Cria um Token para o MAIL
 
+    // Determina a validade do MAIL
     const now = new Date();
     now.setHours(now.getHours() + 1);
 
@@ -181,17 +187,17 @@ router.post('/reset_password', async (req, res) => {
     if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
-
+    // Verifica a Validade do Token
     if (token !== user.passwordResetToken) {
       return res.status(400).send({ error: 'Token Invalido' });
     }
 
+    // Verifica se o Token expirou
     const now = new Date();
-
     if (now > user.passwordResetExpires) {
       return res.status(400).send({ error: 'Token Expirou' });
     }
-
+    // -------------------------------
     user.password = password;
 
     await user.save();
