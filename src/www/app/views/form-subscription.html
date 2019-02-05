@@ -14,6 +14,49 @@
 
   </head>
   <body>
-    teste
+    <form>
+      <h1>Dados Pessoais do Candidato</h1>
+      <br>
+      <!--comunidade interna ou externa? -->
+      <div class="form-check form-check-inline">
+        <h4>Membro da:</h4>
+        <input class="form-check-input" type="checkbox" id="comunidade-interna" value="comunidade-interna">
+        <label class="form-check-label" for="comunidade-interna">comunidade Interna (Estudantes do IFAL,Campus Maceió)</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="comunidade-externa" value="comunidade-externa">
+        <label class="form-check-label" for="comunidade-externa">Comunidade Externa</label>
+      </div>
+      <br>
+
+      <!---->
+      <div class="form-group col-1">
+        <label for="nome">Nome Completo</label>
+        <input type="nome" class="form-control" id="nome" placeholder="Ex: Lucas Amorim de Lima Araújo">
+        <small id="name-help" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group col-2">
+        <label id = "data-de-nascimento" for="nascimento">Data de Nascimento</label>
+        <input type="date" class="form-control" id="nascimento" placeholder="ex: 26/10/1999">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1"></label>
+      </div>
+      <button type="submit" class="btn btn-primary">Inscrever-se</button>
+    </form>
+
+    <form>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Example file input</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+</form>
+
+
+
+
+
   </body>
 </html>
