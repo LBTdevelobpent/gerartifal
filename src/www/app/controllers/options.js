@@ -3,7 +3,7 @@ var app = angular.module('app', []);
 
 app.controller('options', function($scope, $http, $window){
     $scope.session = function() {
-        token = $window.localStorage.getItem('token');
+        token = (document.cookie).split('=', 2)[1];
         if(!token){
             window.localStorage.clear();
             $window.location.href = '/';
@@ -27,7 +27,7 @@ app.controller('options', function($scope, $http, $window){
 
     $scope.submit = function() {
 
-        token = $window.localStorage.getItem('token');
+        token = (document.cookie).split('=', 2)[1];
         name = $scope.name;
         password = $scope.password;
         Npassword = $scope.Newpassword;
@@ -51,7 +51,7 @@ app.controller('options', function($scope, $http, $window){
         .success(function(response) {
             $window.localStorage.clear();
             $window.localStorage.setItem('user', JSON.stringify(response.user));
-            $window.localStorage.setItem('token', response.token);
+            document.cookie = `token=${response.token}; path=/`;
             $window.location.href = "/";
 
         })

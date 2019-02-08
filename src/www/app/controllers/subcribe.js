@@ -1,11 +1,13 @@
 const app = angular.module('app', []);
 
 app.controller('subcribe', ($scope, $http, $window) => {
-  const token = $window.localStorage.getItem('token');
+  const token = (document.cookie).split('=', 2)[1];
+  const openSub =  $window.localStorage.getItem('openSub');
 
   // Validação de sessão como adm
   $scope.sessionAdm = () => {
     if (!token) {
+      document.cookie = 'token=;path=/';
       $window.localStorage.clear();
       $window.location.href = '/';
     }
@@ -24,6 +26,11 @@ app.controller('subcribe', ($scope, $http, $window) => {
   $scope.session = () => {
     if (!token) {
       $window.localStorage.clear();
+      $window.location.href = '/';
+    }
+
+    if (openSub === 'false' || openSub === '') {
+      $window.localStorage.setItem('openSub', false);
       $window.location.href = '/';
     }
 
@@ -80,6 +87,8 @@ app.controller('subcribe', ($scope, $http, $window) => {
   };
 
   // ----------------------------ADM APENAS --------------------------
+
+  // Mostrar todas as fichas de inscrições
   $scope.showAllSub = () => {
     const { nome, cpf } = $scope;
 
@@ -106,5 +115,12 @@ app.controller('subcribe', ($scope, $http, $window) => {
           console.log(response);
         });
     }
+  };
+
+  $scope.openSub = () => {
+    const { from, until } = $scope;
+    const data = JSON.parse(`{ "from": "${from}", "until": "${until}" }`);
+    const socket = io.connect('http://localhost:3000/');
+    socket.emit('open', data);
   };
 });

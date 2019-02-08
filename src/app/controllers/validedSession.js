@@ -1,15 +1,16 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth.js');
+
 const User = require('../models/user.js');
 
 const router = express.Router();
 
-
 router.use(authMiddleware); // verifica se o token é valido
+
 
 // Valida uma sessão
 router.get('/', (req, res) => {
-  res.send({ ok: true, user: req.userId });
+  res.send({ ok: true, user: req.userId, open: req.open });
 });
 
 // Valida uma sessão de ADM

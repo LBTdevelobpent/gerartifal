@@ -3,9 +3,24 @@ const app = angular.module('app', []);
 // Para validar uma sessão
 app.controller('auth', ($scope, $http, $window) => {
   $scope.session = () => {
-    const token = $window.localStorage.getItem('token');
+    const openSub = $window.localStorage.getItem('openSub');
+
+    if (!openSub) {
+      $window.localStorage.setItem('openSub', false);
+    }
+
+    const socket = io.connect('http://localhost:3000/');
+    socket.on('openF', (data) => {
+      const date = Date.now();
+      if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
+        $window.localStorage.setItem('openSub', true);
+      }
+    });
+
+    const token = (document.cookie).split('=', 2)[1];
     if (!token) { // caso não exista token, desvalida a sessão
       console.log('no session');
+      document.cookie = 'token=; path=/';
       $window.localStorage.clear();
       return;
     }
@@ -19,12 +34,14 @@ app.controller('auth', ($scope, $http, $window) => {
       }
     }).error((response) => {
       console.log(response);
+      document.cookie = 'token=; path=/';
       $window.localStorage.clear();
     });
   };
 
   $scope.logout = () => {
     $window.localStorage.clear();
+    document.cookie = 'token=;path=/';
     $window.location.href = '/';
   };
 });
