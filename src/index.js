@@ -4,6 +4,11 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const port = normalizePort(process.env.PORT || '3000');
+
+const server = app.listen(port);
+const io = require('socket.io').listen(server);
+
 const User = require('./app/models/user.js');
 
 
@@ -17,11 +22,23 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, '/www')));
 // -----------------------------------------------//
 
+// -------------------------Para abrir inscrições------------------//
+const sub = ['bilolão'];
+
+io.sockets.on('connection', (socket) => {
+  socket.emit('openF', sub[0]);
+
+  socket.on('open', (data) => {
+    sub.splice(0, sub.length);
+
+    sub.push(data);
+    socket.broadcast.emit('openF', data);
+  });
+});
+
+// -------------------------------------------------------------//
+
 require('./app/controllers/index.js')(app);
-
-const port = normalizePort(process.env.PORT || '3000');
-app.listen(port);
-
 
 // --------------------------Apagar diariamente contas não verificadas------------------
 function sleep(h) {
@@ -37,7 +54,7 @@ async function demo() {
   if (!users) {
     demo();
   }
-  for (let c = 0; c < users.length; c++) {
+  for (let c = 0; c < users.length; c += 1) {
     if (now > users[c].passwordResetExpires) {
       await User.findByIdAndRemove(users[c]._id);
     }

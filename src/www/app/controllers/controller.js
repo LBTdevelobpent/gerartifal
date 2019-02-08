@@ -2,7 +2,7 @@ const app = angular.module('app', []);
 
 app.controller('check', ($scope, $window) => {
   $scope.check = () => {
-    if ($window.localStorage.getItem('token')) {
+    if ((document.cookie).split('=', 2)[1]) {
       $window.location.href = '/';
     }
   };
@@ -50,7 +50,10 @@ app.controller('login', ($scope, $http, $window) => {
           alert('Logado com sucesso\nRedirecionando...');
           $window.localStorage.clear();
           $window.localStorage.setItem('user', JSON.stringify(user));
-          $window.localStorage.setItem('token', token);
+          const date = new Date();
+          date.setTime(date.getTime() + 1);
+          document.cookie = `token=${token}; path=/`;
+
           $window.location.href = '/';
           return 0;
         })
