@@ -54,7 +54,8 @@ router.post('/register', async (req, res) => {
     mailer.sendMail({
 
       to: email,
-      from: 'nigga@reallyNigga.com',
+      from: 'lbtdevelopmentinc@gmail.com',
+      subject: 'Verificação de Email no Sistema Gerartifal',
       template: 'verifyEmail',
       context: { token, email }, // Coloca no email uma varivel
 
