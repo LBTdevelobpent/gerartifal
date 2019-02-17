@@ -1,8 +1,4 @@
 const express = require('express');
-const EventEmitter = require('events');
-
-class MyEmitter extends EventEmitter {}
-const emitter = new MyEmitter();
 
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth.js');
