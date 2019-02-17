@@ -9,7 +9,7 @@ const router = express.Router();
 
 app.set('view engine', 'ejs');
 
-// Pega as noticas mais recentes e põe na tela
+// --------------------Pega as noticas mais recentes e põe na tela--------------
 router.get('/getPosts', (req, res) => {
   const d = new Date();
   const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
@@ -39,8 +39,9 @@ router.get('/getPosts', (req, res) => {
 
   recent(date, d);
 });
+// -----------------------------------------------------------------------------
 
-// Pega noticias de um dia expecifico
+// ----------------------Pega noticias de um dia expecifico-------------------
 router.get('/getPosts/:date', (req, res) => {
   const { date } = req.params;
 
@@ -56,8 +57,9 @@ router.get('/getPosts/:date', (req, res) => {
     }
   });
 });
+// -------------------------------------------------------------------------
 
-// Pega uma noticia especifica
+// -----------------------Pega uma noticia especifica---------------------
 router.get('/getPost/:date/:postName', (req, res) => {
   const { date, postName } = req.params;
   res.sendFile(path.resolve(`news/${date}/${postName}.html`), {
@@ -71,23 +73,27 @@ router.get('/getPost/:date/:postName', (req, res) => {
     }
   });
 });
+// ----------------------------------------------------------------------
 
-// Adiciona um post com base no que vc digitou no HTML
+// -----------------Adiciona um post com base no que vc digitou no HTML------------
 router.post('/addPost', (req) => {
   const { title, body } = req.body;
 
   const d = new Date();
   const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
+  // Vai conferir se já existe uma pasta da data atual
   fs.stat(path.resolve(`news/${date}`), (erro) => {
     if (erro) {
+      // Caso não existe, irar criar uma
       fs.mkdirSync(path.resolve(`news/${date}`));
-
+      // Nomeando o arquivo
       let archiName = title.toLowerCase();
       while (archiName.indexOf(' ') !== -1) {
         archiName = archiName.replace(' ', '-');
       }
 
+      // ---------------------Escrevendo um arquivo dentro da pasta------------------
       ejs.renderFile(path.resolve('resources/templates/template.ejs'), { date, archiName, title, body }, (err, html) => {
         if (err) {
           console.log(err);
@@ -98,7 +104,9 @@ router.post('/addPost', (req) => {
           }
         });
       });
+      // ----------------------------------------------------------------------------
     } else {
+      // ---------------Caso exista só vai criar um novo arquivo dentro-------------
       let archiName = title.toLowerCase();
       while (archiName.indexOf(' ') !== -1) {
         archiName = archiName.replace(' ', '-');
@@ -114,10 +122,13 @@ router.post('/addPost', (req) => {
           }
         });
       });
+      // --------------------------------------------------------------------------
     }
   });
 });
-// Usado para remover o post
+// ---------------------------------------------------------------------------------
+
+// -------------------------Usado para remover o post---------------------
 router.delete('/removePost/:date/:postName', (req) => {
   const { date, postName } = req.params;
   fs.unlink(path.resolve(`news/${date}/${postName}.html`), (err) => {
@@ -126,7 +137,9 @@ router.delete('/removePost/:date/:postName', (req) => {
     }
   });
 });
+// --------------------------------------------------------------------
 
+// Pega o caminho aonde está o post, para mostrar as datas onde tem post criado
 router.get('/getPostPath', (req, res) => {
   fs.readdir(path.resolve('news'), (err, items) =>{
     if (err) {
@@ -136,5 +149,6 @@ router.get('/getPostPath', (req, res) => {
     return res.send({ path: items.reverse() });
   });
 });
+// ----------------------------------------------------------------------------
 
 module.exports = app => app.use('/blog', router);
