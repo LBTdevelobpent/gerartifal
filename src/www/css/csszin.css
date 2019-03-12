@@ -196,3 +196,18 @@ html {
 
 }
 
+.circle {
+  background-color: #aaa;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.circle img {
+  position: top;
+  bottom: 0;
+  width: 100%;
+}
+
