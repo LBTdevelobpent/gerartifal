@@ -6,7 +6,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    
+    <!--SCRIPTS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
@@ -14,15 +15,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="app/controllers/auth.js"></script>
+    
+    <!-- CSS -->
     <!--fontawesome chave de acesso-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-<!-- CSS -->
+    <!--links bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!--links dos nossos arquivos css-->
     <link rel="stylesheet" type="text/css" href="css/csszin.css">
     <link rel="stylesheet" type="text/css" href="css/cssnavcolor.css">
     <link rel="stylesheet" href="css/Footer-with-map.css">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-
 
   </head>
 
@@ -42,15 +45,15 @@
 
 
     <nav class="navbar navbar-expand-sm navbar-light sticky-top ">
-<!-- Logo -->
-    <a class="navbar-brand" href="index.html">GERARTIFAL</a>
+      <!-- Logo -->
+      <a class="navbar-brand" href="index.html">GERARTIFAL</a>
 
-<!-- Toggler/collapsibe Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<!-- Botões Que Ficarão dentro do menuBar-->
+      <!-- Botões Que Ficarão dentro do menuBar-->
       <div ng-controller="session" class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
@@ -72,10 +75,7 @@
           </li>
           <li class="nav-item d-none d-md-block">
             <div class="dropdown">
-              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mais
-              </button>
-
+              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mais</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item " href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Inscrições On-Line</a>
                 <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
@@ -87,7 +87,7 @@
 		    </ul>
       </div>
 
-<!-- Barra De Pesquisa -->
+      <!-- Barra De Pesquisa -->
       <form class="navbar-form" action="/action_page.php" id="pesquisa">
         <div class="input-group" id="barra">
           <div class = "input-group-prepend">
@@ -98,11 +98,12 @@
       </form>
     </nav>
     <br>
-<!-- Carrossel-->
+
+    <!-- Carrossel-->
     <div class="container" >
       <div id="demo" class="carousel slide" data-ride="carousel">
 
-<!-- Indicators -->
+    <!-- Indicators -->
         <ul class="carousel-indicators">
           <li data-target="#demo" data-slide-to="0" class="active"></li>
           <li data-target="#demo" data-slide-to="1"></li>
