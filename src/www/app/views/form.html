@@ -100,8 +100,44 @@
     <br>
  
     <div class="container" align="center" id="form-container">
-	    <h1>Formulário de Inscrição</h1>
+
       <br>
+	    <h1>Formulário de Inscrição</h1>
+      <br><hr>
+
+          <h3>Escolha de Curso</h3>
+          <br>
+
+      
+      <div>
+          <form class="form-inline">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Escolha um Curso</label>
+              <select class="custom-select col-md-2 mb-3 mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                <option selected value="violin">Violino</option>
+                <option value="viola">Viola</option>
+                <option value="cello">Cello</option>
+                <option value="baixo">Baixo Acústico</option>
+                <option value="tecvocal">Tec.Vocal</option>
+                <option value="music">Musicalização</option>
+              </select>
+  
+        <div class="col-md-4 mb-4">
+          <label for="validationCustom01">Turno desejado</label>
+          <input type="text" class="form-control" id="validationCustom01" placeholder="matutino ou vespertino" required>
+          <div class="invalid-feedback">
+            Por Favor, digite o turno no qual você deseja estudar
+          </div>
+        </div>
+
+        <form class="form-inline">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Possui o Instrumento?</label>
+            <select class="custom-select col-md-2 mb-3 mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+              <option selected value="nprecisa">Meu curso não exige</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+      </div>
+
       <hr>
 
       <h3>Dados Pessoais Do Candidato</h3>
