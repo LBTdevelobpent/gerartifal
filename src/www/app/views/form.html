@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!--SCRIPTS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="../controllers/auth.js"></script>
-    
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
     <!-- CSS -->
     <!--fontawesome chave de acesso-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/csszin.css">
     <link rel="stylesheet" type="text/css" href="../../css/cssnavcolor.css">
     <link rel="stylesheet" href="../../css/Footer-with-map.css">
+
+    <script language="JavaScript" type="text/javascript" src="../../js/cidades-estados-1.4-utf8.js"></script>
 
   </head>
 
@@ -98,224 +100,279 @@
       </form>
     </nav>
     <br>
- 
-    <div class="container" align="center" id="form-container">
-
       <br>
-	    <h1>Formulário de Inscrição</h1>
-      <br><hr>
+      	<div class="container" align="center" id="formzão">
+      		<h1>Formulário de Inscrição</h1>
+      <br>
+      	<form class="needs-validation" action="/auth/register"  novalidate>
+      <hr>
+      		<h2>Curso Desejado</h2>
+      <br>
+      		<div class="form-row">
+      			<div class="col-md-4 mb-3">
+      				<label>Selecione um Curso</label>
+      				<select class="custom-select" required>
+      					<option selected value="">Selecione</option>
+      					<option value="violin">Violino</option>
+      					<option value="viola">Viola</option>
+      					<option value="cello">Cello</option>
+      					<option value="baixo">Baixo Acústico</option>
+      					<option value="tecvocal">Tec.Vocal</option>
+      					<option value="music">Musicalização</option>
+      	     	</select>
+      			 	<div class="invalid-feedback">
+      				 	Por Favor, Selecione um Curso.
+      			 	</div>
+      			</div>
+      			<div class="col-md-4 mb-3">
+      				<label>Selecione um Turno</label>
+      				<select class="custom-select" required>
+      					<option selected value="">Selecione</option>
+      					<option value="matutino">Matutino</option>
+      					<option value="vespertino">Vespertino</option>
+      				</select>
+      				<div class="invalid-feedback">
+      					Por Favor, Selecione um Turno.
+      				</div>
+      			</div>
+      			<div class="col-md-4 mb-3">
+      				<label>Você Possui o Instrumento Do Curso?</label>
+      				<select class="custom-select" required>
+      					<option selected value="">Selecione</option>
+      					<option value="sim">Sim</option>
+      					<option value="nao">Não</option>
+      				</select>
+      				<div class="invalid-feedback">
+      					Por Favor, Selecione uma opção.
+      				</div>
+      			</div>
+      		</div>
+      <hr>
+      		<h2>Dados Pessoais</h2>
+      <br>
+      		<div class="form-row">
+      			<div class="col-md-12 mb-3">
+      				<label>Membro Da Comunidade:  </label>
+      				<div class="custom-control custom-radio custom-control-inline">
+          			<input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+          			<label class="custom-control-label" for="customControlValidation2">Interna</label>
+        			</div>
+        			<div class="custom-control custom-radio mb-3 custom-control-inline">
+          			<input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+          			<label class="custom-control-label" for="customControlValidation3">Externa</label>
+        			</div>
+      			</div>
+      		</div>
 
-          <h3>Escolha de Curso</h3>
-          <br>
 
-      
-      <div>
-          <form class="form-inline">
-              <label class="mr-sm-2" for="inlineFormCustomSelect">Escolha um Curso</label>
-              <select class="custom-select col-md-2 mb-3 mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                <option selected value="violin">Violino</option>
-                <option value="viola">Viola</option>
-                <option value="cello">Cello</option>
-                <option value="baixo">Baixo Acústico</option>
-                <option value="tecvocal">Tec.Vocal</option>
-                <option value="music">Musicalização</option>
+        	<div class="form-row">
+          	<div class="col-md-12 mb-3">
+            	<label>Nome Completo</label>
+            	<input type="text" class="form-control" id="validationCustom01" placeholder="Nome Completo" autocomplete="on" required>
+            	<div class="invalid-feedback">
+                	Por Favor, Digite seu nome.
+            	</div>
+          	</div>
+        	</div>
+        	<div class="form-row">
+          	<div class="col-md-5 mb-3">
+            	<label>Data de Nascimento</label>
+            	<input type="date" class="form-control" max="2999-12-31" required>
+            	<div class="invalid-feedback">
+              	Por Favor, Digite Sua Data De Nascimento.
+            	</div>
+          	</div>
+          	<div class="col-md-3 mb-3">
+            	<label>Naturalidade</label>
+              <select class="custom-select" id="estado1" required>
+                <script language="JavaScript" type="text/javascript" charset="utf-8">
+                  new dgCidadesEstados({
+                  estado: document.getElementById('estado1')
+            	})
+                </script>
               </select>
-  
-        <div class="col-md-4 mb-4">
-          <label for="validationCustom01">Turno desejado</label>
-          <input type="text" class="form-control" id="validationCustom01" placeholder="matutino ou vespertino" required>
-          <div class="invalid-feedback">
-            Por Favor, digite o turno no qual você deseja estudar
+              <div class="invalid-feedback">Por Favor, Selecione Um Estado.</div>
+          	</div>
+          	<div class="col-md-4 mb-3">
+            	<label>Cidade</label>
+              <select class="custom-select" id="cidade1" required>
+                <script language="JavaScript" type="text/javascript" charset="utf-8">
+                  new dgCidadesEstados({
+                  estado: document.getElementById('estado1'),
+                  cidade: document.getElementById('cidade1')
+            })
+          </script>
+              </select>
+              <div class="invalid-feedback">Por Favor, Selecione Uma Cidade.</div>
           </div>
+
         </div>
+      	<div class="form-row">
+      		<div class="col-md-5 mb-3">
+      			<label>Registro Geral</label>
+      			<input type="text" class="form-control" pattern="[0-9]+$" maxlength="12" placeholder="Numero De RG" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por Favor, Digite Seu RG Corretamente.
+      			</div>
+      		</div>
+      		<div class="col-md-3 mb-3">
+      			<label>Órgão Emissor</label>
+      			<input type="text" class="form-control" placeholder="SSP" required>
+      			<div class="invalid-feedback">
+      				Por Favor, Digite o Órgão Emissor.
+      			</div>
+      		</div>
+      		<div class="col-md-4 mb-3">
+      			<label>CPF</label>
+      			<input type="text" class="form-control" placeholder="CPF"  id="CPF" maxlength="14" minlength="15" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por Favor, Digite Seu CPF.
+      			</div>
+      		</div>
+      	</div>
 
-        <form class="form-inline">
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Possui o Instrumento?</label>
-            <select class="custom-select col-md-2 mb-3 mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected value="nprecisa">Meu curso não exige</option>
-              <option value="sim">Sim</option>
-              <option value="nao">Não</option>
-            </select>
-      </div>
+      	<div class="form-row">
+      		<div class="col-md-5 mb-3">
+      			<label>Email</label>
+      			<input type="email" class="form-control" type="email" placeholder="email@mail.com" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por favor, Digite um email válido.
+      			</div>
+      		</div>
+      		<div class="col-md-3 mb-3">
+      			<label>Telefone</label>
+      			<input type="text" class="form-control" maxlength="14" id="NUM" placeholder="082 91234-5678" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por favor, Digite um telefone para contato.
+      			</div>
+      		</div>
+      		<div class="col-md-4 mb-3">
+      			<label>Endereço</label>
+      			<input type="text" class="form-control" placeholder="Digite Seu Endereço Residêncial" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por favor, Digite seu endereço residêncial.
+      			</div>
+      		</div>
+      	</div>
 
+      	<div class="form-row">
+      		<div class="col-md-3 mb-3">
+      			<label>Estado Atual</label>
+      			<select class="custom-select" id="estado2" required>
+      				<script language="JavaScript" type="text/javascript" charset="utf-8">
+      					new dgCidadesEstados({
+      					estado: document.getElementById('estado2')
+      		})
+      				</script>
+      			</select>
+      			<div class="invalid-feedback">Por Favor, Selecione Um Estado.</div>
+      		</div>
+
+      		<div class="col-md-3 mb-3">
+      			<label>Cidade</label>
+      			<select class="custom-select" id="cidade2" required>
+      				<script language="JavaScript" type="text/javascript" charset="utf-8">
+      					new dgCidadesEstados({
+      					estado: document.getElementById('estado2'),
+      					cidade: document.getElementById('cidade2')
+      		})
+      	</script>
+      			</select>
+      			<div class="invalid-feedback">
+      				Por favor, Selecione uma Cidade.
+      			</div>
+      		</div>
+      		<div class="col-md-3 mb-3">
+      			<label>CEP</label>
+      			<input class="form-control" id="CEP" maxlength="10" minlength="10" autocomplete="on" required>
+      			<div class="invalid-feedback">
+      				Por favor, Digite seu CEP.
+      			</div>
+      		</div>
+
+      		<div class="col-md-3 mb-3">
+      			<label>Possui Deficiência?</label>
+      			<select class="custom-select" required>
+      				<option selected value="">Selecione</option>
+      				<option value="nao">Não</option>
+      				<option value="fisica">Física</option>
+      				<option value="auditiva">Auditiva</option>
+      				<option value="visual">Visual</option>
+      				<option value="mental">Mental</option>
+      				<option value="multipla">Múltipla</option>
+      			</select>
+      			<div class="invalid-feedback">
+      				Por favor, Selecione Alguma Opção.
+      			</div>
+      		</div>
+      	</div>
       <hr>
 
-      <h3>Dados Pessoais Do Candidato</h3>
+      <h2>Formação Acadêmica</h2>
       <br>
-
-      <label for="validationCustom01"><strong>Membro da:</strong></label>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="interna">
-        <label class="form-check-label" for="inlineRadio1">Comunidade Interna</label>
+      <div class="form-row">
+      	<div class="col-md-12 mb-3">
+      		<label>Informe Seu Grau De Escolaridade</label>
+      		<select class="custom-select" required>
+      			<option selected value="">Selecione</option>
+      			<option value="medio_inc">Ensino médio Incompleto</option>
+      			<option value="medio_com">Ensino Médio Completo</option>
+      			<option value="fundamental_inc">Fundamental Incompleto</option>
+      			<option value="fundamental_com">Fundamental Completo</option>
+      			<option value="superior_inc">Ensino Superior Incompleto</option>
+      			<option value="superior_com">Ensino Superior Completo</option>
+      		</select>
+      		<div class="invalid-feedback">
+      			Por favor, Selecione Alguma Opção.
+      		</div>
+      	</div>
       </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="e">
-        <label class="form-check-label" for="inlineRadio2">Comunidade Externa</label>
+      <hr>
+
+      <h2>Informações Opcionais</h2>
+      <br>
+      <div class="form-row">
+      	<div class="col-md-12 mb-3">
+      		<label>Como Ficou Sabendo Sobre o Projeto?</label>
+      		<select class="custom-select">
+      			<option selected value="">Selecione</option>
+      			<option value="gerart">Site Gerartifal</option>
+      			<option value="folder">Folder</option>
+      			<option value="mail">E-mail</option>
+      			<option value="mural">Divulgação Mural</option>
+      			<option value="site">Site do campus</option>
+      			<option value="jornal">Jornal/Revista</option>
+      			<option value="radio">Rádio Local</option>
+      			<option value="amigos">Através de Amigos</option>
+      			<option value="outros">Outros</option>
+      		</select>
+      	</div>
+      		<div class="col-md-12 mb-3">
+      			<label>Porque Deseja Fazer Este Curso?</label>
+      			<textarea class="form-control" placeholder="Descreva em poucas palavras o motivo de seu interesse neste curso" rows="3"></textarea>
+      		</div>
       </div>
-      <br><br>
 
-      <form class="needs-validation" action="/auth/register"  novalidate id="form"></form>
-        <div class="form-row">
-          <div class="col-md-12 mb-3">
-            <label for="validationCustom01">Nome Completo</label>
-            <input type="text" class="form-control" id="validationCustom01" placeholder="Digite seu nome" required>
+
+
+      <!--  <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+              Agree to terms and conditions
+            </label>
             <div class="invalid-feedback">
-              Por Favor, digite seu nome.
+              You must agree before submitting.
             </div>
           </div>
         </div>
-        
-        <div class="form-row">
-          <div class="col-md-6 mb-3">
-          <label for="validationCustom01">Data de Nascimento</label>
-            <input class="form-control" type="date" value="2019-03-16" id="date">
-          </div>
-       
-          <div class="col-md-3 mb-3">
-            <label for="validationCustom01">Naturalidade</label>
-            <input type="text" class="form-control" id="validationCustom01" placeholder="Onde você nasceu?" required>
-            <div class="invalid-feedback">
-              Por Favor, digite sua Naturalidade
-            </div>
-          </div>
-
-          <div class="col-md-3 mb-3">
-              <label for="validationCustom01">Estado</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="digite o estado" required>
-              <div class="invalid-feedback">
-                Por Favor, digite o estado
-              </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">Registro Geral</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="digite o Nº do R.G" required>
-                <div class="invalid-feedback">
-                  Por Favor, digite o número do seu R.G
-                </div>
-              </div>
-         
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom01">Órgão Emissor</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="Digite o órgão emissor" required>
-              <div class="invalid-feedback">
-                Por Favor, digite sua Naturalidade
-              </div>
-            </div>
-  
-            <div class="col-md-3 mb-3">
-                <label for="validationCustom01">CPF</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="digite seu CPF" required>
-                <div class="invalid-feedback">
-                  Por Favor, digite seu CPF
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="col-md-6 mb-3">
-                <label for="validationCustom01">E-mail</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="exemplo@exemplo.com" required>
-                <div class="invalid-feedback">
-                  Por Favor, digite seu E-mail
-                </div>
-            </div>
-         
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom01">Telefone</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="(DDD)90000-0000" required>
-              <div class="invalid-feedback">
-                Por Favor, digite um telefone para contato
-              </div>
-            </div>
-            
-            <div class="col-md-3 mb-3">
-                <label for="validationCustom01">Endereço</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="digite seu endereço" required>
-                <div class="invalid-feedback">
-                  Por Favor, digite seu endereço
-                </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-md-6 mb-3">
-              <label for="validationCustom01">Cidade/Estado</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="Maceió - Alagoas" required>
-              <div class="invalid-feedback">
-                Por Favor, digite a cidade e o estado que você reside
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <label for="validationCustom01">CEP</label>
-              <input type="text" class="form-control" id="validationCustom01" placeholder="00000-000" required>
-              <div class="invalid-feedback">
-                Por Favor, digite seu CEP
-              </div>
-            </div>
-
-            <form class="form-inline">
-                <label class="mr-sm-2" for="inlineFormCustomSelect">Possui Deficiência?</label>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                  <option selected value="nao">Não</option>
-                  <option value="fisica">física</option>
-                  <option value="auditiva">Auditiva</option>
-                  <option value="visual">Visual</option>
-                  <option value="mental">Mental</option>
-                  <option value="multipla">Múltipla</option>
-                </select>
-          </div>
-          <br><br><hr>
-
-          <h3>Formação Acadêmica</h3>
-          <br>
-
-          
-          <label class="mr-sm-2" for="inlineFormCustomSelect">Qual é o seu Grau de Escolaridade?</label>
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected value="medio_inc">Ensino médio Incompleto</option>
-              <option value="medio_com">Ensino Médio Completo</option>
-              <option value="fundamental_inc">Fundamental Incompleto</option>
-              <option value="fundamental_com">Fundamental Completo</option>
-              <option value="superior_inc">Ensino Superior Incompleto</option>
-              <option value="superior_com">Ensino Superior Completo</option>
-            </select>
-
-          <br><br><hr>
-          <h3>Informações Adicionais</h3>
-          <br>
-
-          <label class="mr-sm-2" for="inlineFormCustomSelect">Como Ficou Sabendo Sobre o Projeto?</label>
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected value="gerart">Site Gerartifal</option>
-              <option value="folder">Folder</option>
-              <option value="mail">E-mail</option>
-              <option value="mural">Divulgação Mural</option>
-              <option value="site">Site do campus</option>
-              <option value="jornal">Jornal/Revista</option>
-              <option value="radio">Rádio Local</option>
-              <option value="amigos">Através de Amigos</option>
-              <option value="outros">Outros</option>
-
-            </select>
-
-            <br><br>
-
-            <div class="form-group">
-                <label for="exampleTextarea">Por que deseja fazer este curso?</label>
-                <textarea class="form-control" placeholder="Descreva em poucas palavras o motivo de seu interesse neste curso" id="exampleTextarea" rows="3"></textarea>
-              </div>
-
-            <br><br><hr>
-
-        
-    <button class="btn btn-primary" type="submit">Enviar</button>
-</form>
-</div>
-<br>
+      	-->
+      <hr>
+      <br>
+        <button class="btn btn-success" type="submit">Submit form</button>
+      </form>
+      </div>
+      <br>
 <!--Rodapé-->
 <footer id="myFooter">
     <div class="container">
@@ -358,6 +415,19 @@
   }, false);
 })();
 </script>
-
+<script>
+    $(document).ready(function () {
+        var $seuCampoCpf = $("#CPF");
+        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
+    });
+		$(document).ready(function () {
+        var $seuCampoCpf = $("#NUM");
+        $seuCampoCpf.mask('000 00000-0000', {reverse:true});
+    });
+		$(document).ready(function () {
+        var $seuCampoCpf = $("#CEP");
+        $seuCampoCpf.mask('00.000-000', {reverse:true});
+    });
+</script>
 </body>
 </html>
