@@ -1,3 +1,6 @@
+//
+//
+//
 var app = angular.module('app', []); 
 
 
@@ -7,11 +10,11 @@ app.controller('reset', ['$scope', '$http', '$location',($scope, $http, $locatio
         return data;
     };
  
-    $scope.submit = function(data) {
+    $scope.submit = (data) => {
         password = $scope.password;
 
         if(password == undefined){
-            console.log("Há campos vazios");
+            alert('Há compos vazios!');
             return 0;
         }
 

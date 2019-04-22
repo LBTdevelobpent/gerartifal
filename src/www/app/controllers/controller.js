@@ -1,5 +1,9 @@
+//
+//  Este script contém os controladores de registro(login e register)
+//
 const app = angular.module('app', []);
 
+// ==================== Checa se há alguem logado(por cookie) ===================
 app.controller('check', ['$scope', '$window',($scope, $window) => {
   $scope.check = () => {
     if ((document.cookie).split('=', 2)[1]) {
@@ -7,16 +11,16 @@ app.controller('check', ['$scope', '$window',($scope, $window) => {
     }
   };
 }]);
-
+// ============================= Controlador de registro ======================================
 app.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
     const data = JSON.parse(`{ "name": "${name}", "email": "${email}", "password": "${password}"}`);
 
     if (name === 'undefined' || !email || !password) {
-      console.log('a');
+      alert('Campos inválidos');
     } else if (password.length < 8) {
-      document.getElementById('senha-invalida').innerHTML = 'senha invalida, a senha deve conter no mínimo 8 dígitos';
+      document.getElementById('senha-invalida').innerHTML = 'Senha invalida: A senha deve conter no mínimo 8 dígitos';
     } else {
       $http.post('/auth/register', data)
         .success((response) => {
@@ -29,24 +33,23 @@ app.controller('register',['$scope', '$http', ($scope, $http) => {
     }
   };
 }]);
-
+// ============================= Controlador de login ============================================
 app.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
   $scope.submit = () => {
     const { name, password } = $scope;
-    const data = JSON.parse(`{ "name": "${name}", "password": "${password}"}`);
+    const data = {name, password};
 
     if (name === 'undefined' || !password) {
-      console.log('a');
+      alert('a');
     } else {
       $http.post('/auth/authenticate', data)
         .success((response) => {
           const { user, token } = response;
 
           if (user.verified === false) {
-            console.log('Email não verificado, porfavor verifique');
+            alert('Email não verificado, por favor verifique');
             return 0;
           }
-          console.log('sou um easterEgg, oi :)');
           alert('Logado com sucesso\nRedirecionando...');
           $window.localStorage.clear();
           $window.localStorage.setItem('user', JSON.stringify(user));

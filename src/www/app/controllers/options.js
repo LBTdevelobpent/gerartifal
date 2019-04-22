@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-
+// ================================= Controlador de 
 app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window) => {
     $scope.session =  () => {
         token = (document.cookie).split('=', 2)[1];
@@ -12,20 +12,20 @@ app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window)
         $http.get("/valid", {
             headers:{'Authorization': 'Bearer '+token+''}
         })
-        .success(function(response) {
+        .success((response) => {
             user = JSON.parse($window.localStorage.getItem('user'));
             $window.localStorage.setItem('validSession', JSON.stringify(response.ok));
             $scope.name = user.name;
 
         })
-        .error(function(response){
+        .error((response)=>{
             window.localStorage.clear();
             $window.location.href = '/';
         });
 
     };
 
-    $scope.submit = function() {
+    $scope.submit = () => {
 
         token = (document.cookie).split('=', 2)[1];
         name = $scope.name;
@@ -40,7 +40,7 @@ app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window)
             return 0;
         }
         if(!(Npassword == RNpassword)){
-            console.log("A nova senha não bate");
+            alert("As senhas não batem!");
             return 0;
         }
         data = JSON.parse('{ "name": "'+name+'", "password": "'+password+'", "Npassword": "'+Npassword+'"}');

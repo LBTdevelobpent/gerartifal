@@ -1,5 +1,5 @@
 //
-//  Este script é responsável pelas ficas de inscrição
+//  Este script é responsável pelas fichas de inscrição
 //
 const app = angular.module('app', []);
 // Controlador de validação de sessão - cookies

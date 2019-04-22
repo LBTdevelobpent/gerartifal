@@ -1,6 +1,6 @@
 const app = angular.module('app', []);
 
-// Para validar uma sessão
+// ==================================== Para validar uma sessão ==========================
 app.controller('auth',[ '$scope','$http', ($scope, $http) => {
   $scope.session = () => {
     const openSub = $window.localStorage.getItem('openSub');
@@ -45,7 +45,7 @@ app.controller('auth',[ '$scope','$http', ($scope, $http) => {
     $window.location.href = '/';
   };
 }]);
-// ativa / desativa itens na tela, dependendo da sessão
+// ============================== ativa / desativa itens na tela, dependendo da sessão =========================
 app.controller('session',['$scope', ($scope) => {
   $scope.validClass = () => {
     const valid = window.localStorage.getItem('validSession');

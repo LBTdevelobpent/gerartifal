@@ -1,3 +1,7 @@
+//
+//  Este script fica responsável pela validação do email e do token
+//
+
 const app = angular.module('app', []);
 
 app.controller('verify', ['$scope', '$http', '$window', '$location',($scope, $http, $window, $location) => {
