@@ -20,12 +20,13 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
-// Modifica informações do Usuario
+// =========================Modifica informações do Usuario================//
 router.put('/modify', async (req, res) => {
-  const userM = req.body;
-  const { userId } = req.userId;
-  const user = await User.findOne({ _id: userId }).select('+password');
   try {
+    const userM = req.body;
+    const { userId } = req.userId;
+    const user = await User.findOne({ _id: userId }).select('+password');
+    
     if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
@@ -46,7 +47,7 @@ router.put('/modify', async (req, res) => {
     return res.status(400).send({ error: 'Não foi possivel atualizar' });
   }
 });
-
+// ========================================================================//
 /*
 router.post('/user_image', async (req, res) => {
   const { image } = req.body;

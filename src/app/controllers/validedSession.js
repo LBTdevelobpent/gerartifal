@@ -8,12 +8,14 @@ const router = express.Router();
 router.use(authMiddleware); // verifica se o token é valido
 
 
-// Valida uma sessão
+// ================================Valida uma sessão===========================//
 router.get('/', (req, res) => {
   res.send({ ok: true, user: req.userId, open: req.open });
 });
+// ============================================================================//
 
-// Valida uma sessão de ADM
+
+// ============================Valida uma sessão de ADM=======================//
 router.post('/adm', async (req, res) => {
   const { adm, email, _id } = req.body;
   if (!adm) {
@@ -35,6 +37,6 @@ router.post('/adm', async (req, res) => {
 
   return res.send({ ok: true, user });
 });
-
+// ===========================================================================//
 
 module.exports = app => app.use('/valid', router);
