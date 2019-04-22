@@ -2,7 +2,7 @@
 //  Este script é responsável pelas fichas de inscrição
 //
 const app = angular.module('app', []);
-// Controlador de validação de sessão - cookies
+// ===================== Controlador de validação de sessão - cookies ========================
 app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window) => {
   const token = (document.cookie).split('=', 2)[1];
   const openSub =  $window.localStorage.getItem('openSub');
@@ -61,7 +61,7 @@ app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window
 
   $scope.submit = () => {
     const { name, age, cpf } = $scope;
-    const data = JSON.parse(`{ "name": "${name}", "age": ${age}, "cpf": ${cpf} }`);
+    const data = {name, age, cpf};
 
     $http.post('/subcribe/create', data, {
       headers: { Authorization: `Bearer ${token}` },
@@ -96,6 +96,7 @@ app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window
     }).success((response) => {
       console.log(response);
     }).error((response) => {
+      alert(response.error);
       console.log(response.error);
     });
   };
@@ -114,11 +115,12 @@ app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window
         const { subcribe } = response;
         $scope.subcribe = subcribe;
       }).error((response) => {
+        alert(response.error);
         console.log(response.error);
       });
       // Pega fichas específicas
     } else {
-      const data = JSON.parse(`{ "nome": "${nome}", "CPF": ${cpf !== undefined ? cpf : 0} }`);
+      const data = {nome, CPF}
       $http.put('/subcribe/find_subscription', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -126,6 +128,7 @@ app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window
           const { subcribe } = response;
           $scope.subcribe = subcribe;
         }).error((response) => {
+          alert(response.error);
           console.log(response);
         });
     }
@@ -133,7 +136,7 @@ app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window
 
   $scope.openSub = () => {
     const { from, until } = $scope;
-    const data = JSON.parse(`{ "from": "${from}", "until": "${until}" }`);
+    const data = {from,until};
     const socket = io.connect('http://localhost:3000/');
     socket.emit('open', data);
   };

@@ -1,9 +1,9 @@
 //
-//
+// Este script contém os controladores para modificações da senha
 //
 var app = angular.module('app', []); 
 
-
+// ====================== Controller reset password =================================
 app.controller('reset', ['$scope', '$http', '$location',($scope, $http, $location) => {
     $scope.reset = () => {
         data = $location.search();
@@ -18,7 +18,7 @@ app.controller('reset', ['$scope', '$http', '$location',($scope, $http, $locatio
             return 0;
         }
 
-        json = JSON.parse('{ "email": "'+data.email+'","token": "'+data.token+'","password": "'+password+'" }');
+        json = {email:data.email,token:data.token,password:data.password};
         
         $http.post('/auth/reset_password', json)
         .success(function(response) {
@@ -31,10 +31,10 @@ app.controller('reset', ['$scope', '$http', '$location',($scope, $http, $locatio
     }
 
  }]);
-
+// ====================== Controlador forget password ================
 app.controller('forgot', ['$scope', '$http',($scope, $http) => {
     $scope.forgot = () => {
-        email = JSON.parse('{ "email": "'+$scope.email+'"}');
+        email = {email};
         
         $http.post('/auth/forgot_password', email)
         .success((response)=> {

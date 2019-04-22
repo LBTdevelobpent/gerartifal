@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-// ================================= Controlador de 
+// ================================= Controlador de opções 
 app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window) => {
     $scope.session =  () => {
         token = (document.cookie).split('=', 2)[1];
@@ -29,6 +29,7 @@ app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window)
 
         token = (document.cookie).split('=', 2)[1];
         name = $scope.name;
+
         password = $scope.password;
         Npassword = $scope.Newpassword;
         RNpassword = $scope.RNewpassword;
@@ -43,7 +44,7 @@ app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window)
             alert("As senhas não batem!");
             return 0;
         }
-        data = JSON.parse('{ "name": "'+name+'", "password": "'+password+'", "Npassword": "'+Npassword+'"}');
+        data = {name,password,Npassword};
 
         $http.put("/options/modify", data,{
             headers:{'Authorization': 'Bearer '+token+''}

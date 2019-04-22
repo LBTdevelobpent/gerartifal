@@ -1,6 +1,9 @@
+//
+// Este script fica responsável dos métodos e configurações do blog(seção de notícias)
+//
 const app = angular.module('app', ['ngRoute']);
 
-
+// ============================= Configuração das rotas ========================================
 app.config([ '$routeProvider', ($routeProvider) => {
   $routeProvider
     .when('/', {
@@ -17,7 +20,7 @@ app.config([ '$routeProvider', ($routeProvider) => {
     })
     .otherwise({ redirectTo: '/' });
 }]);
-
+// ========================== Controladores ==================================================
 app.controller('HomeCtrl',[ '$rootScope', '$location', ($rootScope, $location) => {
   $rootScope.activetab = $location.path();
 }]);
@@ -30,7 +33,7 @@ app.controller('AllCtrl', ['$rootScope', '$routeParams', '$location',($rootScope
   $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
 }]);
 
-
+// =========================== Configuração dos métodos do blog ===============================
 app.controller('post',[ '$scope','$http', ($scope, $http) => {
   $scope.addPost = () => {
     const { title, mss } = $scope;

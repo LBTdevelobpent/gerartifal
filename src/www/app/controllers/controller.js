@@ -15,7 +15,7 @@ app.controller('check', ['$scope', '$window',($scope, $window) => {
 app.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
-    const data = JSON.parse(`{ "name": "${name}", "email": "${email}", "password": "${password}"}`);
+    const data = {name, email,password};
 
     if (name === 'undefined' || !email || !password) {
       alert('Campos inválidos');
