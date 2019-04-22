@@ -7,7 +7,7 @@ const User = require('../models/user.js');
 
 router.use(authMiddleware);
 
-// Criação de uma ficha de inscrição no banco
+// ==========================Criação de uma ficha de inscrição no banco====================//
 router.post('/create', async (req, res) => {
   try {
     const { cpf } = req.body;
@@ -23,8 +23,9 @@ router.post('/create', async (req, res) => {
     return res.status(400).send({ error: 'Error em criar uma inscrição' });
   }
 });
+// =======================================================================================//
 
-// Busca a ficha do proprio usuario
+// =============================Busca a ficha do proprio usuario==========================//
 router.get('/find', async (req, res) => {
   try {
     const subcribe = await Subcribe.findOne({ user: req.userId }).populate('user');
@@ -34,8 +35,9 @@ router.get('/find', async (req, res) => {
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }
 });
+// ========================================================================================//
 
-// Apaga a ficha do banco
+// ====================================Apaga a ficha do banco==============================//
 router.delete('/:subId', async (req, res) => {
   try {
     if (!await Subcribe.findOne({ user: req.params.subId })) {
@@ -49,10 +51,11 @@ router.delete('/:subId', async (req, res) => {
     return res.status(400).send({ error: 'Error em apagar inscrição' });
   }
 });
+// ========================================================================================//
 
-// ----------------------------------------ADM---------------------------------------
+// ================================================ADM======================================//
 
-// Busca todas as fichas
+// ======================================Busca todas as fichas==============================//
 
 router.get('/findAll', async (req, res) => {
   try {
@@ -72,8 +75,9 @@ router.get('/findAll', async (req, res) => {
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }
 });
+// ======================================================================================//
 
-// Busca uma ficha específica
+// =====================================Busca uma ficha específica=======================//
 router.put('/find_subscription', async (req, res) => {
   try {
     const { adm } = await User.findById(req.userId);
@@ -101,14 +105,14 @@ router.put('/find_subscription', async (req, res) => {
       }
       return res.send({ subcribe });
     }
-    // -----------------------------------------------------
+    // ----------------------------------------------------------------------------//
 
     const subcribe = await Subcribe.find({ $or: [{ name: nome }, { cpf: CPF }] }).populate('user');
     return res.send({ subcribe });
   } catch (err) {
-    console.log(err);
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }
 });
+// ======================================================================================//
 
 module.exports = app => app.use('/subcribe', router);
