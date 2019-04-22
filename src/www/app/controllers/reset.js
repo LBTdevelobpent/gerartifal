@@ -1,8 +1,8 @@
 var app = angular.module('app', []); 
 
 
-app.controller('reset', function ($scope, $http, $location) {
-    $scope.reset = function() {
+app.controller('reset', ['$scope', '$http', '$location',($scope, $http, $location) => {
+    $scope.reset = () => {
         data = $location.search();
         return data;
     };
@@ -27,23 +27,23 @@ app.controller('reset', function ($scope, $http, $location) {
 
     }
 
- });
+ }]);
 
-app.controller('forgot', function($scope, $http) {
-    $scope.forgot = function() {
+app.controller('forgot', ['$scope', '$http',($scope, $http) => {
+    $scope.forgot = () => {
         email = JSON.parse('{ "email": "'+$scope.email+'"}');
         
         $http.post('/auth/forgot_password', email)
-        .success(function(response) {
+        .success((response)=> {
             console.log(response);
         })
-        .error(function(response) {
+        .error((response) => {
             console.log(response);
         })
 
 
     }
-})
+}]);
  
  
  

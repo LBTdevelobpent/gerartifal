@@ -1,8 +1,8 @@
 var app = angular.module('app', []);
 
 
-app.controller('options', function($scope, $http, $window){
-    $scope.session = function() {
+app.controller('options', ['$scope', '$http', '$window',($scope, $http, $window) => {
+    $scope.session =  () => {
         token = (document.cookie).split('=', 2)[1];
         if(!token){
             window.localStorage.clear();
@@ -64,4 +64,4 @@ app.controller('options', function($scope, $http, $window){
 
 
     };
-});
+}]);

@@ -1,14 +1,14 @@
 const app = angular.module('app', []);
 
-app.controller('check', ($scope, $window) => {
+app.controller('check', ['$scope', '$window',($scope, $window) => {
   $scope.check = () => {
     if ((document.cookie).split('=', 2)[1]) {
       $window.location.href = '/';
     }
   };
-});
+}]);
 
-app.controller('register', ($scope, $http) => {
+app.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
     const data = JSON.parse(`{ "name": "${name}", "email": "${email}", "password": "${password}"}`);
@@ -28,9 +28,9 @@ app.controller('register', ($scope, $http) => {
         });
     }
   };
-});
+}]);
 
-app.controller('login', ($scope, $http, $window) => {
+app.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
   $scope.submit = () => {
     const { name, password } = $scope;
     const data = JSON.parse(`{ "name": "${name}", "password": "${password}"}`);
@@ -62,4 +62,4 @@ app.controller('login', ($scope, $http, $window) => {
         });
     }
   };
-});
+}]);

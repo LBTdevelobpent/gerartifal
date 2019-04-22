@@ -1,6 +1,6 @@
 const app = angular.module('app', []);
 
-app.controller('verify', ($scope, $http, $window, $location) => {
+app.controller('verify', ['$scope', '$http', '$window', '$location',($scope, $http, $window, $location) => {
   $scope.verified = () => {
     const data = $location.search();
     const json = JSON.parse(`{ "email": "${data.email}","token": "${data.token}"}`);
@@ -13,4 +13,4 @@ app.controller('verify', ($scope, $http, $window, $location) => {
         console.log(response);
       });
   };
-});
+}]);

@@ -1,7 +1,7 @@
 const app = angular.module('app', []);
 
 // Para validar uma sessão
-app.controller('auth', ($scope, $http, $window) => {
+app.controller('auth',[ '$scope','$http', ($scope, $http) => {
   $scope.session = () => {
     const openSub = $window.localStorage.getItem('openSub');
 
@@ -44,11 +44,11 @@ app.controller('auth', ($scope, $http, $window) => {
     document.cookie = 'token=;path=/';
     $window.location.href = '/';
   };
-});
+}]);
 // ativa / desativa itens na tela, dependendo da sessão
-app.controller('session', ($scope, $window) => {
+app.controller('session',['$scope', ($scope) => {
   $scope.validClass = () => {
-    const valid = $window.localStorage.getItem('validSession');
+    const valid = window.localStorage.getItem('validSession');
     if (valid === 'true') {
       return 'nav-link d-none d-lg-block';
     }
@@ -56,10 +56,10 @@ app.controller('session', ($scope, $window) => {
   };
 
   $scope.validDrop = () => {
-    const valid = $window.localStorage.getItem('validSession');
+    const valid = window.localStorage.getItem('validSession');
     if (valid === 'true') {
       return 'btn btn-success dropdown-toggle';
     }
     return 'btn disabled btn-success dropdown-toggle';
   };
-});
+}]);

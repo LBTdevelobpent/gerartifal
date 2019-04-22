@@ -1,6 +1,9 @@
+//
+//  Este script é responsável pelas ficas de inscrição
+//
 const app = angular.module('app', []);
-
-app.controller('subcribe', ($scope, $http, $window) => {
+// Controlador de validação de sessão - cookies
+app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window) => {
   const token = (document.cookie).split('=', 2)[1];
   const openSub =  $window.localStorage.getItem('openSub');
 
@@ -134,4 +137,4 @@ app.controller('subcribe', ($scope, $http, $window) => {
     const socket = io.connect('http://localhost:3000/');
     socket.emit('open', data);
   };
-});
+}]);

@@ -1,7 +1,7 @@
 const app = angular.module('app', ['ngRoute']);
 
 
-app.config(($routeProvider) => {
+app.config([ '$routeProvider', ($routeProvider) => {
   $routeProvider
     .when('/', {
       templateUrl: '/blog/getPosts',
@@ -16,22 +16,22 @@ app.config(($routeProvider) => {
       controller: 'AllCtrl',
     })
     .otherwise({ redirectTo: '/' });
-});
+}]);
 
-app.controller('HomeCtrl', ($rootScope, $location) => {
+app.controller('HomeCtrl',[ '$rootScope', '$location', ($rootScope, $location) => {
   $rootScope.activetab = $location.path();
-});
+}]);
 
-app.controller('DateCtrl', ($rootScope, $routeParams, $location) => {
+app.controller('DateCtrl', ['$rootScope', '$routeParams', '$location',($rootScope, $routeParams, $location) => {
   $rootScope.activetab = $location.path() + $routeParams.date;
-});
+}]);
 
-app.controller('AllCtrl', ($rootScope, $routeParams, $location) => {
+app.controller('AllCtrl', ['$rootScope', '$routeParams', '$location',($rootScope, $routeParams, $location) => {
   $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
-});
+}]);
 
 
-app.controller('post', ($scope, $http) => {
+app.controller('post',[ '$scope','$http', ($scope, $http) => {
   $scope.addPost = () => {
     const { title, mss } = $scope;
     $http.post('/blog/addPost', JSON.parse(`{ "title": "${title}", "body": "${mss}" }`))
@@ -63,4 +63,4 @@ app.controller('post', ($scope, $http) => {
         console.log(response);
       });
   };
-});
+}]);
