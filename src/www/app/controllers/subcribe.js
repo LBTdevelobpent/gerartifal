@@ -1,9 +1,9 @@
 //
 //  Este script é responsável pelas fichas de inscrição
 //
-const app = angular.module('app', []);
+const app = angular.module('subcribe', []);
 // ===================== Controlador de validação de sessão - cookies ========================
-app.controller('subcribe', ['$scope', '$http', '$window',($scope, $http, $window) => {
+app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $window) => {
   const token = (document.cookie).split('=', 2)[1];
   const openSub =  $window.localStorage.getItem('openSub');
 
