@@ -13,6 +13,7 @@
 <!-- RESOLUÇÃO DAS IMAGENS TEM QUE SER OBRIGATORIAMENTE 1000X400 -->
 
   <div class="carousel-inner">
+
     <div class="carousel-item active">
       <img src="img/i1.jpg" class="img-fluid d-block">
       <div class="carousel-caption d-none d-md-block">
@@ -30,10 +31,10 @@
     </div>
 
     <div class="carousel-item">
-        <img src="img/i3.jpg" class="img-fluid d-block">
+        <img src="{{ carrousel.image }}" class="img-fluid d-block">
         <div class="carousel-caption d-none d-md-block">
-          <h2 class="animated flipInY" style="animation-delay: 500ms"> Noticias </h2>
-          <h3 class="animated flipInX" style="animation-delay: 500ms"> Fique por dentro de todas as novidades do nosso grupo. </h3>
+          <a href="/{{ carrousel.date }}/{{ carrousel.archiName }}"><h2 class="animated flipInY" style="animation-delay: 500ms"> {{ carrousel.title }} </h2></a>
+          <h3 class="animated flipInX" style="animation-delay: 500ms"> {{ carrousel.body }} </h3>
         </div>
     </div>
   </div>
