@@ -13,9 +13,16 @@
   width: 100%;
 }
 
-#carouselSite img{
+.carousel-inner h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-inner img {
   width:100%;
-  height: auto;
+  height: 700px;
+  overflow: hidden;
 }
 
 #carouselSite {
@@ -103,11 +110,11 @@
 
 /* Large devices (laptops/desktops, 992px pra cima)*/
 @media only screen and (min-width: 992px) {
-  
+
 
 }
 
 /* Extra large devices (laptopes largos e telas grandes, 1200px pra cima)*/
 @media only screen and (min-width: 1200px) {
-  
+
 }

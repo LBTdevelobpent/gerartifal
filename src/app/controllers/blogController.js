@@ -13,8 +13,8 @@ function extension(element) {
   const extName = path.extname(element);
   return extName === '.json';
 }
-// ===========================Pega as noticas mais recentes e põe na tela==========================//
-router.get('/getPosts', (req, res) => {
+
+router.get('/getCarrousel', (req, res) => {
   try {
     const d = new Date();
     const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
@@ -23,9 +23,8 @@ router.get('/getPosts', (req, res) => {
     // eslint-disable-next-line no-inner-declarations
     function recent(data, da) {
       fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
-        let html = '';
         let i = 1;
-        let items = [];
+        const items = [];
 
         list.filter(extension).forEach((value) => {
           items.push(value);
@@ -39,12 +38,62 @@ router.get('/getPosts', (req, res) => {
           const post = []; // Array que adiciona todos as informações dos posts
           for (let c = 0; c < items.length; c += 1) {
             // eslint-disable-next-line no-loop-func
-            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (err, dados) => {
+            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
+              const dat = JSON.parse(dados);
+              dat.c = c;
+              post.push(dat);
+              if (c === (items.length - 1)) {
+                res.send(post[0]); // renderizar os post no INDEX
+              }
+              if (error) {
+                return res.status(500).send({ error: 'FileSystem Error' });
+              }
+            });
+          }
+        }
+      });
+    }
+
+    recent(date, d);
+  } catch (err) {
+    return res.status(404).send({ error: 'Noticias não encontradas' });
+  }
+});
+
+// ==========================Pega as noticas mais recentes e põe na tela==========================//
+router.get('/getPosts', (req, res) => {
+  try {
+    const d = new Date();
+    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
+
+    // função para checkar as noticias mais recentes
+    // eslint-disable-next-line no-inner-declarations
+    function recent(data, da) {
+      fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
+        let i = 1;
+        const items = [];
+
+        list.filter(extension).forEach((value) => {
+          items.push(value);
+        });
+        if (err || items === undefined) {
+          const ontem = new Date(da.getTime());
+          ontem.setDate(da.getDate() - i);
+          i += 1;
+          recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
+        } else {
+          const post = []; // Array que adiciona todos as informações dos posts
+          for (let c = 0; c < items.length; c += 1) {
+            // eslint-disable-next-line no-loop-func
+            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
               const dat = JSON.parse(dados);
               dat.c = c;
               post.push(dat);
               if (c === (items.length - 1)) {
                 res.render('index', { post }); // renderizar os post no INDEX
+              }
+              if (error) {
+                return res.status(500).send({ error: 'FileSystem Error' });
               }
             });
           }
@@ -67,6 +116,7 @@ router.get('/getPosts/:date', (req, res) => {
     fs.readdir(path.resolve(`news/${date}`), (err, items) => {
       let html = '';
       for (let c = 0; c < items.length; c += 1) {
+        // eslint-disable-next-line no-loop-func
         fs.readFile(path.resolve(`src/news/${date}/${items[c]}`), (err, dados) => {
           html += dados.toString();
           if (c === (items.length - 1)) {
@@ -81,7 +131,7 @@ router.get('/getPosts/:date', (req, res) => {
 });
 // =================================================================================//
 
-//================================Pega uma noticia especifica======================//
+// ================================Pega uma noticia especifica======================//
 router.get('/getPost/:date/:postName', (req, res) => {
   try {
     const { date, postName } = req.params;

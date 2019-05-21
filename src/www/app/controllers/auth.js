@@ -4,6 +4,10 @@ const app2 = angular.module('auth', []);
 app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
   $scope.session = () => {
 
+    $http.get('/blog/getCarrousel')
+      .success((response) => {
+        $scope.carrousel = response;
+      });
     $http.get('/blog/getPosts')
       .success((response) => {
         $('#include').html(response);
