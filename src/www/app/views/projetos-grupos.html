@@ -1,109 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	  <title>Cadastro</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="app/controllers/auth.js"></script>
-    
-    <!--fontawesome chave de acesso-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../../css/csszin.css">
-    <link rel="stylesheet" type="text/css" href="../../css/cssnavcolor.css">
-    <link rel="stylesheet" href="../../css/Footer-with-map.css">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../css/projetos-grupos.css">
-  </head>
-  <body>
-    <section class="first">
-      <div class="container-fluid"></div>
-    </section>
-
-    <!--<h1 id="a">deslogado</h1>
-    <a href="/app/views/login.html"><button>sigin</button></a>
-    <button ng-click="logout()">logout</button>
-    <a href="/app/views/accOptions.html"><button>option</button></a>
-    <a href="/app/views/subcribe.html"><button>Se Increva</button></a>
-    <a href="/app/views/viewAllSubs.html"><button>ver Inscrições</button></a>
-    <a href="/app/views/blog.html"><button>Noticias</button></a>-->
-
-
-    <nav class="navbar navbar-expand-sm navbar-light sticky-top ">
-    <!-- Logo -->
-    <a class="navbar-brand" href="index.html">GERARTIFAL</a>
-
-    <!-- Toggler/collapsibe Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-    <!-- Botões Que Ficarão dentro do menuBar-->
-      <div ng-controller="session" class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link d-none d-lg-block" href="../../index.html" >Página Inicial</a>
-            <a class="nav-link d-md-block d-lg-none" href="../../index.html" >Inicio</a>
-
-          <li class="nav-item">
-            <a class="nav-link d-none d-lg-block" href="app/views/projetos-grupos.html">Projetos e Grupos Artísticos</a>
-            <a class="nav-link d-md-block d-lg-none" href="app/views/projetos-grupos.html">Projetos e Grupos</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link d-none d-lg-block" href="form.html">Inscrições on-line</a>
-            <a class="nav-link d-md-block d-lg-none" href="app/views/form.html">Inscrições</a>
-          </li>
-
-          <li class="nav-item">
-            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
-          </li>
-
-          <li class="nav-item">
-            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
-          </li>
-        
-          <li class="nav-item d-none d-md-block">
-            <div class="dropdown">
-              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mais</button>
-
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item " href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Inscrições On-Line</a>
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
-                <a class="dropdown-item" href="#">Sobre o Site</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-  <!-- Barra De Pesquisa -->
-    <form class="navbar-form" action="/action_page.php" id="pesquisa">
-      <div class="input-group" id="barra">
-
-        <div class = "input-group-prepend">
-          <span class="input-group-text">§</span>
-        </div>
-
-        <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar">
-      </div>
-    </form>
-  </nav>
-  
-  <br>
-  <br>
-
-  
-  <div class="container">
+<div class="container">
 
     <div class="row">
 
@@ -149,7 +44,7 @@
   </div>
   </div>
 
- 
+
 <!--Rodapé-->
 <footer id="myFooter">
     <div class="container">
@@ -192,6 +87,3 @@
   }, false);
 })();
 </script>
-
-</body>
-</html>

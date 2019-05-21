@@ -1,0 +1,113 @@
+.circle {
+  background-color: #aaa;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.circle img {
+  position: top;
+  bottom: 0;
+  width: 100%;
+}
+
+#carouselSite img{
+  width:100%;
+  height: auto;
+}
+
+#carouselSite {
+  font-family: 'Coiny', cursive;
+}
+
+.carousel-caption h2{
+  font-size: 50px;
+  text-transform: uppercase;
+  color: #04ba31;
+}
+
+.carousel-caption h3{
+  color:lightgreen;
+  font-size: 35px;
+}
+
+.fa-caret-right, .fa-caret-left{
+  color:#04ba31
+}
+
+
+#services{
+  background-color: lightgreen;
+  padding-top: 2%;
+  padding-bottom: 3%;
+}
+
+
+#news img{
+  max-height: 30vh;
+  max-width:100%;
+}
+
+#news p{
+  margin-top:2%;
+  margin-right:4%;
+  margin-left:4%;
+}
+
+
+#news2 div{
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+
+#news2 img{
+  margin-right: 3%;
+  margin-left: 3%;
+  width: auto;
+  height: 30vh;
+}
+
+#news2 p {
+  display: block;
+  position:relative;
+  left:50%;
+  top:40%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#news2 h2 {
+  text-align: center;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+
+}
+
+/* Pequenos dispositivos (tablets e celulares largos, 600px pra cima)*/
+@media only screen and (min-width: 600px) {
+
+
+}
+
+/* Medios dispositivos (tablets em paisagem, 768px pra cima)*/
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px pra cima)*/
+@media only screen and (min-width: 992px) {
+  
+
+}
+
+/* Extra large devices (laptopes largos e telas grandes, 1200px pra cima)*/
+@media only screen and (min-width: 1200px) {
+  
+}

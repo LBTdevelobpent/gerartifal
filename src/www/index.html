@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br" ng-app="app">
   <head>
-
-    <title>Pagina Inicial</title>
+    <base href="/">
+    <title>Inicio</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!--SCRIPTS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app/controllers/auth.js"></script>
-    
+
+
     <!-- CSS -->
     <!--fontawesome chave de acesso-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
     <!--links bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css/animate.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Catamaran|Coiny|Noto+Sans+JP" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+
     <!--links dos nossos arquivos css-->
-    <link rel="stylesheet" type="text/css" href="css/csszin.css">
-    <link rel="stylesheet" type="text/css" href="css/cssnavcolor.css">
-    <link rel="stylesheet" href="css/Footer-with-map.css">
+    <link rel="stylesheet" type="text/css" href="css/CssPadrao.css">
+    <link rel="stylesheet" type="text/css" href="css/CorNavbar.css">
+    <link rel="stylesheet" type="text/css" href="css/Rodape.css">
+    <link rel="stylesheet" type="text/css" href="css/PagInicial.css">
 
   </head>
 
-  <body ng-controller="auth" ng-init="session()">
+  <body>
+
+    <!-- Primeira Imagem Topo -->
 
     <section class="first">
       <div class="container-fluid"></div>
@@ -44,9 +57,13 @@
     <a href="/app/views/blog.html"><button>Noticias</button></a>-->
 
 
-    <nav class="navbar navbar-expand-sm navbar-light sticky-top ">
+    <!-- Navbar / Navbar / Navbar / Navbar -->
+
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top ">
+
       <!-- Logo -->
-      <a class="navbar-brand" href="index.html">GERARTIFAL</a>
+      <a class="navbar-brand" href="/"><i class="fas fa-globe"></i> Gerartifal</a>
 
       <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -54,33 +71,31 @@
         </button>
 
       <!-- Botões Que Ficarão dentro do menuBar-->
-      <div ng-controller="session" class="collapse navbar-collapse" id="collapsibleNavbar">
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link d-none d-lg-block" href="#" >Página Inicial</a>
-            <a class="nav-link d-md-block d-lg-none" href="#" >Inicio</a>
-          <li class="nav-item">
-            <a class="nav-link d-none d-lg-block" href="app/views/projetos-grupos.html">Projetos e Grupos Artísticos</a>
-            <a class="nav-link d-md-block d-lg-none" href="app/views/projetos-grupos.html">Projetos e Grupos</a>
+
+          <li class="nav-item active" ng-class="{active: activetab == '/'}">
+            <a class="nav-link d-none d-lg-block" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
+            <a class="nav-link d-md-block d-lg-none" href="/" ><i class="fas fa-home fa-md"> Inicio</i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link d-none d-lg-block" href="app/views/form.html">Inscrições on-line</a>
-            <a class="nav-link d-md-block d-lg-none" href="app/views/form.html">Inscrições</a>
+
+          <li class="nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
+            <a class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
+            <a class="nav-link d-md-block d-lg-none" href="/projetos-grupos"><i class="fas fa-users fa-md"></i> Projetos e Grupos</a>
           </li>
-          <li class="nav-item">
-            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
+
+          <li class="nav-item" ng-class="{active: activetab == '/form'}">
+            <a class="nav-link d-none d-lg-block" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+            <a class="nav-link d-md-block d-lg-none" href="/form"><i class="fas fa-clipboard fa-md"></i> Inscrições</a>
           </li>
-          <li class="nav-item">
-            <a ng-class="validClass()" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
-          </li>
-          <li class="nav-item d-none d-md-block">
+
+          <li class="nav-item d-none d-lg-block">
             <div class="dropdown">
-              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mais</button>
+              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item " href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Inscrições On-Line</a>
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Materiais</a>
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')">Turmas e Horários</a>
-                <a class="dropdown-item" href="#">Sobre o Site</a>
+                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
+                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
               </div>
             </div>
           </li>
@@ -91,163 +106,98 @@
       <form class="navbar-form" action="/action_page.php" id="pesquisa">
         <div class="input-group" id="barra">
           <div class = "input-group-prepend">
-				    <span class="input-group-text">§</span>
+				    <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
           </div>
           <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar">
         </div>
       </form>
     </nav>
-    <br>
 
-    <!-- Carrossel-->
-    <div class="container" >
-      <div id="demo" class="carousel slide" data-ride="carousel">
 
-    <!-- Indicators -->
-        <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-          <li data-target="#demo" data-slide-to="3"></li>
-          <li data-target="#demo" data-slide-to="4"></li>
-        </ul>
 
-  <!-- carroussel -->
-        <div class="carousel-inner " align="center">
-          <div class="carousel-item active">
-            <a href="#"><img src="img/artifal.png" alt="Primeira"></a>
-            <div class="carousel-caption d-none d-md-block ">
-              <h4>ArtIfal</h4>
-              <p>Um projeto realizado para mostrar o poder da Arte</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <a href="#"><img src="img/camerata.jpeg" alt="Segunda"></a>
-            <div class="carousel-caption d-none d-md-block ">
-              <h4>Camerata Jovem</h4>
-              <p>Projeto que junta alunos da instituição em uma pequena orquestra</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <a href="#"><img src="img/coretifal2.jpg" alt="Terceira"></a>
-            <div class="carousel-caption d-none d-md-block ">
-              <h4>CoretIfal</h4>
-              <p>Grupo de canto coral</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <a href="#"><img src="img/mariaaugusta.jpeg" alt="Quarta"></a>
-            <div class="carousel-caption d-none d-md-block ">
-              <h4>Coro Maria Augusta</h4>
-              <p>Coro criado para continuar o legado do canto coral herdado pela maestrina Maria Augusta Monteiro</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <a href="#"><img src="img/iflautasopros.jpeg" alt="Quinta"></a>
-            <div class="carousel-caption d-none d-md-block ">
-              <h4>IflautaSopros</h4>
-              <p>Grupo criado para a prática e divulgação da flauta doce</p>
-            </div>
-          </div>
-        </div>
-  <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
-      </div>
-    </div>
-    <br>
-    <br>
-    <hr>
+    <!--
 
-<!-- Noticias -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 col-md-6" align="center">
-          <h2>Sobre o ARTIFAL</h2>
-          <a href="#"><img class="img-responsive" src="img/artifal.png"></a>
-          <p align="justify">O ARTIFAL, é um programa institucional de extenção do Instituto Federal de Alagoas - IFAL, este projeto visa a formação de grupos culturais/artísticos para a criação, construção, disseminação e preservação da cultura e da arte.</p>
+
+        FIM DO NAVBAR / FIM DO NAVBAR / FIM DO NAVBAR
+
+
+
+    -->
+
+    <div ng-view></div>
+
+    <!--Desenvolvedores-->
+    <section id="services" class="d-none d-lg-block">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase"><i class="fas fa-code fa-md"></i> <strong>Sobre os Desenvolvedores</strong> <i class="fas fa-code fa-md"></i></h2>
+              <h3 class="section-subheading text-muted">Este projeto foi desenvolvido pela equipe LBT em parceria com o IFAL, Campus Maceió.</h3>
+              <br>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                 <img src="img/lucas.jpeg">
+              </span>
+              <h4 class="service-heading">Lucas Amorim</h4>
+              <p class="text-muted"><i class="fas fa-sitemap"></i> Analista/Full-Stack <i class="fas fa-sitemap"></i></p>
+            </div>
+            <div class="col">
+                <span class="fa-stack fa-4x circle">
+                    <img src="img/jerlysson.jpeg">
+                 </span>
+              <h4 class="service-heading">Jerlyson Feliciano</h4>
+              <p class="text-muted"><i class="fas fa-microchip"></i> Desenvolvedor Back-End <i class="fas fa-microchip"></i></p>
+            </div>
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                  <img src="img/eduardo.jpeg">
+               </span>
+            <h4 class="service-heading">Eduardo Moraes</h4>
+            <p class="text-muted"><i class="fas fa-users"></i> Orientador <i class="fas fa-users"></i></p>
+          </div>
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                  <img src="img/matheus.jpeg">
+               </span>
+            <h4 class="service-heading">Matheus Silva</h4>
+            <p class="text-muted"><i class="fas fa-laptop-code"></i> Designer/ Desenvolvedor Front-End <i class="fas fa-laptop-code"></i></p>
         </div>
-        <div class="col-12 col-md-6" align="center">
-          <h3>Noticias</h3>
-          <a href="#"><img class="img-responsive" src="img/news.png"></a><br>
-          <p align="justify">As Incrições para o ARTIFAL, Campus Maceió estarão disponíveis, clique <a href="app/views/form.html">Aqui</a>, preencha o formulário, e venha conosco descobrir o incrível mundo da arte ! </p>
+            <div class="col">
+                <span class="fa-stack fa-4x circle">
+                    <img src="img/gabriel.jpeg">
+                 </span>
+              <h4 class="service-heading">Gabriel Henrique</h4>
+              <p class="text-muted"><i class="fas fa-laptop-code"></i> Desenvolvedor Front-End <i class="fas fa-laptop-code"></i></p>
+            </div>
+
+
+          </div>
         </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-12 col-md-6 d-none d-md-block" align="center">
-          <h3>Inscrições</h3>
-          <a href="#"><img class="img-responsive" src="img/register.png"></a><br>
-          <p align="justify">O Processo de inscrições para o programa ARTIFAL, campus maceió, pode agora ser feito através deste site, basta clicar em inscrições e preencher o formulário, se o candidato for selecionado, este receberá um email para comparecer ao campus e confirmar sua incrição.</p>
-        </div>
-        <div class="col-12 col-md-6" align="center">
-          <h2>Conheça Nosso Trabalho</h2>
-          <a href="#"><img class="img-responsive" src="img/art.png"></a>
-          <p align="justify">O Artifal conta hoje com diversos cursos em variadas áreas da música, podendo participar tanto membros da comunidade interna (estudantes do IFAL) quanto da comunidade externa, além de 5 grupos artísticos formado por bolsistas e voluntários do programa, ficou curioso?, clique <a href="app/views/blog.html">Aqui</a> e conheça mais do que o ARTIFAL, Campus Maceió tem para te oferecer!</p>
-        </div>
-      </div>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <!-- Sobre os Desenvolvedores -->
-  <section id="services">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="section-heading text-uppercase">Sobre os Desenvolvedores</h2>
-          <h3 class="section-subheading text-muted">Este projeto foi desenvolvido pela equipe lbt em parceria com o IFAL, Campus Maceió</h3>
-          <br>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-md-3">
-          <span class="fa-stack fa-4x circle">
-             <img src="img/lucas.jpeg">
-          </span>
-          <h4 class="service-heading">Lucas Amorim</h4>
-          <p class="text-muted">Analista/Full-Stack</p>
-        </div>
-        <div class="col-md-3">
-            <span class="fa-stack fa-4x circle">
-                <img src="img/jerlysson.jpeg">
-             </span>
-          <h4 class="service-heading">Jerlyson Feliciano</h4>
-          <p class="text-muted">Desenvolvedor Back-End</p>
-        </div>
-        <div class="col-md-3">
-            <span class="fa-stack fa-4x circle">
-                <img src="img/gabriel.jpeg">
-             </span>
-          <h4 class="service-heading">Gabriel Henrique</h4>
-          <p class="text-muted">Desenvolvedor Front-End</p>
-        </div>
-        <div class="col-md-3">
-            <span class="fa-stack fa-4x circle">
-                <img src="img/matheus.jpeg">
-             </span>
-          <h4 class="service-heading">Matheus Silva</h4>
-          <p class="text-muted">Designer/ Desenvolvedor Front-End</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+
+
+
+
+
 
 
 <!--Rodapé-->
     <footer id="myFooter">
       <div class="container">
         <div class="row">
-          <h4 style="text-align: center">Localização e Redes Sociais:</h4>
+          <h4 class="d-none d-lg-block" style="text-align: center"><i class="fas fa-address-book fa-lg"></i> Nossos Contatos :</h4>
+          <h4 class="d-md-block d-lg-none" style="text-align: center"><i class="fas fa-address-book fa-md"></i> Nossos Contatos :</h4>
+
+<!-- API DO GOOGLE -->
         </div>
-<!-- Here we use the Google Embed API to show Google Maps. -->
         <iframe class="d-none d-md-block" id="map-container" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.1989023512087!2d-35.732519584780675!3d-9.664039593081965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701457996307ad5%3A0x1d22c2c44f26f853!2sInstituto+Federal+de+Alagoas+-+Campus+Macei%C3%B3!5e0!3m2!1spt-BR!2sbr!4v1545226271030" >
         </iframe>
       </div>
+<!--_______________-->
+
       <div class="social-networks">
         <a href=""><i class="fa fa-instagram"></i></a>
         <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
@@ -259,10 +209,31 @@
       </div>
     </footer>
 
+
+
+
+    <!--
+
+
+        FIM DO RODAPÉ / FIM DO RODAPÉ / FIM DO RODAPÉ
+
+
+
+    -->
+
+
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
+
+  <script src="app/controllers/subcribe.js"></script>
+  <script src="app/controllers/auth.js"></script>
+  <script src="app/spa.js"></script>
+
 </html>

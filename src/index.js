@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 });
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/www')));
+app.set('views', __dirname + '/views');
 // -----------------------------------------------//
 
 // -------------------------Para abrir inscrições------------------//
