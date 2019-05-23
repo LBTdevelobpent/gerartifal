@@ -1,3 +1,6 @@
+/**
+ * Script para SPA
+ */
 const app1 = angular.module('app', ['auth', 'subcribe', 'ngRoute']);
 
 app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {

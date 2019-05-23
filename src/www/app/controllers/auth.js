@@ -13,12 +13,11 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
         $('#include').html(response);
       });
 
+    // ===============Checkagem de abertura de incrição===============//
     const openSub = window.localStorage.getItem('openSub');
-
     if (!openSub) {
       window.localStorage.setItem('openSub', false);
     }
-
     const socket = io.connect('http://localhost:3000/');
     socket.on('openF', (data) => {
       const date = Date.now();
@@ -26,6 +25,7 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
         window.localStorage.setItem('openSub', true);
       }
     });
+    // ===============================================================//
 
     const token = (document.cookie).split('=', 2)[1];
     if (!token) { // caso não exista token, desvalida a sessão
@@ -53,23 +53,5 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
     window.localStorage.clear();
     document.cookie = 'token=;path=/';
     window.location.href = '/';
-  };
-}]);
-// ============================== ativa / desativa itens na tela, dependendo da sessão =========================
-app2.controller('session',['$scope', ($scope) => {
-  $scope.validClass = () => {
-    const valid = window.localStorage.getItem('validSession');
-    if (valid === 'true') {
-      return 'nav-link d-none d-lg-block';
-    }
-    return 'nav-link d-md-none';
-  };
-
-  $scope.validDrop = () => {
-    const valid = window.localStorage.getItem('validSession');
-    if (valid === 'true') {
-      return 'btn btn-success dropdown-toggle';
-    }
-    return 'btn btn-success dropdown-toggle';
   };
 }]);

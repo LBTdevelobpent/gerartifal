@@ -26,15 +26,20 @@ router.get('/getCarrousel', (req, res) => {
         let i = 1;
         const items = [];
 
-        list.filter(extension).forEach((value) => {
-          items.push(value);
-        });
+        // ----------------------------Codigo para evitar loop infinito---------------//
+        if (da.getFullYear() < 2019) {
+          return res.status(404).send({ error: 'No have news before this year' });
+        }
+        // --------------------------------------------------------------------------//
         if (err || items === undefined) {
           const ontem = new Date(da.getTime());
           ontem.setDate(da.getDate() - i);
           i += 1;
           recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
         } else {
+          list.filter(extension).forEach((value) => {
+            items.push(value);
+          });
           const post = []; // Array que adiciona todos as informações dos posts
           for (let c = 0; c < items.length; c += 1) {
             // eslint-disable-next-line no-loop-func
@@ -73,15 +78,21 @@ router.get('/getPosts', (req, res) => {
         let i = 1;
         const items = [];
 
-        list.filter(extension).forEach((value) => {
-          items.push(value);
-        });
+        // ----------------------------Codigo para evitar loop infinito---------------//
+        if (da.getFullYear() < 2019) {
+          return res.status(404).send({ error: 'No have news before this year' });
+        }
+        // --------------------------------------------------------------------------//
+        
         if (err || items === undefined) {
           const ontem = new Date(da.getTime());
           ontem.setDate(da.getDate() - i);
           i += 1;
           recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
         } else {
+          list.filter(extension).forEach((value) => {
+            items.push(value);
+          });
           const post = []; // Array que adiciona todos as informações dos posts
           for (let c = 0; c < items.length; c += 1) {
             // eslint-disable-next-line no-loop-func

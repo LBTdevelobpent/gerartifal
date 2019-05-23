@@ -80,8 +80,7 @@
           </li>
 
           <li class="nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
-            <a class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
-            <a class="nav-link d-md-block d-lg-none" href="/projetos-grupos"><i class="fas fa-users fa-md"></i> Projetos e Grupos</a>
+            <a id="project" class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
           </li>
 
           <li class="nav-item" ng-class="{active: activetab == '/form'}">
@@ -89,7 +88,7 @@
             <a class="nav-link d-md-block d-lg-none" href="/form"><i class="fas fa-clipboard fa-md"></i> Inscrições</a>
           </li>
 
-          <li class="nav-item d-none d-lg-block">
+          <li id="dropdown" class="nav-item d-none d-lg-block ">
             <div class="dropdown">
               <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -103,14 +102,7 @@
       </div>
 
       <!-- Barra De Pesquisa -->
-      <form class="navbar-form" action="/action_page.php" id="pesquisa">
-        <div class="input-group" id="barra">
-          <div class = "input-group-prepend">
-				    <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
-          </div>
-          <input class="form-control mr-sm-2" type="text" placeholder="Pesquisar">
-        </div>
-      </form>
+      <a href="app/views/login.html"><input type="button" class="btn btn-primary" value="Log In" ></a>
     </nav>
 
 
@@ -209,9 +201,6 @@
       </div>
     </footer>
 
-
-
-
     <!--
 
 
@@ -221,10 +210,6 @@
 
     -->
 
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
@@ -232,8 +217,11 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 
+  <!----------------Bloco para inserção de todos os scripts------------------>
   <script src="app/controllers/subcribe.js"></script>
   <script src="app/controllers/auth.js"></script>
+  <script src="js/session.js"></script>
   <script src="app/spa.js"></script>
+  <!------------------------------------------------------------------------->
 
 </html>
