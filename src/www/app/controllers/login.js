@@ -1,13 +1,13 @@
 //
 //  Este script contém os controladores de registro(login e register)
 //
-const app = angular.module('app', []);
+const app = angular.module('sigin', []);
 
 // ==================== Checa se há alguem logado(por cookie) ===================
-app.controller('check', ['$scope', '$window',($scope, $window) => {
+app.controller('check', ['$scope', '$window', ($scope) => {
   $scope.check = () => {
     if ((document.cookie).split('=', 2)[1]) {
-      $window.location.href = '/';
+      window.location.href = '/';
     }
   };
 }]);
@@ -15,7 +15,7 @@ app.controller('check', ['$scope', '$window',($scope, $window) => {
 app.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
-    const data = {name, email,password};
+    const data = { name, email, password };
 
     if (name === 'undefined' || !email || !password) {
       alert('Campos inválidos');
