@@ -1,17 +1,63 @@
-<div ng-app="sigin">
-    <form class="form-signin">
-      <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
+<div ng-app="sigin" id="loginab">
+    <div class="container mt-3">
+        <div id="accordion">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-success active" data-toggle="collapse" href="#collapseOne">
+                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Login
+                </label>
+                <label class="btn-success btn btn-info" data-toggle="collapse" href="#collapseTwo">
+                  <input type="radio" name="options" id="option2" autocomplete="off"> Sigin
+                </label>
+              </div>
+            <div ng-controller="login" id="collapseOne" class="collapse show" data-parent="#accordion">
+              <br>
+                <form>                  
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                          <label>Email</label>
+                          <input type="email" class="form-control" placeholder="Email." autocomplete="on" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                          <label>Senha</label>
+                          <input type="password" class="form-control" placeholder="*******" required>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+
+            </div>
+            <div ng-controller="register" id="collapseTwo" class="collapse" data-parent="#accordion">
+              <br>
+                <form>                  
+                  <div id="from-cadastro" class="form-row">
+                      <div class="col-md-12 mb-3">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Email." autocomplete="on" required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3">
+                        <label>Senha</label>
+                        <input type="password" class="form-control" placeholder="*******" required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                          <label>Senha Novamente</label>
+                          <input type="password" class="form-control" placeholder="*******" required>
+                        </div>
+                    </div>
+
+                    <div class="g-recaptcha" data-sitekey="6LeJD5UUAAAAAIJiM8AcfqBgaJ5EK4_Kbj4HVMmf">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+            <a href="/auth/google"><img src="img/google/web/1x/btn_google_signin_dark_normal_web.png"></a>
+          </div>
+        </div>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
-    </form>
 </div>
