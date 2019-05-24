@@ -101,7 +101,7 @@
       </div>
 
       <!-- Barra De Pesquisa -->
-      <input type="button" id="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" value="Log In"/>
+      <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" value="Log In"/>
 
     </nav>
 
@@ -227,7 +227,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <div id="login"></div>
+          <div ng-include="'app/views/login.html'"></div>
         </div>
         <div class="modal-footer">
           <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -12,13 +12,3 @@ $(document).ready(() => {
      * */
   }
 });
-
-$('#button').on('click', () => {
-  $.get('app/views/login.html', (data) => {
-    $('#login').html(data);
-  });
-});
-
-$('#close').on('click', () => {
-  $('#login').html('');
-});
