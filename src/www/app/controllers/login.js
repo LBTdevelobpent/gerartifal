@@ -1,10 +1,10 @@
 //
 //  Este script contém os controladores de registro(login e register)
 //
-const app = angular.module('sigin', []);
+const app3 = angular.module('sigin', []);
 
 // ==================== Checa se há alguem logado(por cookie) ===================
-app.controller('check', ['$scope', '$window', ($scope) => {
+app3.controller('check', ['$scope', '$window', ($scope) => {
   $scope.check = () => {
     if ((document.cookie).split('=', 2)[1]) {
       window.location.href = '/';
@@ -12,10 +12,16 @@ app.controller('check', ['$scope', '$window', ($scope) => {
   };
 }]);
 // ============================= Controlador de registro ======================================
-app.controller('register',['$scope', '$http', ($scope, $http) => {
+app3.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
-    const data = { name, email, password };
+    const captcha = $('#form-cadastro #g-recaptcha-response').val();
+    const data = {
+      name,
+      email,
+      password,
+      captcha,
+    };
 
     if (name === 'undefined' || !email || !password) {
       alert('Campos inválidos');
@@ -34,7 +40,7 @@ app.controller('register',['$scope', '$http', ($scope, $http) => {
   };
 }]);
 // ============================= Controlador de login ============================================
-app.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
+app3.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
   $scope.submit = () => {
     const { name, password } = $scope;
     const data = {name, password};
