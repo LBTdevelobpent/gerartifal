@@ -1,7 +1,9 @@
 /**
  * Script para SPA
  */
-const app1 = angular.module('app', ['auth', 'subcribe', 'ngRoute']);
+const app1 = angular.module('app', ['auth',
+  'subcribe',
+  'ngRoute']);
 
 app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
   $locationProvider.html5Mode({
@@ -34,8 +36,8 @@ app1.controller('MainCtrl', ['$rootScope', '$location', ($rootScope, $location) 
   $rootScope.activetab = $location.path();
 }]);
 app1.controller('AllCtrl', ['$rootScope', '$routeParams', '$location', ($rootScope, $routeParams, $location) => {
+  // eslint-disable-next-line no-param-reassign
   $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
 }]);
-
 
 angular.bootstrap(document.getElementById('app'), ['auth', 'subcribe']);
