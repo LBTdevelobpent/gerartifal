@@ -19,11 +19,6 @@
   text-overflow: ellipsis;
 }
 
-.carousel-inner img {
-  width:100%;
-  height: 700px;
-  overflow: hidden;
-}
 
 #carouselSite {
   font-family: 'Coiny', cursive;
@@ -105,16 +100,28 @@
 
 /* Medios dispositivos (tablets em paisagem, 768px pra cima)*/
 @media only screen and (min-width: 768px) {
-
+  .carousel-inner img {
+    width:100%;
+    height: 500px;
+    overflow: hidden;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px pra cima)*/
 @media only screen and (min-width: 992px) {
-
+  .carousel-inner img {
+    width:100%;
+    height: 600px;
+    overflow: hidden;
+  }
 
 }
 
 /* Extra large devices (laptopes largos e telas grandes, 1200px pra cima)*/
 @media only screen and (min-width: 1200px) {
-
+  .carousel-inner img {
+    width:100%;
+    height: 700px;
+    overflow: hidden;
+  }
 }
