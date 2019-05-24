@@ -3,6 +3,7 @@
  */
 const app1 = angular.module('app', ['auth',
   'subcribe',
+  'sigin',
   'ngRoute']);
 
 app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
@@ -40,4 +41,4 @@ app1.controller('AllCtrl', ['$rootScope', '$routeParams', '$location', ($rootSco
   $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
 }]);
 
-angular.bootstrap(document.getElementById('app'), ['auth', 'subcribe']);
+angular.bootstrap(document.getElementById('app'), ['auth', 'subcribe', 'sigin']);
