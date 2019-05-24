@@ -29,7 +29,7 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: (params) => { return `/blog/getPost/${params.date}/${params.post}`; },
       controller: 'AllCtrl',
     })
-    .otherwise({ redirectTo: '/' });
+    // .otherwise({ redirectTo: '/' });
 }]);
 
 app1.controller('MainCtrl', ['$rootScope', '$location', ($rootScope, $location) => {

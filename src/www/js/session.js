@@ -3,7 +3,9 @@
  */
 $(document).ready(() => {
   const valid = window.localStorage.getItem('validSession');
-  if (!valid) {
+  const user = window.localStorage.getItem('user');
+
+  if (!valid || !user) {
     $('#dropdown').removeClass('d-none d-lg-block');
     $('#dropdown').addClass('d-md-block d-lg-none');
 

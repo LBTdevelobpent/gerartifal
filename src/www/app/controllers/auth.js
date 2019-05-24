@@ -37,9 +37,8 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
     $http.get('/valid', {
       headers: { Authorization: `Bearer ${token}` },
     }).success((response) => { // se tiver tudo certo, valida uma sessao
-      const { _id, name } = JSON.parse(window.localStorage.getItem('user'));
+      const { _id } = JSON.parse(window.localStorage.getItem('user'));
       if (response.user === _id) {
-        document.getElementById('a').innerHTML = name;
         window.localStorage.setItem('validSession', JSON.stringify(response.ok));// criar uma chave afirmando a validade da sessao
       }
     }).error((response) => {

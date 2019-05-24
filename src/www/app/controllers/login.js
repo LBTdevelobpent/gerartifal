@@ -1,4 +1,4 @@
-//
+  //
 //  Este script contém os controladores de registro(login e register)
 //
 const app3 = angular.module('sigin', []);
@@ -15,7 +15,7 @@ app3.controller('check', ['$scope', '$window', ($scope) => {
 app3.controller('register',['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
-    const captcha = $('#form-cadastro #g-recaptcha-response').val();
+    const captcha = $('#g-recaptcha-response').val();
     const data = {
       name,
       email,
@@ -31,7 +31,7 @@ app3.controller('register',['$scope', '$http', ($scope, $http) => {
       $http.post('/auth/register', data)
         .success((response) => {
           alert('Registrado com sucesso, verifique sua conta');
-          console.log(response);
+          window.location.href = '/';
         })
         .error((response) => {
           alert(response.error);
@@ -42,10 +42,10 @@ app3.controller('register',['$scope', '$http', ($scope, $http) => {
 // ============================= Controlador de login ============================================
 app3.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
   $scope.submit = () => {
-    const { name, password } = $scope;
-    const data = {name, password};
-
-    if (name === 'undefined' || !password) {
+    const { email, password } = $scope;
+    const data = { email, password };
+    
+    if (email === 'undefined' || !password) {
       alert('a');
     } else {
       $http.post('/auth/authenticate', data)

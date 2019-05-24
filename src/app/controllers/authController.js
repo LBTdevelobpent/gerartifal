@@ -58,9 +58,9 @@ router.post('/register_verify', async (req, res) => {
 // ===================================Login===================================//
 router.post('/authenticate', async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ name }).select('+password');
+    const user = await User.findOne({ email }).select('+password');
 
     // Check se usuario existe
     if (!user) { 
