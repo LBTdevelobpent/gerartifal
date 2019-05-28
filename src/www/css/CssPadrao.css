@@ -1,0 +1,142 @@
+/* Cor Do Background */
+
+body {
+  background-color: rgb(152,251,152,0.5);
+  font-family: 'Merriweather', serif;
+}
+
+#include p {
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative;
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 3.6em;
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+  text-overflow: ellipsis;
+}
+
+/* Foto De Cima */
+
+.first {
+  height:45vh;
+  background-position: center;
+  background-size:cover;
+  background-image:url('orquestra.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat:no-repeat;
+}
+
+
+.navbar{
+  align-items:center;
+}
+
+
+#pesquisa {
+  margin-left:10px;
+}
+
+
+.footer{
+  padding-top:2%;
+  background-color:#04ba31;
+}
+
+.footer p{
+  border:0px;
+  margin-top:0%;
+  margin-right:0%;
+  margin-left:2%;
+  color:white;
+}
+
+
+  body {
+    background: #76b852; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+    background: -moz-linear-gradient(right, #76b852, #8DC26F);
+    background: -o-linear-gradient(right, #76b852, #8DC26F);
+    background: linear-gradient(to left, #76b852, #8DC26F);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;      
+  }
+
+
+
+
+/*Telas  Super Pequenas (Telefones, 600px e menor)*/
+@media only screen and (max-width: 600px) {
+  #pesquisa {
+    display: none;
+  }
+  .first {
+    height:40vh;
+    min-height:40vh;
+    min-width:40vw;
+    background-position: center;
+    background-size:cover;
+    background-image:url('orquestra.jpg');
+    }
+
+}
+/* Pequenos dispositivos (tablets e celulares largos, 600px pra cima) */
+@media only screen and (min-width: 600px) {
+  #pesquisa {
+    display: none;
+  }
+
+
+}
+
+/* Medios dispositivos (tablets em paisagem, 768px pra cima) */
+@media only screen and (min-width: 768px) {
+  #pesquisa {
+    display: none;
+  }
+
+}
+
+/* Large devices (laptops/desktops, 992px pra cima) */
+@media only screen and (min-width: 992px) {
+  #pesquisa{
+    display: block;
+  }
+
+
+}
+
+/* Extra large devices (laptopes largos e telas grandes, 1200px pra cima) */
+@media only screen and (min-width: 1200px) {
+}
+
+
+/* Fonte Tamanho */
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
