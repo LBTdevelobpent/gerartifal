@@ -3,6 +3,10 @@ const mongoose = require('../../database');
 
 // Criação do Schema do usuario
 const UserSchema = new mongoose.Schema({
+  adm: {
+    type: String,
+    required: false,
+  },
   name: {
     type: String,
     require: true,
