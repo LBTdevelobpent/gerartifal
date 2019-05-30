@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const passport = require('passport');
+const querystring = require('querystring');
 
 const mailer = require('../../module/mailer.js');
 const { secret } = require('../../config/auth.json');// KELLYMEUAMOR é o secret ( Eu gosto de esterEggs, são divertidos)
@@ -63,7 +64,7 @@ router.post('/authenticate', async (req, res) => {
     const user = await User.findOne({ email }).select('+password');
 
     // Check se usuario existe
-    if (!user) { 
+    if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
     if (user.verified === false) {
@@ -163,15 +164,24 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => {
   const { user } = req;
 
-  const query = querystring.stringify({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    adm: user.adm,
-    token: generateToken({ id: user.id }),
-  });
-
-  res.redirect(`/?${query}`);
+  if (user.adm) {
+    const query = querystring.stringify({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      adm: user.adm,
+      token: generateToken({ id: user.id }),
+    });
+    res.redirect(`/?${query}`);
+  } else {
+    const query = querystring.stringify({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token: generateToken({ id: user.id }),
+    });
+    res.redirect(`/?${query}`);
+  }
 });
 // ==========================================================================//
 

@@ -1,8 +1,36 @@
 const app2 = angular.module('auth', []);
 
+// =======================Get Parametros da URL====================//
+const getUrlParameter = function getUrlParameter(sParam) {
+  const sPageURL = window.location.search.substring(1),
+      sURLVariables = sPageURL.split('&');
+  let sParameterName;
+  for (let i = 0; i < sURLVariables.length; i += 1) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+      return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    }
+  }
+};
+// ==============================================================//
+
 // ==================================== Para validar uma sessão ==========================
 app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
   $scope.session = () => {
+    if (getUrlParameter('token')) {
+      let user = {
+        _id: getUrlParameter('id'),
+        name: getUrlParameter('name'),
+        email: getUrlParameter('email'),
+        adm: getUrlParameter('adm'),
+        social: true,
+      };
+      window.localStorage.clear();
+      window.localStorage.setItem('user', JSON.stringify(user));
+      document.cookie = `token=${getUrlParameter('token')}; path=/`;
+      window.location.href = '/';
+    }
 
     $http.get('/blog/getCarrousel')
       .success((response) => {
@@ -28,24 +56,41 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
     // ===============================================================//
 
     const token = (document.cookie).split('=', 2)[1];
+    const { _id, email, adm } = JSON.parse(window.localStorage.getItem('user'));
     if (!token) { // caso não exista token, desvalida a sessão
       console.log('no session');
       document.cookie = 'token=; path=/';
       window.localStorage.clear();
       return;
     }
-    $http.get('/valid', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).success((response) => { // se tiver tudo certo, valida uma sessao
-      const { _id } = JSON.parse(window.localStorage.getItem('user'));
-      if (response.user === _id) {
-        window.localStorage.setItem('validSession', JSON.stringify(response.ok));// criar uma chave afirmando a validade da sessao
-      }
-    }).error((response) => {
-      console.log(response);
-      document.cookie = 'token=; path=/';
-      window.localStorage.clear();
-    });
+    if (adm) {
+      $http.post('/valid/adm', { adm, email, _id }, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success((response) => {
+        const { user } = response;
+        if (user._id === _id) {
+          window.localStorage.setItem('validSession', JSON.stringify(response.ok));
+          logged();
+        }
+      }).error((response) => {
+        console.log(response);
+        document.cookie = 'token=; path=/';
+        window.localStorage.clear();
+      });
+    } else {
+      $http.get('/valid', {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success((response) => { // se tiver tudo certo, valida uma sessao
+        if (response.user === _id) {
+          window.localStorage.setItem('validSession', JSON.stringify(response.ok));// criar uma chave afirmando a validade da sessao
+          logged();
+        }
+      }).error((response) => {
+        console.log(response);
+        document.cookie = 'token=; path=/';
+        window.localStorage.clear();
+      });
+    }
   };
 
   $scope.logout = () => {

@@ -48,15 +48,6 @@
       <div class="container-fluid"></div>
     </section>
 
-    <!--<h1 id="a">deslogado</h1>
-    <a href="/app/views/login.html"><button>sigin</button></a>
-    <button ng-click="logout()">logout</button>
-    <a href="/app/views/accOptions.html"><button>option</button></a>
-    <a href="/app/views/subcribe.html"><button>Se Increva</button></a>
-    <a href="/app/views/viewAllSubs.html"><button>ver Inscrições</button></a>
-    <a href="/app/views/blog.html"><button>Noticias</button></a>-->
-
-
     <!-- Navbar / Navbar / Navbar / Navbar -->
 
 
@@ -88,7 +79,7 @@
             <a class="nav-link d-md-block d-lg-none" href="/form"><i class="fas fa-clipboard fa-md"></i> Inscrições</a>
           </li>
 
-          <li id="dropdown" class="nav-item d-none d-lg-block ">
+          <li id="dropdown" class="nav-item d-md-block d-lg-none">
             <div class="dropdown">
               <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -101,9 +92,11 @@
 		    </ul>
       </div>
 
-      <!-- Barra De Pesquisa -->
-      <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" value="Log In"/>
-
+      <div ng-controller="auth">
+        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Log In"/>
+        <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
+        <a ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
+      </div>
     </nav>
 
 
@@ -169,12 +162,6 @@
           </div>
         </div>
       </section>
-
-
-
-
-
-
 
 <!--Rodapé-->
     <footer id="myFooter">
@@ -243,6 +230,7 @@
   <script src="app/controllers/login.js"></script>
   <script src="app/controllers/subcribe.js"></script>
   <script src="app/controllers/auth.js"></script>
+  <script src="app/controllers/options.js"></script>
   <script src="js/session.js"></script>
   <script src="app/spa.js"></script>
   <!------------------------------------------------------------------------->
