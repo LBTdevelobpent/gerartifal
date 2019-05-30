@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const session = require('express-session');
 
 const port = normalizePort(process.env.PORT || '3000');
 
@@ -12,7 +14,8 @@ const io = require('socket.io').listen(server);
 const User = require('./app/models/user.js');
 
 
-// --------------------Rederização da pagina-------//
+// =================== Configurações servidor ==============//
+require('./config/passport.js')(passport);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +24,17 @@ app.get('/', (req, res) => {
 });
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/www')));
-// -----------------------------------------------//
+app.set('views', __dirname + '/views');
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: '084cfe37060434b2a49492a784a43364',
+}));
+
+// ========================================================//
 
 // -------------------------Para abrir inscrições------------------//
 const sub = ['bilolão'];

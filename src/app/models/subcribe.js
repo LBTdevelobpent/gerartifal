@@ -6,16 +6,88 @@ const subcribeSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-
-  age: {
-    type: Number,
+  birthDate: {
+    type: Date,
     required: true,
   },
-
   cpf: {
     type: Number,
     required: true,
   },
+  class:{
+    type: String,
+    require: true,
+  },
+  turno:{
+    type: String,
+    require: true,
+  },
+  hasInstrument:{
+    type: Boolean,
+    require: true,
+  },
+  memberCommunity:{
+    type: String,
+    require: true,
+  },
+  birthState:{
+    type: String,
+    require: true,
+  },
+  birthCity:{
+    type: String,
+    require: true,
+  },
+  rg:{
+    type: String,
+    require: true,
+  },
+  orgaoEmissor:{
+    type: String,
+    require: true,
+  },
+  email:{
+    type: String,
+    require: true,
+  },
+  phone:{
+    type: Number,
+    require: true,
+  },
+  address:{
+    type: String,
+    require: true,
+  },
+  city:{
+    type: String,
+    require: true,
+  },
+  state:{
+    type: String,
+    require: true,
+  },
+  cep:{
+    type: Number,
+    require: true,
+  },
+  deficiency:{
+    type: String,
+    require: true,
+  },
+  schoolingDegree:{
+    type: String,
+    require: true,
+  },
+  howDiscovered:{
+    type: String,
+    require: true,
+  },
+  whyWants:{
+    type: String,
+    require: true,
+  },
+  
+
 
   user: {
     type: mongoose.Schema.Types.ObjectId, // Relação com a coleção de usuarios

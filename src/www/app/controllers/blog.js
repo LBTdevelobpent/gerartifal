@@ -4,7 +4,7 @@
 const app = angular.module('app', ['ngRoute']);
 
 // ============================= Configuração das rotas ========================================
-app.config([ '$routeProvider', ($routeProvider) => {
+app.config(['$routeProvider', ($routeProvider) => {
   $routeProvider
     .when('/', {
       templateUrl: '/blog/getPosts',
@@ -21,7 +21,7 @@ app.config([ '$routeProvider', ($routeProvider) => {
     .otherwise({ redirectTo: '/' });
 }]);
 // ========================== Controladores ==================================================
-app.controller('HomeCtrl',[ '$rootScope', '$location', ($rootScope, $location) => {
+app.controller('HomeCtrl', [ '$rootScope', '$location', ($rootScope, $location) => {
   $rootScope.activetab = $location.path();
 }]);
 
@@ -34,9 +34,10 @@ app.controller('AllCtrl', ['$rootScope', '$routeParams', '$location',($rootScope
 }]);
 
 // =========================== Configuração dos métodos do blog ===============================
-app.controller('post',[ '$scope','$http', ($scope, $http) => {
+app.controller('post', ['$scope', '$http', ($scope, $http) => {
   $scope.addPost = () => {
     const { title, mss } = $scope;
+    /*
     $http.post('/blog/addPost', JSON.parse(`{ "title": "${title}", "body": "${mss}" }`))
       .success(() => {
         $router.reload();
@@ -44,6 +45,7 @@ app.controller('post',[ '$scope','$http', ($scope, $http) => {
       .error((response) => {
         console.log(response);
       });
+      */
   };
 
   $scope.removePost = () => {

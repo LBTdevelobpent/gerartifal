@@ -9,28 +9,102 @@ const router = express.Router();
 
 app.set('view engine', 'ejs');
 
-// ===========================Pega as noticas mais recentes e põe na tela==========================//
-router.get('/getPosts', (req, res) => {
+function extension(element) {
+  const extName = path.extname(element);
+  return extName === '.json';
+}
+
+router.get('/getCarrousel', (req, res) => {
   try {
     const d = new Date();
     const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
     // função para checkar as noticias mais recentes
+    // eslint-disable-next-line no-inner-declarations
     function recent(data, da) {
-      fs.readdir(path.resolve(`news/${data}`), (err, items) => {
-        let html = '';
+      fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
         let i = 1;
+        const items = [];
+
+        // ----------------------------Codigo para evitar loop infinito---------------//
+        if (da.getFullYear() < 2019) {
+          return res.status(404).send({ error: 'No have news before this year' });
+        }
+        // --------------------------------------------------------------------------//
         if (err || items === undefined) {
           const ontem = new Date(da.getTime());
           ontem.setDate(da.getDate() - i);
           i += 1;
           recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
         } else {
+          list.filter(extension).forEach((value) => {
+            items.push(value);
+          });
+          const post = []; // Array que adiciona todos as informações dos posts
           for (let c = 0; c < items.length; c += 1) {
-            fs.readFile(path.resolve(`news/${data}/${items[c]}`), (err, dados) => {
-              html += dados.toString();
+            // eslint-disable-next-line no-loop-func
+            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
+              const dat = JSON.parse(dados);
+              dat.c = c;
+              post.push(dat);
               if (c === (items.length - 1)) {
-                res.render('index', { body: html });
+                res.send(post[0]); // renderizar os post no INDEX
+              }
+              if (error) {
+                return res.status(500).send({ error: 'FileSystem Error' });
+              }
+            });
+          }
+        }
+      });
+    }
+
+    recent(date, d);
+  } catch (err) {
+    return res.status(404).send({ error: 'Noticias não encontradas' });
+  }
+});
+
+// ==========================Pega as noticas mais recentes e põe na tela==========================//
+router.get('/getPosts', (req, res) => {
+  try {
+    const d = new Date();
+    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
+
+    // função para checkar as noticias mais recentes
+    // eslint-disable-next-line no-inner-declarations
+    function recent(data, da) {
+      fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
+        let i = 1;
+        const items = [];
+
+        // ----------------------------Codigo para evitar loop infinito---------------//
+        if (da.getFullYear() < 2019) {
+          return res.status(404).send({ error: 'No have news before this year' });
+        }
+        // --------------------------------------------------------------------------//
+        
+        if (err || items === undefined) {
+          const ontem = new Date(da.getTime());
+          ontem.setDate(da.getDate() - i);
+          i += 1;
+          recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
+        } else {
+          list.filter(extension).forEach((value) => {
+            items.push(value);
+          });
+          const post = []; // Array que adiciona todos as informações dos posts
+          for (let c = 0; c < items.length; c += 1) {
+            // eslint-disable-next-line no-loop-func
+            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
+              const dat = JSON.parse(dados);
+              dat.c = c;
+              post.push(dat);
+              if (c === (items.length - 1)) {
+                res.render('index', { post }); // renderizar os post no INDEX
+              }
+              if (error) {
+                return res.status(500).send({ error: 'FileSystem Error' });
               }
             });
           }
@@ -53,7 +127,8 @@ router.get('/getPosts/:date', (req, res) => {
     fs.readdir(path.resolve(`news/${date}`), (err, items) => {
       let html = '';
       for (let c = 0; c < items.length; c += 1) {
-        fs.readFile(path.resolve(`news/${date}/${items[c]}`), (err, dados) => {
+        // eslint-disable-next-line no-loop-func
+        fs.readFile(path.resolve(`src/news/${date}/${items[c]}`), (err, dados) => {
           html += dados.toString();
           if (c === (items.length - 1)) {
             res.render('index', { body: html });
@@ -67,11 +142,11 @@ router.get('/getPosts/:date', (req, res) => {
 });
 // =================================================================================//
 
-//================================Pega uma noticia especifica======================//
+// ================================Pega uma noticia especifica======================//
 router.get('/getPost/:date/:postName', (req, res) => {
   try {
     const { date, postName } = req.params;
-    res.sendFile(path.resolve(`news/${date}/${postName}.html`), {
+    res.sendFile(path.resolve(`src/news/${date}/${postName}.html`), {
       headers: {
         'x-timestamp': Date.now(),
         'x-sent': true,
@@ -88,29 +163,32 @@ router.get('/getPost/:date/:postName', (req, res) => {
 // =================================================================================//
 
 // =============================Adiciona um post=========================================//
-router.post('/addPost', (req) => {
+router.post('/addPost', (req, res) => {
   try {
-    const { title, body } = req.body;
+    const { title, body, image } = req.body;
     const d = new Date();
     const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
     // Vai conferir se já existe uma pasta da data atual
-    fs.stat(path.resolve(`news/${date}`), (erro) => {
+    fs.stat(path.resolve(`src/news/${date}`), (erro) => {
       if (erro) {
         // Caso não existe, irar criar uma
-        fs.mkdirSync(path.resolve(`news/${date}`));
+        fs.mkdirSync(path.resolve(`src/news/${date}`));
         // Nomeando o arquivo
         let archiName = title.toLowerCase();
-        while (archiName.indexOf(' ') !== -1) {
-          archiName = archiName.replace(' ', '-');
-        }
+        while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
 
         // ---------------------Escrevendo um arquivo dentro da pasta------------------//
-        ejs.renderFile(path.resolve('resources/templates/template.ejs'), { date, archiName, title, body }, (err, html) => {
+        ejs.renderFile(path.resolve('src/resources/templates/template.ejs'), { date, archiName, title, body, image }, (err, html) => {
           if (err) {
             console.log(err);
           }
-          fs.writeFile(path.resolve(`news/${date}/${archiName}.html`), html, (error) => {
+          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.html`), html, (error) => {
+            if (error) {
+              console.log(error);
+            }
+          });
+          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.json`), `{ "date": "${date}", "archiName": "${archiName}", "title": "${title}", "body": "${body}", "image": "${image}" }`, (error) => {
             if (error) {
               console.log(error);
             }
@@ -124,11 +202,16 @@ router.post('/addPost', (req) => {
           archiName = archiName.replace(' ', '-');
         }
 
-        ejs.renderFile('resources/templates/template.ejs', { date, archiName, title, body }, (err, html) => {
+        ejs.renderFile('src/resources/templates/template.ejs', { date, archiName, title, body, image }, (err, html) => {
           if (err) {
             console.log(err);
           }
-          fs.writeFile(path.resolve(`news/${date}/${archiName}.html`), html, (error) => {
+          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.html`), html, (error) => {
+            if (error) {
+              console.log(error);
+            }
+          });
+          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.json`), `{ "date": "${date}", "archiName": "${archiName}", "title": "${title}", "body": "${body}", "image": "${image}" }`, (error) => {
             if (error) {
               console.log(error);
             }
@@ -137,6 +220,7 @@ router.post('/addPost', (req) => {
         // --------------------------------------------------------------------------//
       }
     });
+    res.redirect('/app/views/blog.html');
   } catch (err) {
     return res.status(400).send({ error: 'Erro em criar uma nova noticia' });
   }
@@ -147,7 +231,7 @@ router.post('/addPost', (req) => {
 router.delete('/removePost/:date/:postName', (req) => {
   try {
     const { date, postName } = req.params;
-    fs.unlink(path.resolve(`news/${date}/${postName}.html`), (err) => {
+    fs.unlink(path.resolve(`src/news/${date}/${postName}.html`), (err) => {
       if (err) {
         console.log(err);
       }
@@ -160,7 +244,7 @@ router.delete('/removePost/:date/:postName', (req) => {
 
 // Pega o caminho aonde está o post, para mostrar as datas onde tem post criado
 router.get('/getPostPath', (req, res) => {
-  fs.readdir(path.resolve('news'), (err, items) =>{
+  fs.readdir(path.resolve('src/news'), (err, items) =>{
     if (err) {
       return res.send({ error: 'Error Post Path' });
     }
