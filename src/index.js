@@ -22,9 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/www/index.html'));
 });
+
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/www')));
-app.set('views', __dirname + '/views');
+app.set('views', `${__dirname}/views`);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -91,3 +92,24 @@ function normalizePort(val) {
   }
   return false;
 }
+
+// =============================== SPA ROUTES CONFIG =================================//
+
+/**
+ * Esse Bloco de codigo serve para caso o usuario der refresh não der erro 404
+ * Infelizmente tem q ser feito dessa forma, se não buga
+ */
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '/www/app/views/login.html'));
+});
+
+app.get('/:anyone', (req, res) => {
+  res.sendFile(path.join(__dirname, '/www/index.html'));
+});
+
+app.get('/:date/:post', (req, res) => {
+  res.sendFile(path.join(__dirname, '/www/index.html'));
+});
+
+// ==================================================================================//

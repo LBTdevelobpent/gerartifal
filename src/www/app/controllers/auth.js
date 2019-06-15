@@ -19,7 +19,7 @@ const getUrlParameter = function getUrlParameter(sParam) {
 app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
   $scope.session = () => {
     if (getUrlParameter('token')) {
-      let user = {
+      const user = {
         _id: getUrlParameter('id'),
         name: getUrlParameter('name'),
         email: getUrlParameter('email'),

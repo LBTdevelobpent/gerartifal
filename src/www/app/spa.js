@@ -10,7 +10,7 @@ const app1 = angular.module('app', ['auth',
 app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
   $locationProvider.html5Mode({
     enabled: true,
-    requireBase: false,
+    requireBase: true,
   });
 
   $routeProvider
