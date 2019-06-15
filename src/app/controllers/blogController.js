@@ -54,9 +54,9 @@ router.get('/getPosts/:date', async (req, res) => {
 router.get('/getPost/:date/:archiName', async (req, res) => {
   try {
     const { date, archiName } = req.params;
-    const news = await News.find({ date, archiName });
+    const news = await News.findOne({ date, archiName });
 
-    return res.render(path.resolve('src/resources/templates/template.ejs'), news[0]);
+    return res.render(path.resolve('src/resources/templates/template.ejs'), news);
   } catch (err) {
     return res.status(404).send({ error: 'Noticias especifica não encontrada' });
   }
