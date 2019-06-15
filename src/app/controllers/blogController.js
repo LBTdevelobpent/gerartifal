@@ -1,6 +1,9 @@
 const express = require('express');
 
 const path = require('path');
+const formidable = require('formidable');
+const uploadcare = require('uploadcare')('c98d904c5b4622af0397', 'd268ffd593134af176b7');
+const fs = require('file-system');
 
 const News = require('../models/news.js');
 
@@ -9,7 +12,7 @@ const router = express.Router();
 router.get('/getCarrousel', async (req, res) => {
   try {
     const news = await News.find({});
-
+    news.reverse();
     return res.send(news[0]);
   } catch (err) {
     return res.status(404).send({ error: 'Noticias não encontradas' });
@@ -22,11 +25,11 @@ router.get('/getPosts', async (req, res) => {
     const news = await News.find({});
     const recents = [];
     let count = 0;
+    news.reverse();
     do {
       recents.push(news[count]);
       count += 1;
-    } while (count < recents.length && count < 4);
-
+    } while (count < news.length && count < 4);
     return res.render('index', { post: recents });
   } catch (err) {
     return res.status(404).send({ error: 'Noticias não encontradas' });
@@ -61,21 +64,35 @@ router.get('/getPost/:date/:archiName', async (req, res) => {
 // =================================================================================//
 
 // =============================Adiciona um post=========================================//
-router.post('/addPost', async (req, res) => {
+router.post('/addPost', (req, res) => {
   try {
-    const { title, body, image } = req.body;
-    const d = new Date();
-    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
+      const { title, body } = fields;
+      const { image } = files;
+      const d = new Date();
+      const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
-    let archiName = title.toLowerCase();
-    while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
+      let archiName = title.toLowerCase();
+      while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
 
-    await News.create({
-      date,
-      archiName,
-      title,
-      body,
-      image,
+      uploadcare.file.upload(fs.createReadStream(image.path), (error, response) => {
+        if (error) {
+          return res.status(400).send({ error: 'Erro em adicionar a foto' });
+        }
+        uploadcare.files.info(`${response.file}`, async (eror, callback) => {
+          if (eror) {
+            return res.status(400).send({ error: 'Erro em pegar infor da foto' });
+          }
+          await News.create({
+            date,
+            archiName,
+            title,
+            body,
+            image: callback.original_file_url,
+          });
+        });
+      });
     });
 
     return res.redirect('/app/views/blog.html');

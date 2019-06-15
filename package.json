@@ -19,6 +19,7 @@
     "express": "^4.17.0",
     "express-session": "^1.16.1",
     "file-system": "^2.2.2",
+    "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.10",
@@ -29,7 +30,8 @@
     "password-generator": "^2.2.0",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "uploadcare": "^0.4.5"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
