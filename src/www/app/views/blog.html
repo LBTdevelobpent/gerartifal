@@ -13,7 +13,7 @@
         UPLOADCARE_PREVIEW_STEP = true;
     </script>
 
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
   </head>
 
   <body ng-controller="post" ng-init="getPostPath()">
@@ -22,15 +22,12 @@
 
     <div ng-view></div>
 
-    <form method="POST" action="/blog/addPost">
+    <form method="POST" action="/blog/addPost" enctype='multipart/form-data'>
       <input type="text" name="title" placeholder="Title"><br>
       <textarea name="body" ng-model="mss" placeholder="text"></textarea>
       <input
-      type="hidden"
+      type="file"
       name="image"
-      role="uploadcare-uploader"
-      data-clearable="true"
-      data-image-shrink="500x500"
       />
       <input type="submit"/>
     </form>
