@@ -4,7 +4,7 @@
 
 const app = angular.module('app', []);
 
-app.controller('verify', ['$scope', '$http', '$window', '$location',($scope, $http, $window, $location) => {
+app.controller('verify', ['$scope', '$http', '$location', ($scope, $http, $location) => {
   $scope.verified = () => {
     const data = $location.search();
     const json = JSON.parse(`{ "email": "${data.email}","token": "${data.token}"}`);
@@ -12,7 +12,7 @@ app.controller('verify', ['$scope', '$http', '$window', '$location',($scope, $ht
     $http.post('/auth/register_verify', json)
       .success((response) => {
         console.log(response);
-        $window.location.href = '/';
+        window.location.href = '/';
       }).error((response) => {
         console.log(response);
       });
