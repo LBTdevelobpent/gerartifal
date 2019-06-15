@@ -1,6 +1,6 @@
 <div class="container-fluid d-none d-md-block" id="news2">
-  <% post.forEach(function(posts) { %>
-    <%if (posts.c % 2 == 0) { %>
+  <% post.forEach(function(posts, index) { %>
+    <%if (index % 2 == 0) { %>
       <div class="row" style="background-color: lightgreen;">
         <div class="col-md-4 d-none d-md-block" >
           <img src="<%- posts.image %>" class="img-thumbnail rounded">
