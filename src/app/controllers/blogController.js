@@ -1,118 +1,36 @@
 const express = require('express');
 
-const app = express();
-const fs = require('file-system');
-const ejs = require('ejs');
 const path = require('path');
+const formidable = require('formidable');
+const uploadcare = require('uploadcare')('c98d904c5b4622af0397', 'd268ffd593134af176b7');
+const fs = require('file-system');
+
+const News = require('../models/news.js');
 
 const router = express.Router();
 
-app.set('view engine', 'ejs');
-
-function extension(element) {
-  const extName = path.extname(element);
-  return extName === '.json';
-}
-
-router.get('/getCarrousel', (req, res) => {
+router.get('/getCarrousel', async (req, res) => {
   try {
-    const d = new Date();
-    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
-
-    // função para checkar as noticias mais recentes
-    // eslint-disable-next-line no-inner-declarations
-    function recent(data, da) {
-      fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
-        let i = 1;
-        const items = [];
-
-        // ----------------------------Codigo para evitar loop infinito---------------//
-        if (da.getFullYear() < 2019) {
-          return res.status(404).send({ error: 'No have news before this year' });
-        }
-        // --------------------------------------------------------------------------//
-        if (err || items === undefined) {
-          const ontem = new Date(da.getTime());
-          ontem.setDate(da.getDate() - i);
-          i += 1;
-          recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
-        } else {
-          list.filter(extension).forEach((value) => {
-            items.push(value);
-          });
-          const post = []; // Array que adiciona todos as informações dos posts
-          for (let c = 0; c < items.length; c += 1) {
-            // eslint-disable-next-line no-loop-func
-            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
-              const dat = JSON.parse(dados);
-              dat.c = c;
-              post.push(dat);
-              if (c === (items.length - 1)) {
-                res.send(post[0]); // renderizar os post no INDEX
-              }
-              if (error) {
-                return res.status(500).send({ error: 'FileSystem Error' });
-              }
-            });
-          }
-        }
-      });
-    }
-
-    recent(date, d);
+    const news = await News.find({});
+    news.reverse();
+    return res.send(news[0]);
   } catch (err) {
     return res.status(404).send({ error: 'Noticias não encontradas' });
   }
 });
 
 // ==========================Pega as noticas mais recentes e põe na tela==========================//
-router.get('/getPosts', (req, res) => {
+router.get('/getPosts', async (req, res) => {
   try {
-    const d = new Date();
-    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
-
-    // função para checkar as noticias mais recentes
-    // eslint-disable-next-line no-inner-declarations
-    function recent(data, da) {
-      fs.readdir(path.resolve(`src/news/${data}`), (err, list) => {
-        let i = 1;
-        const items = [];
-
-        // ----------------------------Codigo para evitar loop infinito---------------//
-        if (da.getFullYear() < 2019) {
-          return res.status(404).send({ error: 'No have news before this year' });
-        }
-        // --------------------------------------------------------------------------//
-        
-        if (err || items === undefined) {
-          const ontem = new Date(da.getTime());
-          ontem.setDate(da.getDate() - i);
-          i += 1;
-          recent(`${ontem.getMonth()}-${ontem.getDate()}-${ontem.getFullYear()}`, ontem);
-        } else {
-          list.filter(extension).forEach((value) => {
-            items.push(value);
-          });
-          const post = []; // Array que adiciona todos as informações dos posts
-          for (let c = 0; c < items.length; c += 1) {
-            // eslint-disable-next-line no-loop-func
-            fs.readFile(path.resolve(`src/news/${data}/${items[c]}`), (error, dados) => {
-              const dat = JSON.parse(dados);
-              dat.c = c;
-              post.push(dat);
-              if (c === (items.length - 1)) {
-                res.render('index', { post }); // renderizar os post no INDEX
-              }
-              if (error) {
-                return res.status(500).send({ error: 'FileSystem Error' });
-              }
-            });
-          }
-        }
-      });
-    }
-
-    recent(date, d);
+    const news = await News.find({});
+    const recents = [];
+    let count = 0;
+    news.reverse();
+    do {
+      recents.push(news[count]);
+      count += 1;
+    } while (count < news.length && count < 4);
+    return res.render('index', { post: recents });
   } catch (err) {
     return res.status(404).send({ error: 'Noticias não encontradas' });
   }
@@ -120,22 +38,12 @@ router.get('/getPosts', (req, res) => {
 // ====================================================================================//
 
 // ===========================Pega noticias de um dia expecifico=======================//
-router.get('/getPosts/:date', (req, res) => {
+router.get('/getPosts/:date', async (req, res) => {
   try {
     const { date } = req.params;
+    const news = await News.find({ date });
 
-    fs.readdir(path.resolve(`news/${date}`), (err, items) => {
-      let html = '';
-      for (let c = 0; c < items.length; c += 1) {
-        // eslint-disable-next-line no-loop-func
-        fs.readFile(path.resolve(`src/news/${date}/${items[c]}`), (err, dados) => {
-          html += dados.toString();
-          if (c === (items.length - 1)) {
-            res.render('index', { body: html });
-          }
-        });
-      }
-    });
+    return res.render('index', { post: news });
   } catch (err) {
     return res.status(404).send({ error: 'Noticias não encontradas de data especifica' });
   }
@@ -143,19 +51,12 @@ router.get('/getPosts/:date', (req, res) => {
 // =================================================================================//
 
 // ================================Pega uma noticia especifica======================//
-router.get('/getPost/:date/:postName', (req, res) => {
+router.get('/getPost/:date/:archiName', async (req, res) => {
   try {
-    const { date, postName } = req.params;
-    res.sendFile(path.resolve(`src/news/${date}/${postName}.html`), {
-      headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true,
-      },
-    }, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    const { date, archiName } = req.params;
+    const news = await News.findOne({ date, archiName });
+
+    return res.render(path.resolve('src/resources/templates/template.ejs'), news);
   } catch (err) {
     return res.status(404).send({ error: 'Noticias especifica não encontrada' });
   }
@@ -165,62 +66,36 @@ router.get('/getPost/:date/:postName', (req, res) => {
 // =============================Adiciona um post=========================================//
 router.post('/addPost', (req, res) => {
   try {
-    const { title, body, image } = req.body;
-    const d = new Date();
-    const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
+      const { title, body } = fields;
+      const { image } = files;
+      const d = new Date();
+      const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
-    // Vai conferir se já existe uma pasta da data atual
-    fs.stat(path.resolve(`src/news/${date}`), (erro) => {
-      if (erro) {
-        // Caso não existe, irar criar uma
-        fs.mkdirSync(path.resolve(`src/news/${date}`));
-        // Nomeando o arquivo
-        let archiName = title.toLowerCase();
-        while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
+      let archiName = title.toLowerCase();
+      while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
 
-        // ---------------------Escrevendo um arquivo dentro da pasta------------------//
-        ejs.renderFile(path.resolve('src/resources/templates/template.ejs'), { date, archiName, title, body, image }, (err, html) => {
-          if (err) {
-            console.log(err);
-          }
-          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.html`), html, (error) => {
-            if (error) {
-              console.log(error);
-            }
-          });
-          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.json`), `{ "date": "${date}", "archiName": "${archiName}", "title": "${title}", "body": "${body}", "image": "${image}" }`, (error) => {
-            if (error) {
-              console.log(error);
-            }
-          });
-        });
-        // ----------------------------------------------------------------------------//
-      } else {
-        // ---------------Caso exista só vai criar um novo arquivo dentro-------------//
-        let archiName = title.toLowerCase();
-        while (archiName.indexOf(' ') !== -1) {
-          archiName = archiName.replace(' ', '-');
+      uploadcare.file.upload(fs.createReadStream(image.path), (error, response) => {
+        if (error) {
+          return res.status(400).send({ error: 'Erro em adicionar a foto' });
         }
-
-        ejs.renderFile('src/resources/templates/template.ejs', { date, archiName, title, body, image }, (err, html) => {
-          if (err) {
-            console.log(err);
+        uploadcare.files.info(`${response.file}`, async (eror, callback) => {
+          if (eror) {
+            return res.status(400).send({ error: 'Erro em pegar infor da foto' });
           }
-          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.html`), html, (error) => {
-            if (error) {
-              console.log(error);
-            }
-          });
-          fs.writeFile(path.resolve(`src/news/${date}/${archiName}.json`), `{ "date": "${date}", "archiName": "${archiName}", "title": "${title}", "body": "${body}", "image": "${image}" }`, (error) => {
-            if (error) {
-              console.log(error);
-            }
+          await News.create({
+            date,
+            archiName,
+            title,
+            body,
+            image: callback.original_file_url,
           });
         });
-        // --------------------------------------------------------------------------//
-      }
+      });
     });
-    res.redirect('/app/views/blog.html');
+
+    return res.redirect('/app/views/blog.html');
   } catch (err) {
     return res.status(400).send({ error: 'Erro em criar uma nova noticia' });
   }
@@ -228,14 +103,11 @@ router.post('/addPost', (req, res) => {
 // =======================================================================================//
 
 // ===============================Usado para remover o post=============================//
-router.delete('/removePost/:date/:postName', (req) => {
+router.delete('/removePost/:date/:archiName', async (req, res) => {
   try {
-    const { date, postName } = req.params;
-    fs.unlink(path.resolve(`src/news/${date}/${postName}.html`), (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    const { date, archiName } = req.params;
+    await News.findOneAndDelete({ date, archiName });
+    return res.redirect('/app/views/blog.html');
   } catch (err) {
     return res.status(400).send({ error: 'Erro em apagar uma noticia' });
   }
@@ -243,13 +115,22 @@ router.delete('/removePost/:date/:postName', (req) => {
 // ====================================================================================//
 
 // Pega o caminho aonde está o post, para mostrar as datas onde tem post criado
-router.get('/getPostPath', (req, res) => {
-  fs.readdir(path.resolve('src/news'), (err, items) =>{
-    if (err) {
-      return res.send({ error: 'Error Post Path' });
-    }
-    return res.send({ path: items.reverse() });
-  });
+router.get('/getPostPath', async (req, res) => {
+  try {
+    await News.find({}, (err, docs) => {
+      if (err) {
+        return res.status(404).send({ error: 'Caminhos não encontrados' });
+      }
+      const paths = [];
+      for (let c = 0; c < docs.length; c += 1) {
+        paths.push(docs[c].date);
+      }
+      return res.send(paths);
+    });
+    return 0;
+  } catch (err) {
+    return res.status(404).send({ error: 'Caminhos não encontrados' });
+  }
 });
 // ----------------------------------------------------------------------------
 

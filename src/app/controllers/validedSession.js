@@ -1,6 +1,6 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/auth.js');
 
+const authMiddleware = require('../middlewares/auth.js');
 const User = require('../models/user.js');
 const { key } = require('../../config/admKey.json');
 
