@@ -1,9 +1,15 @@
 .navbar {
   background-color: #04ba31;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
+
 }
+
 .navbar .navbar-brand {
+  max-width: 100%;
+  height: auto;
+  padding-left: 10%;
   color: #000000;
+  position: static;
 }
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
@@ -23,7 +29,9 @@
   color: #000000;
   border-radius: .25rem;
   margin: 0 0.25em;
+
 }
+
 .navbar .navbar-nav .nav-link:not(.disabled):hover,
 .navbar .navbar-nav .nav-link:not(.disabled):focus {
   color: #ffffff;

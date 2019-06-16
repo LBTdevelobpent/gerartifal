@@ -1,10 +1,13 @@
-#grupo{
-    background-position: 50% 35%;
-    background-size:cover;
-    background-size: cover;
-    background-repeat:no-repeat;
-}
+
 
 .jumbotron{
-    color:rgb(70, 187, 14);
+  max-width: 100%;
+  height: auto;
+  color: #FFFFFF;
+  background-position: 50% 35%;
+  background-size:cover;
+  background-blend-mode:darken;
+  background-repeat:no-repeat;
+  font-family: 'Coiny', cursive;
+  background-color: rgba(0.0, 0.0, 0.0, 0.7);
 }
