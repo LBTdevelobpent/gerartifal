@@ -1,30 +1,5 @@
-#camerata{
-    background-image: url(../img/camerata.jpeg);
+#grupo{
     background-position: 50% 35%;
-    background-size:cover;
-    background-size: cover;
-    background-repeat:no-repeat;
-}
-
-#coretifal{
-    background-image: url(../img/coretifal2.jpg);
-    background-position: 50% 35%;
-    background-size:cover;
-    background-size: cover;
-    background-repeat:no-repeat;
-}
-
-#iflautasopros{
-    background-image: url(../img/iflautasopros.jpeg);
-    background-position: 50% 35%;
-    background-size:cover;
-    background-size: cover;
-    background-repeat:no-repeat;
-}
-
-#mariaaugusta{
-    background-image: url(../img/mariaaugusta.jpeg);
-    background-position: center;
     background-size:cover;
     background-size: cover;
     background-repeat:no-repeat;

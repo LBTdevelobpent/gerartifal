@@ -1,5 +1,6 @@
 .navbar {
   background-color: #04ba31;
+  margin-bottom: 5%;
 }
 .navbar .navbar-brand {
   color: #000000;
@@ -16,7 +17,7 @@
 }
 .navbar .navbar-text a:hover,
 .navbar .navbar-text a:focus {
-  color: #ffffff; 
+  color: #ffffff;
 }
 .navbar .navbar-nav .nav-link {
   color: #000000;

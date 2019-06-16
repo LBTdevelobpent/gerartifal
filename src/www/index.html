@@ -27,16 +27,18 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.css/animate.css">
 
-
+    <!--links google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Catamaran|Coiny|Noto+Sans+JP" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
 
 
     <!--links dos nossos arquivos css-->
-    <link rel="stylesheet" type="text/css" href="css/CssPadrao.css">
-    <link rel="stylesheet" type="text/css" href="css/CorNavbar.css">
-    <link rel="stylesheet" type="text/css" href="css/Rodape.css">
-    <link rel="stylesheet" type="text/css" href="css/PagInicial.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/projetos-grupos.css">
+
 
   </head>
 
@@ -44,24 +46,22 @@
 
     <!-- Primeira Imagem Topo -->
 
-    <section class="first">
-      <div class="container-fluid"></div>
-    </section>
 
-    <!-- Navbar / Navbar / Navbar / Navbar -->
+    <!-- ===============  Navbar =================-->
 
 
     <nav class="navbar navbar-expand-lg navbar-light sticky-top ">
 
-      <!-- Logo -->
-      <a class="navbar-brand" href="/"><i class="fas fa-globe"></i> Gerartifal</a>
-
-      <!-- Toggler/collapsibe Button -->
+      <!-- ===============  navbarLogo =================-->
+      <div class="navbar-brand light">
+        <a href="#"><img src="./img/navimg.png" width="25%"></a>
+      </div>
+      <!--========== Toggler/collapsibe Button ========== -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-      <!-- Botões Que Ficarão dentro do menuBar-->
+      <!-- ========== Botões Que Ficarão dentro do menuBar ==========-->
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
 
@@ -81,7 +81,7 @@
 
           <li id="dropdown" class="nav-item d-md-block d-lg-none">
             <div class="dropdown">
-              <button ng-class="validDrop()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
+              <button ng-class="validDrop%()" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
                 <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
@@ -100,24 +100,18 @@
     </nav>
 
 
-    <!--
+    <!--==================== FIM DO NAVBAR    ===================-->
+    <div id="contGeral" class="container">
 
+    <div  class="container" id="noticias" ng-view ></div>
 
-        FIM DO NAVBAR / FIM DO NAVBAR / FIM DO NAVBAR
-
-
-
-    -->
-
-    <div ng-view></div>
-
-    <!--Desenvolvedores-->
+    <!-- ==========Desenvolvedores ==========-->
     <section id="services" class="d-none d-lg-block">
-        <div class="container-fluid">
+        <div class="container">
           <div class="row">
             <div class="col-lg-12 text-center">
               <h2 class="section-heading text-uppercase"><i class="fas fa-code fa-md"></i> <strong>Sobre os Desenvolvedores</strong> <i class="fas fa-code fa-md"></i></h2>
-              <h3 class="section-subheading text-muted">Este projeto foi desenvolvido pela equipe LBT em parceria com o IFAL, Campus Maceió.</h3>
+              <h3 class="section-subheading text-muted">Este projeto foi desenvolvido pela equipe DuckDev em parceria com o IFAL, Campus Maceió.</h3>
               <br>
             </div>
           </div>
@@ -163,19 +157,17 @@
         </div>
       </section>
 
-<!--Rodapé-->
+<!-- ========== footer ==========-->
     <footer id="myFooter">
       <div class="container">
         <div class="row">
-          <h4 class="d-none d-lg-block" style="text-align: center"><i class="fas fa-address-book fa-lg"></i> Nossos Contatos :</h4>
-          <h4 class="d-md-block d-lg-none" style="text-align: center"><i class="fas fa-address-book fa-md"></i> Nossos Contatos :</h4>
 
-<!-- API DO GOOGLE -->
+<!-- ========== Google Maps API ========== -->
         </div>
         <iframe class="d-none d-md-block" id="map-container" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.1989023512087!2d-35.732519584780675!3d-9.664039593081965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701457996307ad5%3A0x1d22c2c44f26f853!2sInstituto+Federal+de+Alagoas+-+Campus+Macei%C3%B3!5e0!3m2!1spt-BR!2sbr!4v1545226271030" >
         </iframe>
       </div>
-<!--_______________-->
+<!-- ========== Social media ==========-->
 
       <div class="social-networks">
         <a href=""><i class="fa fa-instagram"></i></a>
@@ -188,25 +180,16 @@
       </div>
     </footer>
 
-    <!--
-
-
-        FIM DO RODAPÉ / FIM DO RODAPÉ / FIM DO RODAPÉ
-
-
-
-    -->
-
-
+    <!-- ==================== FIM DO FOOTER ==================== -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="vendor/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </div>
   </body>
 
-  <!-- Modal -->
+  <!-- ========== Modal ========== -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -226,13 +209,13 @@
     </div>
   </div>
 
-  <!----------------Bloco para inserção de todos os scripts------------------>
+  <!--- ========== Bloco para inserção de todos os scripts ========== ----->
   <script src="app/controllers/login.js"></script>
   <script src="app/controllers/subcribe.js"></script>
   <script src="app/controllers/auth.js"></script>
   <script src="app/controllers/options.js"></script>
   <script src="js/session.js"></script>
   <script src="app/spa.js"></script>
-  <!------------------------------------------------------------------------->
+
 
 </html>
