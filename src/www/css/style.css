@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
 /* Cor Do Background */
 
 body {
-  background-color: rgb(152,251,152,0.5);
-  font-family: 'Merriweather', serif;
+  background-image: linear-gradient(135deg, #abcc9f 25%, #ffffff 25%, #ffffff 50%, #abcc9f 50%, #abcc9f 75%, #ffffff 75%, #ffffff 100%);
+  background-size: 40.00px 40.00px;
+  font-family: 'Noto Sans HK', sans-serif;
 }
+
 
 #include p {
   overflow: hidden;
@@ -24,13 +27,11 @@ body {
 /* Foto De Cima */
 
 .first {
-  height:45vh;
-  background-position: center;
-  background-size:cover;
-  background-image:url('orquestra.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat:no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 20 vh;
+  margin: 5%;
+  background-image:url('../img/orquestraBanner.jpg');
+
 }
 
 
@@ -38,6 +39,10 @@ body {
   align-items:center;
 }
 
+#noticias{
+  padding-top: 1%;
+  background-color: #ffffff
+}
 
 #pesquisa {
   margin-left:10px;
@@ -46,7 +51,7 @@ body {
 
 .footer{
   padding-top:2%;
-  background-color:#04ba31;
+  background-color:#00FF3E;
 }
 
 .footer p{
@@ -58,16 +63,7 @@ body {
 }
 
 
-  body {
-    background: #76b852; /* fallback for old browsers */
-    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-    background: -moz-linear-gradient(right, #76b852, #8DC26F);
-    background: -o-linear-gradient(right, #76b852, #8DC26F);
-    background: linear-gradient(to left, #76b852, #8DC26F);
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+
 
 
 
@@ -83,7 +79,7 @@ body {
     min-width:40vw;
     background-position: center;
     background-size:cover;
-    background-image:url('orquestra.jpg');
+    background-image:url('../img/orquestra.jpg');
     }
 
 }

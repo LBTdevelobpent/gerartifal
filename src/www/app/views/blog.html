@@ -1,39 +1,50 @@
-<html ng-app="app">
-  <head>
-    <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.4.7/angular-route.js"></script>
-    <script src="../controllers/blog.js"></script>
+<div ng-app="blog" ng-controller="post" ng-init="init()">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/option">Options </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Blog <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-  </head>
+  <div ng-include="'/blog/getPostsAdm'"></div>
 
-  <body ng-controller="post" ng-init="getPostPath()">
+  <form method="POST" action="/blog/addPost" enctype='multipart/form-data'>
+    <div class="form-group">
+      <label for="title">Título</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title" required><br>
+      <textarea name="body" id="froala-editor" placeholder="text" required></textarea><br>
 
-    <a href="#/">Home</a>
-
-    <div ng-view></div>
-
-    <form method="POST" action="/blog/addPost" enctype='multipart/form-data'>
-      <input type="text" name="title" placeholder="Title"><br>
-      <textarea name="body" ng-model="mss" placeholder="text"></textarea>
-      <input
-      type="file"
-      name="image"
-      />
-      <input type="submit"/>
-    </form>
-
-    <form >
-      <input type="text" ng-model="post">
-      <input type="submit" value="Remove Post" ng-click="removePost()"/>
-    </form>
-
-    <div class="row">
-      <div ng-repeat="x in path">
-        <div><a href="#/{{ x }}">{{ x }}</a></div>
+      <div class="custom-file">
+          <input
+          type="file"
+          name="image"
+          class="custom-file-input"
+          id="inputGroupFile01"
+          accept="image/*"
+          required
+          />
+        <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
       </div>
     </div>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Inserir Notícia"/>
+  </form>
+  <br>
+  <script>
+      new FroalaEditor('textarea#froala-editor', {
+        toolbarButtons: ['bold', 'italic'],
+        quickInsertTags: [''],
+      });
 
-  </body>
-</html>
+      $('#inputGroupFile01').on('change',function(){
+              var fileName = $(this).val();
+              $(this).next('.custom-file-label').html(fileName.replace('C:\\fakepath\\', " "));
+          })
+    </script>
+  </div>

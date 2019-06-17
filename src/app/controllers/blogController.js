@@ -36,7 +36,21 @@ router.get('/getPosts', async (req, res) => {
   }
 });
 // ====================================================================================//
-
+router.get('/getPostsAdm', async (req, res) => {
+  try {
+    const news = await News.find({});
+    const recents = [];
+    let count = 0;
+    news.reverse();
+    do {
+      recents.push(news[count]);
+      count += 1;
+    } while (count < news.length);
+    return res.render('postsAdm', { post: recents });
+  } catch (err) {
+    return res.status(404).send({ error: 'Noticias não encontradas' });
+  }
+});
 // ===========================Pega noticias de um dia expecifico=======================//
 router.get('/getPosts/:date', async (req, res) => {
   try {
@@ -68,6 +82,10 @@ router.post('/addPost', (req, res) => {
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, (err, fields, files) => {
+      if (!fields || !files) {
+        return res.status(400).send({ error: 'Há campos vazios' });
+      }
+
       const { title, body } = fields;
       const { image } = files;
       const d = new Date();
@@ -90,12 +108,13 @@ router.post('/addPost', (req, res) => {
             title,
             body,
             image: callback.original_file_url,
+            imageId: response.file,
           });
         });
       });
     });
 
-    return res.redirect('/app/views/blog.html');
+    res.redirect('/posts');
   } catch (err) {
     return res.status(400).send({ error: 'Erro em criar uma nova noticia' });
   }
@@ -103,11 +122,16 @@ router.post('/addPost', (req, res) => {
 // =======================================================================================//
 
 // ===============================Usado para remover o post=============================//
-router.delete('/removePost/:date/:archiName', async (req, res) => {
+router.delete('/removePost/:date/:archiName/:imageId', async (req, res) => {
   try {
-    const { date, archiName } = req.params;
-    await News.findOneAndDelete({ date, archiName });
-    return res.redirect('/app/views/blog.html');
+    const { date, archiName, imageId } = req.params;
+    await News.findOneAndDelete({ date, archiName }, (err) => {
+      if (err) {
+        return res.status(400).send({ error: 'Error em apagar post' });
+      }
+      uploadcare.files.remove(`${imageId}`);
+    });
+    res.redirect('/posts');
   } catch (err) {
     return res.status(400).send({ error: 'Erro em apagar uma noticia' });
   }

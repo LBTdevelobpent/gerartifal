@@ -12,11 +12,23 @@
   bottom: 0;
   width: 100%;
 }
+.carousel-inner img{
+  width: 100%;
+  height: auto;
+  display: block;
+  box-sizing:border-box;
+}
+
 
 .carousel-inner h3 {
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#spanCarousel{
+  background-color: rgba(0, 0, 0, 0.9);
+  padding-bottom: 2%;
 }
 
 
@@ -25,6 +37,7 @@
 }
 
 .carousel-caption h2{
+
   font-size: 50px;
   text-transform: uppercase;
   color: #04ba31;
@@ -51,7 +64,9 @@
   max-height: 30vh;
   max-width:100%;
 }
-
+#news{
+  text-align: center;
+}
 #news p{
   margin-top:2%;
   margin-right:4%;
@@ -85,6 +100,15 @@
   text-align: center;
 }
 
+#spanInit{
+  width: 100%;
+  padding: 15%;
+  background-image: url("../img/orquestra.jpg");
+  background-color: rgba(0, 0, 0, 0.75);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+}
 
 
 @media only screen and (max-width: 600px) {
