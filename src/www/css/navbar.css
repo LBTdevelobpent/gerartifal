@@ -11,10 +11,7 @@
   color: #000000;
   position: static;
 }
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-  color: #ffffff;
-}
+
 .navbar .navbar-text {
   color: #000000;
 }
