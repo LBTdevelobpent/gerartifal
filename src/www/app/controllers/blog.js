@@ -1,61 +1,45 @@
 //
 // Este script fica responsável dos métodos e configurações do blog(seção de notícias)
 //
-const app = angular.module('app', ['ngRoute']);
-
-// ============================= Configuração das rotas ========================================
-app.config(['$routeProvider', ($routeProvider) => {
-  $routeProvider
-    .when('/', {
-      templateUrl: '/blog/getPosts',
-      controller: 'HomeCtrl',
-    })
-    .when('/:date', {
-      templateUrl: (params) => { return `/blog/getPosts/${params.date}`; },
-      controller: 'DateCtrl',
-    })
-    .when('/:date/:post', {
-      templateUrl: (params) => { return `/blog/getPost/${params.date}/${params.post}`; },
-      controller: 'AllCtrl',
-    })
-    .otherwise({ redirectTo: '/' });
-}]);
-// ========================== Controladores ==================================================
-app.controller('HomeCtrl', [ '$rootScope', '$location', ($rootScope, $location) => {
-  $rootScope.activetab = $location.path();
-}]);
-
-app.controller('DateCtrl', ['$rootScope', '$routeParams', '$location',($rootScope, $routeParams, $location) => {
-  $rootScope.activetab = $location.path() + $routeParams.date;
-}]);
-
-app.controller('AllCtrl', ['$rootScope', '$routeParams', '$location',($rootScope, $routeParams, $location) => {
-  $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
-}]);
+const blog = angular.module('blog', ['ngRoute']);
 
 // =========================== Configuração dos métodos do blog ===============================
-app.controller('post', ['$scope', '$http', ($scope, $http) => {
-  $scope.addPost = () => {
-    const { title, mss } = $scope;
-    /*
-    $http.post('/blog/addPost', JSON.parse(`{ "title": "${title}", "body": "${mss}" }`))
-      .success(() => {
-        $router.reload();
-      })
-      .error((response) => {
+blog.controller('post', ['$scope', '$http', ($scope, $http) => {
+
+  $scope.init = () => {
+    const token = (document.cookie).split('=', 2)[1];
+    if (!token) { // caso não exista token, desvalida a sessão
+      console.log('no session');
+      document.cookie = 'token=; path=/';
+      window.localStorage.clear();
+      window.location.href = '/';
+      return;
+    }
+    const { _id, email, adm } = JSON.parse(window.localStorage.getItem('user'));
+
+    if (adm) {
+      $http.post('/valid/adm', { adm, email, _id }, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success((response) => {
+        const { user } = response;
+        if (user._id === _id) {
+          window.localStorage.setItem('validSession', JSON.stringify(response.ok));
+          logged();
+        }
+      }).error((response) => {
         console.log(response);
+        document.cookie = 'token=; path=/';
+        window.localStorage.clear();
+        window.location.href = '/';
+        return;
       });
-      */
+    }
   };
 
-  $scope.removePost = () => {
-    const { post } = $scope;
-    $http.delete(`/blog/removePost/${post}`)
-      .success(() => {
-        $router.reload();
-      })
+  $scope.removePost = (date, archiName, imageId) => {
+    $http.delete(`/blog/removePost/${date}/${archiName}/${imageId}`)
       .error((response) => {
-        console.log(response);
+        console.error(response);
       });
   };
 

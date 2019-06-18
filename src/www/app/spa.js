@@ -5,6 +5,7 @@ const app1 = angular.module('app', ['auth',
   'subcribe',
   'sigin',
   'options',
+  'blog',
   'ngRoute']);
 
 app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) => {
@@ -33,7 +34,11 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
     })
     .when('/option', {
       templateUrl: 'app/views/accOptions.html',
-      controller: 'OptCtrl',
+      controller: 'MainCtrl',
+    })
+    .when('/posts', {
+      templateUrl: 'app/views/blog.html',
+      controller: 'MainCtrl',
     })
     .when('/:date/:post', {
       templateUrl: (params) => { return `/blog/getPost/${params.date}/${params.post}`; },
@@ -45,36 +50,19 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
 app1.controller('MainCtrl', ['$rootScope', '$location', ($rootScope, $location) => {
 
   if ($location.path() !== '/') {
-    $('.first').animate({
-      height: '0vh',
-    }, 500);
+    $('#spanInit').slideUp('slow');
   } else {
-    $('.first').animate({
-      height: '45vh',
-    }, 500);
+    $('#spanInit').slideDown('slow');
   }
 
   // eslint-disable-next-line no-param-reassign
   $rootScope.activetab = $location.path();
 }]);
-app1.controller('OptCtrl', ['$rootScope', '$location', ($rootScope, $location) => {
 
-  if ($location.path() !== '/') {
-    $('.first').animate({
-      height: '0vh',
-    }, 500);
-  } else {
-    $('.first').animate({
-      height: '45vh',
-    }, 500);
-  }
-
-  // eslint-disable-next-line no-param-reassign
-  $rootScope.activetab = $location.path();
-}]);
 app1.controller('AllCtrl', ['$rootScope', '$routeParams', '$location', ($rootScope, $routeParams, $location) => {
+
   // eslint-disable-next-line no-param-reassign
   $rootScope.activetab = $location.path() + $routeParams.date + $routeParams.post;
 }]);
 
-angular.bootstrap(document.getElementById('app'), ['auth', 'subcribe', 'sigin', 'options']);
+angular.bootstrap(document.getElementById('app'), ['auth', 'subcribe', 'sigin', 'options', 'blog']);

@@ -27,6 +27,11 @@ const newsSchema = new mongoose.Schema({
     required: true,
   },
 
+  imageId: {
+    type: String,
+    required: true,
+  },
+
 });
 
 const News = mongoose.model('News', newsSchema);
