@@ -102,12 +102,19 @@
 
 #spanInit{
   width: 100%;
-  padding: 15%;
+  height: auto;
   background-image: url("../img/orquestra.jpg");
   background-color: rgba(0, 0, 0, 0.75);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: darken;
+}
+#spanInit img{
+  width: 100%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding:10px;
 }
 
 
