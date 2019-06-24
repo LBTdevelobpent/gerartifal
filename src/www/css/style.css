@@ -24,15 +24,7 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Foto De Cima */
 
-.first {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 20 vh;
-  margin: 5%;
-  background-image:url('../img/orquestraBanner.jpg');
-
-}
 
 
 .navbar{
