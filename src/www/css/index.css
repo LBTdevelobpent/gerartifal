@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
 .circle {
   background-color: #aaa;
   border-radius: 50%;
@@ -49,7 +50,7 @@
 }
 
 .fa-caret-right, .fa-caret-left{
-  color:#04ba31
+  color:#04ba31;
 }
 
 
@@ -94,10 +95,14 @@
   top:40%;
   transform: translate(-50%, -50%);
   text-align: center;
+  font-family: 'Noto Sans HK', sans-serif;
+  color: white;
 }
 
 #news2 h2 {
   text-align: center;
+  font-family: 'Noto Sans HK', sans-serif;
+  color: white;
 }
 
 #spanInit{
@@ -116,6 +121,8 @@
   margin-right: auto;
   padding:10px;
 }
+
+
 
 
 @media only screen and (max-width: 600px) {

@@ -32,6 +32,10 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: 'app/views/projetos-grupos.html',
       controller: 'MainCtrl',
     })
+    .when('/projetos-grupos/grupo', {
+      templateUrl: 'app/views/grupo.html',
+      controller: 'MainCtrl',
+    })
     .when('/option', {
       templateUrl: 'app/views/accOptions.html',
       controller: 'MainCtrl',

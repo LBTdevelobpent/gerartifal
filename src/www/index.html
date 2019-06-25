@@ -50,12 +50,15 @@
 
     <!-- Primeira Imagem Topo -->
     <div id="spanInit">
+      <div class="container">
       <img  src="./img/2.png">
+    </div>
     </div>
     <!-- ===============  Navbar =================-->
 
 
     <nav class="navbar navbar-expand-lg sticky-top ">
+      <div class="container">
       <!-- ===============  navbarLogo =================-->
       <a href="#"><img class="navbar-brand" src="" alt=""></a>
 
@@ -76,9 +79,10 @@
             <a id="project" class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
           </li>
 
-          <li class="nav-item" ng-class="{active: activetab == '/form'}">
-            <a class="nav-link d-none d-lg-block" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+          <li class="nav-item"  ng-class="{active: activetab == '/form'}">
+            <a class="nav-link d-none d-lg-block disabled"  href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
           </li>
+
 
           <li id="dropdown" class="nav-item">
             <div class="dropdown">
@@ -98,13 +102,14 @@
         <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
         <a ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
       </div>
+    </div>
     </nav>
 
 
     <!--==================== FIM DO NAVBAR    ===================-->
-    <div id="contGeral" class="container-fluid">
 
-    <div  class="container-fluid" id="noticias" ng-view ></div>
+
+    <div  class="container" id="noticias" ng-view ></div>
 
     <!-- ==========Desenvolvedores ==========-->
     <section id="services" class="d-none d-lg-block">
@@ -196,7 +201,7 @@
         }
       });
     </script>
-  </div>
+
   </body>
 
   <!-- ========== Modal ========== -->
