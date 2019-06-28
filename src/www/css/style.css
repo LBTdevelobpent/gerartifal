@@ -2,7 +2,7 @@
 /* Cor Do Background */
 
 body {
-  background-color: #ffffff;
+  background-color:rgb(152,251,152,0.5);
   font-family: 'Noto Sans HK', sans-serif;
 }
 
@@ -22,8 +22,9 @@ body {
   padding-right: 1em;
   text-overflow: ellipsis;
 }
-
-
+.linkInit{
+  display: none;
+}
 
 
 .navbar{
@@ -54,7 +55,7 @@ body {
 }
 
 #containerGrupo{
-  margin-bottom: 3%;
+  padding: 3%;
 }
 #containerGrupo h1, h2, h3{
   text-align:center;
@@ -69,7 +70,8 @@ body {
 }
 #gallery{
   background-color: rgba(46, 230, 0, 0.438);
-  padding:3%;
+  padding:5%;
+  margin-bottom: 2%;
 }
 
 /* galeria grupos */
@@ -131,6 +133,7 @@ body {
   }
 
 
+
 }
 
 /* Medios dispositivos (tablets em paisagem, 768px pra cima) */
@@ -145,6 +148,9 @@ body {
 @media only screen and (min-width: 992px) {
   #pesquisa{
     display: block;
+  }
+  .linkInit{
+    display: inline;
   }
 
 

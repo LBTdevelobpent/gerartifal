@@ -18,8 +18,15 @@
   height: auto;
   display: block;
   box-sizing:border-box;
+  opacity: 0.2;
+  background-blend-mode: darken;
 }
-
+.carousel-inner{
+  background-color: #000000;
+}
+.spanCarousel{
+  background-color: #000000;
+}
 
 .carousel-inner h3 {
 
@@ -27,10 +34,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#spanCarousel{
-  background-color: rgba(0, 0, 0, 0.9);
-  padding-bottom: 2%;
-}
+
 
 
 #carouselSite {
@@ -38,7 +42,7 @@
 }
 
 .carousel-caption h2{
-
+  font-family: 'Coiny', cursive;
   font-size: 50px;
   text-transform: uppercase;
   color: #04ba31;
@@ -126,7 +130,9 @@
 
 
 @media only screen and (max-width: 600px) {
-
+  #carouselSite{
+    display: none;
+  }
 
 }
 
@@ -143,6 +149,7 @@
     height: 500px;
     overflow: hidden;
   }
+
 }
 
 /* Large devices (laptops/desktops, 992px pra cima)*/

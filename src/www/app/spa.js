@@ -32,10 +32,23 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: 'app/views/projetos-grupos.html',
       controller: 'MainCtrl',
     })
-    .when('/projetos-grupos/grupo', {
-      templateUrl: 'app/views/grupo.html',
+    .when('/projetos-grupos/camerata', {
+      templateUrl: 'app/views/camerata.html',
       controller: 'MainCtrl',
     })
+    .when('/projetos-grupos/coretifal', {
+      templateUrl: 'app/views/coretifal.html',
+      controller: 'MainCtrl',
+    })
+    .when('/projetos-grupos/flautasopros', {
+      templateUrl: 'app/views/flautasopros.html',
+      controller: 'MainCtrl',
+    })
+    .when('/projetos-grupos/mariaaugusta', {
+      templateUrl: 'app/views/mariaaugusta.html',
+      controller: 'MainCtrl',
+    })
+
     .when('/option', {
       templateUrl: 'app/views/accOptions.html',
       controller: 'MainCtrl',
