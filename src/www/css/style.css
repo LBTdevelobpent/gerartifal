@@ -113,8 +113,8 @@ body {
 
 /*Telas  Super Pequenas (Telefones, 600px e menor)*/
 @media only screen and (max-width: 600px) {
-  #pesquisa {
-    display: none;
+  .linkInit{
+    display: block;
   }
   .first {
     height: 40vh;
@@ -128,30 +128,19 @@ body {
 }
 /* Pequenos dispositivos (tablets e celulares largos, 600px pra cima) */
 @media only screen and (min-width: 600px) {
-  #pesquisa {
-    display: none;
-  }
-
-
 
 }
 
 /* Medios dispositivos (tablets em paisagem, 768px pra cima) */
 @media only screen and (min-width: 768px) {
-  #pesquisa {
-    display: none;
-  }
+  
 
 }
 
 /* Large devices (laptops/desktops, 992px pra cima) */
 @media only screen and (min-width: 992px) {
-  #pesquisa{
-    display: block;
-  }
-  .linkInit{
-    display: inline;
-  }
+  
+  
 
 
 }
