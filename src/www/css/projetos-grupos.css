@@ -11,3 +11,10 @@
   font-family: 'Coiny', cursive;
   background-color: rgba(0.0, 0.0, 0.0, 0.7);
 }
+.container h1{
+  text-align: center;
+  padding:2%;
+  padding-bottom:3%;
+  font-family: 'Coiny', cursive;
+
+}

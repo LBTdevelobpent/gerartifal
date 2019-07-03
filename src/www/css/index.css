@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
 .circle {
   background-color: #aaa;
   border-radius: 50%;
@@ -17,8 +18,15 @@
   height: auto;
   display: block;
   box-sizing:border-box;
+  opacity: 0.2;
+  background-blend-mode: darken;
 }
-
+.carousel-inner{
+  background-color: #000000;
+}
+.spanCarousel{
+  background-color: #000000;
+}
 
 .carousel-inner h3 {
 
@@ -26,10 +34,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#spanCarousel{
-  background-color: rgba(0, 0, 0, 0.9);
-  padding-bottom: 2%;
-}
+
 
 
 #carouselSite {
@@ -37,7 +42,7 @@
 }
 
 .carousel-caption h2{
-
+  font-family: 'Coiny', cursive;
   font-size: 50px;
   text-transform: uppercase;
   color: #04ba31;
@@ -49,7 +54,7 @@
 }
 
 .fa-caret-right, .fa-caret-left{
-  color:#04ba31
+  color:#04ba31;
 }
 
 
@@ -94,25 +99,40 @@
   top:40%;
   transform: translate(-50%, -50%);
   text-align: center;
+  font-family: 'Noto Sans HK', sans-serif;
+  color: white;
 }
 
 #news2 h2 {
   text-align: center;
+  font-family: 'Noto Sans HK', sans-serif;
+  color: white;
 }
 
 #spanInit{
   width: 100%;
-  padding: 15%;
+  height: auto;
   background-image: url("../img/orquestra.jpg");
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.9);
   background-repeat: no-repeat;
   background-size: cover;
   background-blend-mode: darken;
 }
+#spanInit img{
+  width: 75%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding:10px;
+}
+
+
 
 
 @media only screen and (max-width: 600px) {
-
+  #carouselSite{
+    display: none;
+  }
 
 }
 
@@ -129,6 +149,7 @@
     height: 500px;
     overflow: hidden;
   }
+
 }
 
 /* Large devices (laptops/desktops, 992px pra cima)*/

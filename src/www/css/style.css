@@ -2,8 +2,7 @@
 /* Cor Do Background */
 
 body {
-  background-image: linear-gradient(135deg, #abcc9f 25%, #ffffff 25%, #ffffff 50%, #abcc9f 50%, #abcc9f 75%, #ffffff 75%, #ffffff 100%);
-  background-size: 40.00px 40.00px;
+  background-color:rgb(152,251,152,0.5);
   font-family: 'Noto Sans HK', sans-serif;
 }
 
@@ -23,15 +22,8 @@ body {
   padding-right: 1em;
   text-overflow: ellipsis;
 }
-
-/* Foto De Cima */
-
-.first {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 20 vh;
-  margin: 5%;
-  background-image:url('../img/orquestraBanner.jpg');
-
+.linkInit{
+  display: none;
 }
 
 
@@ -62,16 +54,67 @@ body {
   color:white;
 }
 
+#containerGrupo{
+  padding: 3%;
+}
+#containerGrupo h1, h2, h3{
+  text-align:center;
+  font-family: 'Noto Sans HK', sans-serif;
+  margin-bottom: 3%;
+}
+#containerGrupo img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  display: block;
+}
+#gallery{
+  background-color: rgba(46, 230, 0, 0.438);
+  padding:5%;
+  margin-bottom: 2%;
+}
 
+/* galeria grupos */
+.gallery {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33%;
+  -moz-column-width: 33%;
+  column-width: 33%; }
+  .gallery .pics {
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease; }
+  .gallery .animation {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
 
+  @media (max-width: 450px) {
+  .gallery {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-width: 100%;
+  -moz-column-width: 100%;
+  column-width: 100%;
+  }
+  }
+
+  @media (max-width: 400px) {
+  .btn.filter {
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+  }
+  }
 
 
 
 
 /*Telas  Super Pequenas (Telefones, 600px e menor)*/
 @media only screen and (max-width: 600px) {
-  #pesquisa {
-    display: none;
+  .linkInit{
+    display: block;
   }
   .first {
     height: 40vh;
@@ -85,26 +128,19 @@ body {
 }
 /* Pequenos dispositivos (tablets e celulares largos, 600px pra cima) */
 @media only screen and (min-width: 600px) {
-  #pesquisa {
-    display: none;
-  }
-
 
 }
 
 /* Medios dispositivos (tablets em paisagem, 768px pra cima) */
 @media only screen and (min-width: 768px) {
-  #pesquisa {
-    display: none;
-  }
+  
 
 }
 
 /* Large devices (laptops/desktops, 992px pra cima) */
 @media only screen and (min-width: 992px) {
-  #pesquisa{
-    display: block;
-  }
+  
+  
 
 
 }
