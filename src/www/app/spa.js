@@ -48,6 +48,19 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: 'app/views/mariaaugusta.html',
       controller: 'MainCtrl',
     })
+    .when('/projetos-grupos/cordas_friccionadas', {
+      templateUrl: 'app/views/corFriccionadas.html',
+      controller: 'MainCtrl',
+    })
+    .when('/projetos-grupos/canto_coral', {
+      templateUrl: 'app/views/cantoCoral.html',
+      controller: 'MainCtrl',
+    })
+    .when('/projetos-grupos/flauta_doce', {
+      templateUrl: 'app/views/flautaDoce.html',
+      controller: 'MainCtrl',
+    })
+
 
     .when('/option', {
       templateUrl: 'app/views/accOptions.html',
