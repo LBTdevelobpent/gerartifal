@@ -23,12 +23,7 @@ const newsSchema = new mongoose.Schema({
   },
 
   image: {
-    type: String,
-    required: true,
-  },
-
-  imageId: {
-    type: String,
+    type: Buffer,
     required: true,
   },
 

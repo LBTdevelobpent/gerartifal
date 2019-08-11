@@ -1,6 +1,6 @@
 <div class="row" style="background-color: lightgreen;">
   <div class="col-md-4 d-none d-md-block" >
-    <img src="<%- image %>" class="img-thumbnail rounded">
+    <img src="<%- 'data:image/webp;base64,'+image.toString('base64') %>" class="img-thumbnail rounded">
   </div>
   <div class="col-md-8 d-none d-md-block">
     <a href="/<%- date %>/<%- archiName %>"><h2><%- title %></h2></a>

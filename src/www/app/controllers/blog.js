@@ -36,8 +36,11 @@ blog.controller('post', ['$scope', '$http', ($scope, $http) => {
     }
   };
 
-  $scope.removePost = (date, archiName, imageId) => {
-    $http.delete(`/blog/removePost/${date}/${archiName}/${imageId}`)
+  $scope.removePost = (date, archiName) => {
+    $http.delete(`/blog/removePost/${date}/${archiName}`)
+      .success(() => {
+        window.location.href = '/posts';
+      })
       .error((response) => {
         console.error(response);
       });

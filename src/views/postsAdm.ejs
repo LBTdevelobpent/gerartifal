@@ -2,10 +2,10 @@
   <div class="row">
   <% post.forEach(function(posts, index) { %>
         <div class="col-lg-5 noticia">
-          <img src="<%- posts.image %>" class="img-thumbnail border border-primary">
+          <img src="<%- 'data:image/webp;base64,'+posts.image.toString('base64') %>" class="img-thumbnail border border-primary">
           <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2><%- posts.title %></h2></a>
           <p><%- posts.body %></p>
-          <button class="btn btn-danger" ng-click="removePost('<%- posts.date %>', '<%- posts.archiName %>', '<%- posts.imageId %>')"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-danger" ng-click="removePost('<%- posts.date %>', '<%- posts.archiName %>')"><i class="fas fa-trash"></i></button>
         </div>
   <% }) %>
   </div>
