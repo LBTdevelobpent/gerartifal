@@ -79,13 +79,13 @@
           </li>
 
           <li class="nav-item"  ng-class="{active: activetab == '/form'}">
-            <a class="nav-link d-none d-lg-block disabled"  href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+            <a class="btn disabled nav-link d-none d-lg-block"  href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
           </li>
 
 
-          <li id="dropdown" class="nav-item">
+          <li id="dropdown">
             <div class="dropdown">
-              <button ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link d-none d-lg-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</button>
+              <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
                 <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
@@ -97,7 +97,7 @@
       </div>
 
       <div ng-controller="auth">
-        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Log In"/>
+        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Login/Register"/>
         <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
         <a ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
       </div>
@@ -108,7 +108,7 @@
     <!--==================== FIM DO NAVBAR    ===================-->
 
     <div class="container">
-    <div  class="container" id="noticias" ng-view ></div>
+    <div  class="container" id="contNoticias" ng-view ></div>
 
     <!-- ==========Desenvolvedores ==========-->
 
@@ -182,7 +182,7 @@
         <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
       </div>
       <div class="footer-copyright" id="copy">
-        <p>© 2018 Copyright Text </p>
+        <p>© 2019</p>
       </div>
     </footer>
   </div>

@@ -1,25 +1,17 @@
 <div class="" id="news2">
+<hr>
+<br>
+ <div class="row">
   <% post.forEach(function(posts, index) { %>
-    <%if (index % 2 == 0) { %>
-      <div class="row" style="background-color: #04ba31;">
-        <div class="col-md-4 d-none d-md-block" >
-          <img src="<%- posts.image %>" class="img-thumbnail rounded">
-        </div>
-        <div class="col-md-8 d-none d-md-block">
+        <div class="col-12 col-md-6 d-none d-md-block">
+          <img src="<%- posts.image %>" class="img-responsive rounded">
+          <br>
           <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2><%- posts.title %></h2></a>
           <p><%- posts.body %></p>
         </div>
-      </div>
-    <% } else {%>
-    <div class="row" style="">
-      <div class="col-md-8 d-none d-md-block">
-        <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2 style="color: black;" ><%- posts.title %></h2></a>
-          <p style="color: black;" ><%- posts.body %></p>
-      </div>
-      <div class="col-md-4 d-none d-md-block">
-        <img src="<%- posts.image %>" class="img-thumbnail rounded float-right">
-      </div>
-    </div>
-    <% } %>
   <% }) %>
+  <br>
+  </div>
 </div>
+
+
