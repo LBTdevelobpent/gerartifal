@@ -3,11 +3,12 @@
 //
 const blog = angular.module('blog', ['ngRoute']);
 
+const token = (document.cookie).split('=', 2)[1];
+
 // =========================== Configuração dos métodos do blog ===============================
 blog.controller('post', ['$scope', '$http', ($scope, $http) => {
 
   $scope.init = () => {
-    const token = (document.cookie).split('=', 2)[1];
     if (!token) { // caso não exista token, desvalida a sessão
       console.log('no session');
       document.cookie = 'token=; path=/';
@@ -37,7 +38,9 @@ blog.controller('post', ['$scope', '$http', ($scope, $http) => {
   };
 
   $scope.removePost = (date, archiName) => {
-    $http.delete(`/blog/removePost/${date}/${archiName}`)
+    $http.delete(`/blog/removePost/${date}/${archiName}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .success(() => {
         window.location.href = '/posts';
       })
