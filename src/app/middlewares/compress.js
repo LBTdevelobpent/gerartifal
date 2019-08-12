@@ -5,7 +5,7 @@ exports.compressImage = (file, sizeX, sizeY) => {
     .resize(sizeX, sizeY)
     .toFormat('webp')
     .webp({
-      quality: 60,
+      quality: 50,
     })
     .toBuffer()
     .then((data) => { return data; });

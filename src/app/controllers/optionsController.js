@@ -23,20 +23,20 @@ router.use(authMiddleware);
 // =========================Modifica informações do Usuario================//
 router.put('/modify', async (req, res) => {
   try {
-    const userM = req.body;
+    const userModify = req.body;
     const { userId } = req.userId;
     const user = await User.findOne({ _id: userId }).select('+password');
-    
+
     if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }
 
-    if (!await bcrypt.compare(userM.password, user.password)) {
+    if (!await bcrypt.compare(userModify.password, user.password)) {
       return res.status(400).send({ error: 'Senhas não batem' });
     }
 
-    user.name = userM.name;
-    user.password = userM.password;
+    user.name = userModify.name;
+    user.password = userModify.Npassword;
 
     await user.save();
 
@@ -47,25 +47,5 @@ router.put('/modify', async (req, res) => {
     return res.status(400).send({ error: 'Não foi possivel atualizar' });
   }
 });
-// ========================================================================//
-/*
-router.post('/user_image', async (req, res) => {
-  const { image } = req.body;
 
-  fs.readFile(image.path, (err, data) => {
-    UserImg.create({
-      img: data,
-    }, (error, user) => {
-      if (error) {
-        return res.status(400).send({ error: 'error em inserir uma image' });
-      }
-      if (user) {
-        return res.send({ ok: true });
-      }
-      return 0;
-    });
-  });
-  return res.send({ error: 'algo aconteceu' });
-});
-*/
 module.exports = app => app.use('/options', router);

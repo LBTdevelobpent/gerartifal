@@ -42,7 +42,7 @@ router.post('/register_verify', async (req, res) => {
     // --------------------------------------------------------------------//
 
     // Modifica o Verificado para True, assim verificando de fato o email
-    await User.findOneAndUpdate({ email: email }, {
+    await User.findOneAndUpdate({ email }, {
       $set: {
         verified: true,
       },
@@ -59,9 +59,9 @@ router.post('/register_verify', async (req, res) => {
 // ===================================Login===================================//
 router.post('/authenticate', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { emailOrUser, password } = req.body;
 
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ $or: [{ email: emailOrUser }, { name: emailOrUser }] }).select('+password');
 
     // Check se usuario existe
     if (!user) {
@@ -77,7 +77,6 @@ router.post('/authenticate', async (req, res) => {
 
     user.password = undefined;
     return res.send({ user, token: generateToken({ id: user.id }) });
-
   } catch (err) {
     return res.status(400).send({ error: 'Erro na autenticação do login' });
   }
@@ -185,9 +184,8 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 });
 // ==========================================================================//
 
-router.use(captchaMiddleware);
-
 // ===============================Registro no DB=============================//
+router.use('/register', captchaMiddleware);
 router.post('/register', async (req, res) => {
   try {
     const { name, email } = req.body;

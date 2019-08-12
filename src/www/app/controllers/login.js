@@ -40,12 +40,12 @@ app3.controller('register',['$scope', '$http', ($scope, $http) => {
   };
 }]);
 // ============================= Controlador de login ============================================
-app3.controller('login', ['$scope', '$http', '$window',($scope, $http, $window) => {
+app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window) => {
   $scope.submit = () => {
-    const { email, password } = $scope;
-    const data = { email, password };
-    
-    if (email === 'undefined' || !password) {
+    const { emailOrUser, password } = $scope;
+    const data = { emailOrUser, password };
+
+    if (emailOrUser === 'undefined' || !password) {
       alert('a');
     } else {
       $http.post('/auth/authenticate', data)

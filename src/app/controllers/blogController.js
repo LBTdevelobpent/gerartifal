@@ -5,6 +5,7 @@ const formidable = require('formidable');
 const compress = require('../middlewares/compress.js');
 
 const News = require('../models/news.js');
+const authMiddleware = require('../middlewares/auth.js');
 
 const router = express.Router();
 
@@ -116,6 +117,7 @@ router.post('/addPost', (req, res) => {
 // =======================================================================================//
 
 // ===============================Usado para remover o post=============================//
+router.use('/removePost/:date/:archiName', authMiddleware);
 router.delete('/removePost/:date/:archiName', async (req, res) => {
   try {
     const { date, archiName } = req.params;
