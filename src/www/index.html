@@ -99,7 +99,7 @@
       <div ng-controller="auth">
         <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Login/Register"/>
         <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
-        <a ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
+        <a id="optionsLink" ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
       </div>
     </div>
     </nav>

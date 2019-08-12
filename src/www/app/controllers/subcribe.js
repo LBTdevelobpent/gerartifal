@@ -7,7 +7,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
   const token = (document.cookie).split('=', 2)[1];
   const openSub =  $window.localStorage.getItem('openSub');
 
-  // Validação de sessão como adm
+  // ---------------Validação de sessão como adm---------------//
   $scope.sessionAdm = () => {
     if (!token) {
       document.cookie = 'token=;path=/';
@@ -25,6 +25,8 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       $window.location.href = '/';
     });
   };
+  // -----------------------------------------------------------//
+
   // Validação de sessão
   $scope.session = () => {
     if (!token) {
@@ -61,7 +63,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
 
   $scope.submit = () => {
     const { name, age, cpf } = $scope;
-    const data = {name, age, cpf};
+    const data = { name, age, cpf };
 
     $http.post('/subcribe/create', data, {
       headers: { Authorization: `Bearer ${token}` },
@@ -120,7 +122,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       });
       // Pega fichas específicas
     } else {
-      const data = {nome, CPF}
+      const data = { nome, CPF }
       $http.put('/subcribe/find_subscription', data, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -136,7 +138,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
 
   $scope.openSub = () => {
     const { from, until } = $scope;
-    const data = {from,until};
+    const data = { from, until };
     const socket = io.connect('http://localhost:3000/');
     socket.emit('open', data);
   };
