@@ -71,7 +71,7 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
         const { user } = response;
         if (user._id === _id) {
           window.localStorage.setItem('validSession', JSON.stringify(response.ok));
-          logged();
+          logged(true);
         }
       }).error((response) => {
         console.log(response);
@@ -84,7 +84,7 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
       }).success((response) => { // se tiver tudo certo, valida uma sessao
         if (response.user === _id) {
           window.localStorage.setItem('validSession', JSON.stringify(response.ok));// criar uma chave afirmando a validade da sessao
-          logged();
+          logged(false);
         }
       }).error((response) => {
         console.log(response);

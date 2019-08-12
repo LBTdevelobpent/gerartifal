@@ -45,7 +45,7 @@ io.sockets.on('connection', (socket) => {
 
   socket.on('open', (data) => {
     sub.splice(0, sub.length);
-
+    console.log(data);
     sub.push(data);
     socket.broadcast.emit('openF', data);
   });
