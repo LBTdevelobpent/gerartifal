@@ -2,10 +2,10 @@ const express = require('express');
 
 const path = require('path');
 const formidable = require('formidable');
-const uploadcare = require('uploadcare')('c98d904c5b4622af0397', 'd268ffd593134af176b7');
-const fs = require('file-system');
+const compress = require('../middlewares/compress.js');
 
 const News = require('../models/news.js');
+const authMiddleware = require('../middlewares/auth.js');
 
 const router = express.Router();
 
@@ -88,30 +88,25 @@ router.post('/addPost', (req, res) => {
 
       const { title, body } = fields;
       const { image } = files;
-      const d = new Date();
-      const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
+      compress.compressImage(image, 1200, 720)
+        .then(async (data) => {
+          const d = new Date();
+          const date = `${d.getMonth()}-${d.getDate()}-${d.getFullYear()}`;
 
-      let archiName = title.toLowerCase();
-      while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
+          let archiName = title.toLowerCase();
+          while (archiName.indexOf(' ') !== -1) { archiName = archiName.replace(' ', '-'); }
 
-      uploadcare.file.upload(fs.createReadStream(image.path), (error, response) => {
-        if (error) {
-          return res.status(400).send({ error: 'Erro em adicionar a foto' });
-        }
-        uploadcare.files.info(`${response.file}`, async (eror, callback) => {
-          if (eror) {
-            return res.status(400).send({ error: 'Erro em pegar infor da foto' });
-          }
           await News.create({
             date,
             archiName,
             title,
             body,
-            image: callback.original_file_url,
-            imageId: response.file,
+            image: data,
           });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      });
     });
 
     res.redirect('/posts');
@@ -122,16 +117,16 @@ router.post('/addPost', (req, res) => {
 // =======================================================================================//
 
 // ===============================Usado para remover o post=============================//
-router.delete('/removePost/:date/:archiName/:imageId', async (req, res) => {
+router.use('/removePost/:date/:archiName', authMiddleware);
+router.delete('/removePost/:date/:archiName', async (req, res) => {
   try {
-    const { date, archiName, imageId } = req.params;
+    const { date, archiName } = req.params;
     await News.findOneAndDelete({ date, archiName }, (err) => {
       if (err) {
         return res.status(400).send({ error: 'Error em apagar post' });
       }
-      uploadcare.files.remove(`${imageId}`);
     });
-    res.redirect('/posts');
+    res.status(200).send({ sucess: 'Sucesso' });
   } catch (err) {
     return res.status(400).send({ error: 'Erro em apagar uma noticia' });
   }
