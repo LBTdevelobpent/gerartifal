@@ -11,6 +11,7 @@ $(document).ready(() => {
 
     $('#logout').removeClass('d-md-block d-lg-none');
     $('#option').removeClass('d-md-block d-lg-none');
+    $('#dropdownMenuButton').removeClass('d-md-block d-lg-none');
     $('#login').addClass('d-md-block d-lg-none');
     /**
      * Adicione aki todos os elementos que só aparecerão apois login
@@ -24,6 +25,9 @@ window.logged = (adm) => {
 
   $('#logout').removeClass('d-md-block d-lg-none');
   $('#option').removeClass('d-md-block d-lg-none');
+  $('#dropdownMenuButton').removeClass('d-md-block d-lg-none');
+
+
   $('#login').addClass('d-md-block d-lg-none');
 
 

@@ -1,15 +1,6 @@
 .navbar {
   background-color: #04ba31;
-  margin-bottom: 3%;
 
-}
-
-.navbar .navbar-brand {
-  max-width: 100%;
-  height: auto;
-  padding-left: 10%;
-  color: #000000;
-  position: static;
 }
 
 .navbar .navbar-text {
@@ -93,7 +84,7 @@
     color: #ffffff;
     background-color: #4ecc11;
   }
-  
+
 }
 
 @media (max-width: 767px) {
