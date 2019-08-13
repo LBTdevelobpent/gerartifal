@@ -19,7 +19,7 @@ $(document).ready(() => {
   }
 });
 
-window.logged = () => {
+window.logged = (adm) => {
   $('#dropdown').removeClass('d-md-block d-lg-none');
   $('#dropdown').addClass('d-none d-lg-block');
 
@@ -29,4 +29,10 @@ window.logged = () => {
 
 
   $('#login').addClass('d-md-block d-lg-none');
+
+
+  if (adm) {
+    $('#optionsLink').attr('ng-class', '{active: activetab == \'/adm/option\'}');
+    $('#optionsLink').attr('href', '/adm/option');
+  }
 };
