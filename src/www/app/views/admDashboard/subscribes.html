@@ -1,29 +1,13 @@
 <div ng-app="subcribe" ng-controller="subcribe" ng-init="sessionAdm()">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/adm/option">Options</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/adm/posts">Posts</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Incrições <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
     <form ng-submit="openSub()">
       <div class="form-group">
         <label for="fromDate">Data de Abertura: </label>
-        <input type="date" id="fromDate" ng-model="from"> 
+        <input type="date" id="fromDate" ng-model="from">
       </div>
       <div class="form-group">
         <label for="untilDate">Data de Encerramento: </label>
         <input type="date" id="untilDate" ng-model="until">
-      </div> 
+      </div>
       <input type="submit" class="btn btn-primary" value="submit">
     </form>
 </div>

@@ -39,17 +39,6 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       $window.location.href = '/';
     }
 
-    const socket = io.connect('http://localhost:3000/');
-    socket.on('openF', (data) => {
-      const date = Date.now();
-      if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
-        $window.localStorage.setItem('openSub', true);
-      } else {
-        $window.localStorage.setItem('openSub', false);
-        $window.location.href = '/';
-      }
-    });
-
     $http.get('/valid', {
       headers: { Authorization: `Bearer ${token}` },
     }).success((response) => {
