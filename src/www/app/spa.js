@@ -60,7 +60,10 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: 'app/views/flautaDoce.html',
       controller: 'MainCtrl',
     })
-
+    .when('/sobre', {
+      templateUrl: 'app/views/sobre.html',
+      controller: 'MainCtrl',
+    })
 
     .when('/option', {
       templateUrl: 'app/views/accOptions.html',

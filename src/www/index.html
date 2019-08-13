@@ -51,8 +51,8 @@
     <!-- Primeira Imagem Topo -->
     <div id="spanInit">
       <div class="container">
-      <img  src="./img/2.png">
-    </div>
+       <img  src="./img/2.png">
+      </div>
     </div>
     <!-- ===============  Navbar =================-->
 
@@ -60,48 +60,58 @@
     <nav class="navbar navbar-expand-lg sticky-top ">
       <div class="container">
       <!-- ===============  navbarLogo =================-->
-      <a class="nav-link d-none d-lg-block" href="/" ><i  class="linkInit fas fa-home fa-lg"></i></a>
       <!--========== Toggler/collapsibe Button ========== -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
 
       <!-- ========== Botões Que Ficarão dentro do menuBar ==========-->
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ml-auto">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav ml-auto">
 
-          <li class="nav-item active" ng-class="{active: activetab == '/'}">
-            <a class="nav-link d-none d-lg-block" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
-          </li>
+            <li class="nav-item active" ng-class="{active: activetab == '/'}">
+              <a class="nav-link d-none d-lg-block" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
+            </li>
 
-          <li class="nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
-            <a id="project" class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
-          </li>
+            <li class="nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
+              <a id="project" class="nav-link d-none d-lg-block" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
+            </li>
 
-          <li class="nav-item"  ng-class="{active: activetab == '/form'}">
-            <a class="btn disabled nav-link d-none d-lg-block"  href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
-          </li>
+            <li class="nav-item"  ng-class="{active: activetab == '/form'}">
+              <a class="btn disabled nav-link d-none d-lg-block" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+            </li>
 
 
-          <li id="dropdown">
-            <div class="dropdown">
-              <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
-                <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
+            <li id="dropdown">
+              <div class="dropdown">
+                <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
+                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
+                  <a class="dropdown-item" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
+                </div>
               </div>
-            </div>
-          </li>
-		    </ul>
-      </div>
+            </li>
+            <li class="nav-item">
+              <div ng-controller="auth">
+                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Login/Register"/>
+                <div id="option" class="dropdown d-md-block d-lg-none">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opções
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
+                    <a ng-class="{active: activetab == '/posts'}" class="dropdown-item" href="/posts">Adicionar posts</a>
+                  </div>
+                </div>
+                <input type="button" class=" nav-item btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-      <div ng-controller="auth">
-        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login" value="Login/Register"/>
-        <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
-        <a id="optionsLink" ng-class="{active: activetab == '/option'}" href="/option"><input type="button" class="btn btn-info d-md-block d-lg-none" id="option" value="Options"></a>
-      </div>
-    </div>
+
+
     </nav>
 
 
