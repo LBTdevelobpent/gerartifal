@@ -1,4 +1,4 @@
-  //
+//
 //  Este script contém os controladores de registro(login e register)
 //
 const app3 = angular.module('sigin', []);
@@ -52,22 +52,20 @@ app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window)
         .success((response) => {
           const { user, token } = response;
 
-          if (user.verified === false) {
-            alert('Email não verificado, por favor verifique');
-            return 0;
-          }
           alert('Logado com sucesso\nRedirecionando...');
+
           $window.localStorage.clear();
           $window.localStorage.setItem('user', JSON.stringify(user));
+
           const date = new Date();
           date.setTime(date.getTime() + 1);
           document.cookie = `token=${token}; path=/`;
-
           $window.location.href = '/';
+
           return 0;
         })
         .error((response) => {
-          console.log(response.error);
+          alert(response.error);
         });
     }
   };

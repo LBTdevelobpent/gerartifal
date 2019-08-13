@@ -109,7 +109,7 @@ router.post('/forgot_password', async (req, res) => {
       to: email,
       from: 'lbtdevelopmentinc@gmail.com',
       subject: 'Esquecimento de Senha no Sistema Gerartifal',
-      template: 'mail',
+      template: 'ForgotPassMail',
       context: { token, email }, // Coloca no email uma varivel
 
     }, (err) => {
@@ -226,16 +226,16 @@ router.post('/register', async (req, res) => {
 
     }, (err) => {
       if (err) {
+        console.log(err);
         return res.status(400).send({ error: 'Error no envio de email' });
       }
-      return 0;
+      return res.redirect('/');
     });
     // ------------------------------------------------------//
 
     user.password = undefined; // Não retornar a senha para o usuario
-    return res.send({ ok: true });
+    return 0;
   } catch (err) {
-    console.log(err);
     return res.status(400).send({ error: 'Não foi possivel cadastrar' });
   }
 });
