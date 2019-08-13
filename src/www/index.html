@@ -100,8 +100,9 @@
                     Opções
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
-                    <a ng-class="{active: activetab == '/posts'}" class="dropdown-item" href="/posts">Adicionar posts</a>
+                    <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/adm/option">Editar Perfil</a>
+                    <a ng-class="{active: activetab == '/posts'}" class="dropdown-item" href="/adm/posts">Adicionar posts</a>
+                    <a ng-class="{active: activetab == '/posts'}" class="dropdown-item" href="/adm/subscribe">Abrir Inscrições</a>
                   </div>
                 </div>
                 <input type="button" class=" nav-item btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
