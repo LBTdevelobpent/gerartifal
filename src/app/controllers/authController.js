@@ -109,15 +109,15 @@ router.post('/forgot_password', async (req, res) => {
       to: email,
       from: 'lbtdevelopmentinc@gmail.com',
       subject: 'Esquecimento de Senha no Sistema Gerartifal',
-      template: 'ForgotPassMail',
+      template: 'forgotPassMail',
       context: { token, email }, // Coloca no email uma varivel
 
     }, (err) => {
       if (err) {
-        return res.status(400).send({ error: 'Error no envio de email' });
+        return res.status(400).send({ err });
       }
 
-      return res.send({ ok: true });
+      return 0;
     });
   } catch (err) {
     return res.status(400).send({ error: 'Erro no esqueci minha senha' });

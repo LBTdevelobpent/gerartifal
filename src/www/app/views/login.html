@@ -10,7 +10,7 @@
                 <label class="btn-success btn btn-info" data-toggle="collapse" href="#collapseTwo">
                   <input type="radio" name="options" id="option2" autocomplete="off"> Registro
                 </label>
-              </div>
+            </div>
             <div ng-controller="login" id="collapseOne" class="collapse show" data-parent="#accordion">
               <br>
                 <form ng-submit="submit()">
@@ -26,7 +26,9 @@
                           <input type="password" class="form-control" ng-model="password" placeholder="Digite sua senha" required>
                         </div>
                       </div>
-                      <a href="/forgot_password">Esqueci minha senha</a>
+                      <span style="color: #3399ff;">
+                        <label data-toggle="collapse" style="text-decoration: underline; cursor: pointer;" href="#collapseThree">Esqueci minha senha</label>
+                      </span>
                       <br>
                       <button type="submit" class="btn btn-primary">Entrar</button>
                   </form>
@@ -60,6 +62,22 @@
 
                 </form>
             </div>
+            <div ng-controller="forgotPassword" id="collapseThree" class="collapse" data-parent="#accordion">
+              <br>
+                <form ng-submit="submit()">
+                  <div id="from-cadastro" class="form-row">
+                    <div class="col-md-12 mb-3">
+                      <label>Insira o Email para recuperar sua senha</label>
+                      <hr>
+                      <label>Email</label>
+                      <input type="email" class="form-control" placeholder="Digite seu email" ng-model="email" autocomplete="on" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+            </div>
+            <hr>
+            <br>
             <a href="/googleAuth"><img src="img/google/web/1x/btn_google_signin_dark_normal_web.png"></a>
           </div>
         </div>

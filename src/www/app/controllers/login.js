@@ -12,7 +12,7 @@ app3.controller('check', ['$scope', '$window', ($scope) => {
   };
 }]);
 // ============================= Controlador de registro ======================================
-app3.controller('register',['$scope', '$http', ($scope, $http) => {
+app3.controller('register', ['$scope', '$http', ($scope, $http) => {
   $scope.submit = () => {
     const { name, password, email } = $scope;
     const captcha = $('#g-recaptcha-response').val();
@@ -46,7 +46,7 @@ app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window)
     const data = { emailOrUser, password };
 
     if (emailOrUser === 'undefined' || !password) {
-      alert('a');
+      alert('Há campos vazios');
     } else {
       $http.post('/auth/authenticate', data)
         .success((response) => {
@@ -66,6 +66,24 @@ app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window)
         })
         .error((response) => {
           alert(response.error);
+        });
+    }
+  };
+}]);
+
+app3.controller('forgotPassword', ['$scope', '$http', ($scope, $http) => {
+  $scope.submit = () => {
+    const { email } = $scope;
+
+    if (email === 'undefined') {
+      alert('Há campos vazios');
+    } else {
+      $http.post('/auth/forgot_password', { email })
+        .success((response) => {
+          alert('Email de recuperação enviado para sua caixa de email');
+        })
+        .error((response) => {
+          console.error(response);
         });
     }
   };
