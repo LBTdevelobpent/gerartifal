@@ -235,6 +235,7 @@ router.post('/register', async (req, res) => {
     user.password = undefined; // Não retornar a senha para o usuario
     return res.send({ ok: true });
   } catch (err) {
+    console.log(err);
     return res.status(400).send({ error: 'Não foi possivel cadastrar' });
   }
 });
