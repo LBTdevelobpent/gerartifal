@@ -1,8 +1,8 @@
 {
-  "service": "gmail",
-  "host": "smtp.gmail.com",
-  "port": 465,
-  "secure": true,
-  "user": "lbtdevelopmentinc@gmail.com",
-  "pass": "patodemais"
+  "service": "mailtrap",
+  "host": "smtp.mailtrap.io",
+  "port": 2525,
+  "secure": false,
+  "user": "eadbf94253ca9d",
+  "pass": "05a8fd01ffb61f"
 }
