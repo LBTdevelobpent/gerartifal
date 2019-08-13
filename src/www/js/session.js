@@ -31,8 +31,8 @@ window.logged = (adm) => {
   $('#login').addClass('d-md-block d-lg-none');
 
 
-  if (adm) {
-    $('#optionsLink').attr('ng-class', '{active: activetab == \'/adm/option\'}');
-    $('#optionsLink').attr('href', '/adm/option');
+  if (!adm) {
+    $('#postsOp').hide();
+    $('#subsOp').hide();
   }
 };

@@ -3,29 +3,34 @@
   <h3>Opções da conta</h3>
   <div class="container">
     <form ng-submit="submit()">
-      <div class="form-group row">
+      <h4>Atualizar nome de usuário: </h2>
+      <div class="form-group row" style="margin-left: 5%;">
         <label for="inputName" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="inputName" ng-model="name" value="{{ user.name }}" placeholder="Nome">
         </div>
       </div>
-      <div class="form-group row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Senha Atual</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" ng-model="password" placeholder="Senha Atual">
-          </div>
-      </div>
-      <div class="form-group row">
-          <label for="inputNewPassword" class="col-sm-2 col-form-label">Nova Senha</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputNewPassword" ng-model="Npassword" placeholder="Nova Senha">
-          </div>
-      </div>
-      <div class="form-group row">
-          <label for="inputRNewPassoword" class="col-sm-2 col-form-label">Repita Nova Senha:</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputRNewPassoword" ng-model="RNpassword" placeholder="Repita Nova Senha">
-          </div>
+      <hr>
+      <h4>Atualizar senha de usuário: </h2>
+      <div style="margin-left: 5%;">
+        <div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Senha Atual</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" ng-model="password" placeholder="Senha Atual">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputNewPassword" class="col-sm-2 col-form-label">Nova Senha</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputNewPassword" ng-model="Npassword" placeholder="Nova Senha">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputRNewPassoword" class="col-sm-2 col-form-label">Repita Nova Senha:</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputRNewPassoword" ng-model="RNpassword" placeholder="Repita Nova Senha">
+            </div>
+        </div>
       </div>
       <button class="btn btn-primary" type="submit">Confirmar</button>
     </form>

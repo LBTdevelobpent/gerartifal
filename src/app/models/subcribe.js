@@ -86,8 +86,6 @@ const subcribeSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  
-
 
   user: {
     type: mongoose.Schema.Types.ObjectId, // Relação com a coleção de usuarios

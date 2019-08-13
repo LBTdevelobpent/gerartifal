@@ -12,6 +12,9 @@ const server = app.listen(port);
 const io = require('socket.io').listen(server);
 
 const User = require('./app/models/user.js');
+const Opsub = require('./app/models/openSub.js');
+
+const subscribeMiddleware = require('./app/middlewares/subscribeMiddleware.js');
 
 
 // =================== Configurações servidor ==============//
@@ -38,15 +41,17 @@ app.use(session({
 // ========================================================//
 
 // -------------------------Para abrir inscrições------------------//
-const sub = ['bilolão'];
 
-io.sockets.on('connection', (socket) => {
-  socket.emit('openF', sub[0]);
+io.sockets.on('connection', async (socket) => {
+  socket.emit('openF', await Opsub.findOne({ unique: true }));
 
-  socket.on('open', (data) => {
-    sub.splice(0, sub.length);
-    console.log(data);
-    sub.push(data);
+  socket.on('open', async (data) => {
+    const opensub = await Opsub.findOne({ unique: true });
+    opensub.from = data.from;
+    opensub.until = data.until;
+
+    opensub.save();
+
     socket.broadcast.emit('openF', data);
   });
 });
@@ -99,6 +104,8 @@ function normalizePort(val) {
  * Esse Bloco de codigo serve para caso o usuario der refresh não der erro 404
  * Infelizmente tem q ser feito dessa forma, se não buga
  */
+
+app.use('/form', subscribeMiddleware);
 
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '/www/app/views/login.html'));
