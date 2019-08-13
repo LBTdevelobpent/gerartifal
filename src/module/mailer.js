@@ -21,11 +21,11 @@ const transport = nodemailer.createTransport({
 transport.use('compile', hbs({
   viewEngine: {
     extName: '.html',
-    partialsDir: './resources/mail/',
-    layoutsDir: './resources/mail/',
+    partialsDir: './src/resources/mail/',
+    layoutsDir: './src/resources/mail/',
     defaultLayout: 'verifyEmail.html',
   },
-  viewPath: path.resolve('./resources/mail/'),
+  viewPath: path.resolve('./src/resources/mail/'),
   extName: '.html',
 }));
 
