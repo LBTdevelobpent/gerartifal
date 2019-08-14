@@ -20,13 +20,13 @@ const transport = nodemailer.createTransport({
 
 transport.use('compile', hbs({
   viewEngine: {
-    extName: '.html',
+    extName: '.ejs',
     partialsDir: './src/resources/mail/',
     layoutsDir: './src/resources/mail/',
-    defaultLayout: 'verifyEmail.html',
+    defaultLayout: 'mail.ejs',
   },
   viewPath: path.resolve('./src/resources/mail/'),
-  extName: '.html',
+  extName: '.ejs',
 }));
 
 module.exports = transport;

@@ -34,6 +34,11 @@ blog.controller('post', ['$scope', '$http', ($scope, $http) => {
         window.location.href = '/';
         return;
       });
+    } else {
+      document.cookie = 'token=; path=/';
+      window.localStorage.clear();
+      window.location.href = '/';
+      return;
     }
   };
 

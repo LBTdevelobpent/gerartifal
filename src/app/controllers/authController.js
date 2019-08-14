@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const passport = require('passport');
 const querystring = require('querystring');
+const path = require('path');
 
 const mailer = require('../../module/mailer.js');
 const { secret } = require('../../config/auth.json');// KELLYMEUAMOR é o secret ( Eu gosto de esterEggs, são divertidos)
@@ -95,6 +96,9 @@ router.post('/forgot_password', async (req, res) => {
 
     const token = crypto.randomBytes(20).toString('hex'); // Cria um Token para o MAIL
 
+    const type = 'Recuperar sua senha';
+    const route = 'resetPass';
+
     // Determina a validade do MAIL
     const now = new Date();
     now.setHours(now.getHours() + 1);
@@ -109,18 +113,28 @@ router.post('/forgot_password', async (req, res) => {
       to: email,
       from: 'lbtdevelopmentinc@gmail.com',
       subject: 'Esquecimento de Senha no Sistema Gerartifal',
-      template: 'forgotPassMail',
-      context: { token, email }, // Coloca no email uma varivel
+      template: 'mail',
+      attachments: [{
+        filename: '2.png',
+        path: path.join(__dirname, '../../www/img/2.png'),
+        cid: 'logo@cid',
+      }],
+      context: {
+        type,
+        route,
+        token,
+        email,
+      }, // Coloca no email uma varivel
 
     }, (err) => {
       if (err) {
         return res.status(400).send({ err });
       }
 
-      return 0;
+      return res.status(200).send({ success: 'Email enviado com sucesso' });
     });
   } catch (err) {
-    return res.status(400).send({ error: 'Erro no esqueci minha senha' });
+    return res.status(400).send({ err });
   }
 });
 // =====================================================================//
@@ -149,7 +163,7 @@ router.post('/reset_password', async (req, res) => {
 
     await user.save();
 
-    return res.send({ ok: true });
+    return res.status(200).send({ ok: true });
   } catch (err) {
     return res.status(400).send({ error: 'Erro no esqueci recuperar senha' });
   }
@@ -205,6 +219,9 @@ router.post('/register', async (req, res) => {
 
     const token = crypto.randomBytes(20).toString('hex'); // Cria um Token para o MAIL
 
+    const type = 'Validar sua conta';
+    const route = 'verify';
+
     // --------------Determina a validade do MAIL------------//
     const now = new Date();
     now.setHours(now.getHours() + 1);
@@ -221,12 +238,21 @@ router.post('/register', async (req, res) => {
       to: email,
       from: 'lbtdevelopmentinc@gmail.com',
       subject: 'Verificação de Email no Sistema Gerartifal',
-      template: 'verifyEmail',
-      context: { token, email }, // Coloca no email uma varivel
+      template: 'mail',
+      attachments: [{
+        filename: '2.png',
+        path: path.join(__dirname, '../../www/img/2.png'),
+        cid: 'logo@cid',
+      }],
+      context: {
+        type,
+        route,
+        token,
+        email,
+      }, // Coloca no email uma varivel
 
     }, (err) => {
       if (err) {
-        console.log(err);
         return res.status(400).send({ error: 'Error no envio de email' });
       }
       return res.redirect('/');
