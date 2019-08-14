@@ -39,6 +39,7 @@
 .navbar .navbar-nav .dropdown-menu .dropdown-divider {
   border-top-color: #4ecc11;
 }
+
 .dropdownMenuLink{
   background-color: #005210;
 }
@@ -52,14 +53,14 @@
   background-color: #06a800;
 }
 .navbar .navbar-toggler {
-  background-color: #205c02;
+  background-color: hsl(116, 100%, 22%);
 }
 .navbar .navbar-toggle:hover,
 .navbar .navbar-toggle:focus {
   background-color: #194901;
 }
-.navbar .navbar-toggle .navbar-toggler-icon {
-  color: #020101;
+.navbar .navbar-toggler-icon {
+  color: #000000;
 }
 .navbar .navbar-collapse,
 .navbar .navbar-form {
