@@ -1,0 +1,14 @@
+<div style="padding: 10%; text-align: center; background-color: #cccccc; border-radius: 6px;">
+  <img src="cid:logo@cid" height="200" width="400">
+    <h2 style="font-family: Georgia, 'Times New Roman', Times, serif">
+      Olá, nossos sistemas informaram que você gostaria de {{ type }}.
+      Caso não tenha sido você que solicitou, por favor desconsidere o Email
+    </h2>
+
+    <a href="http://localhost:3000/app/views/{{ route }}.html#?token={{ token }}&email={{ email }}">
+      <button
+      style="height: 100px; width: 250px; font-size: 20px;border: 2px solid; border-radius: 6px; padding: 8px 12px; color: #fff; background-color: #28a745; font-family: inherit;"
+      >Clique aqui para continuar</button>
+    </a>
+
+  </div>
