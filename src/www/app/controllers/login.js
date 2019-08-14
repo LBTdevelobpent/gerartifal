@@ -78,12 +78,15 @@ app3.controller('forgotPassword', ['$scope', '$http', ($scope, $http) => {
     if (email === 'undefined') {
       alert('Há campos vazios');
     } else {
+      $('#forgotButton').prop('disabled', true);
       $http.post('/auth/forgot_password', { email })
-        .success((response) => {
+        .success(() => {
           alert('Email de recuperação enviado para sua caixa de email');
+          $('#forgotButton').prop('disabled', false);
         })
         .error((response) => {
           console.error(response);
+          $('#forgotButton').prop('disabled', false);
         });
     }
   };
