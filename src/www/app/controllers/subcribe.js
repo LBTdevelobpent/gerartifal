@@ -174,7 +174,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
   $scope.openSub = () => {
     const { from, until } = $scope;
     const data = { from, until };
-    const socket = io.connect('http://localhost:3000/');
+    const socket = io.connect('http://gerartifal-com.umbler.net/');
     socket.emit('open', data);
   };
 }]);
