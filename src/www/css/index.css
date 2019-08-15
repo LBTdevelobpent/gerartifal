@@ -127,9 +127,9 @@
   height: 500px;
 }
 .texto-noticia-adm{
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: auto;
   height: 500px;
+  margin: 2%;
 }
 
 

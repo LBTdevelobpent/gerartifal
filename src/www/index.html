@@ -3,8 +3,7 @@
   <head>
     <title>Inicio</title>
     <base href="/">
-
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--SCRIPTS-->
@@ -81,7 +80,7 @@
             </li>
 
 
-            <li class="btn nav-item dropdown" id="dropdown">
+            <li class="btn nav-item" id="dropdown">
               <div class="dropdown">
                 <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -94,8 +93,8 @@
             <li class=" btn nav-item active">
             <div ng-controller="auth">
               <button type="button" class="btn nav-item btn-primary" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
-              <div id="option" class="btn dropdown d-md-block d-lg-none">
-                <button class="btn btn-info dropdown-toggle d-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div id="option" class="btn dropdown d-none">
+                <button class="btn btn-info dropdown-toggle d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opções
                 </button>
                 <div class="btn dropdown-menu" aria-labelledby="dropdownMenuLink">

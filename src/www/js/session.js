@@ -6,12 +6,9 @@ const user = window.localStorage.getItem('user');
 
 $(document).ready(() => {
   if (valid || user) {
-    $('#dropdown').removeClass('d-md-block d-lg-none');
-    $('#dropdown').addClass('d-none d-lg-block');
-
     $('#logout').removeClass('d-none');
-    $('#option').removeClass('d-md-block d-lg-none');
-    $('#dropdownMenuButton').removeClass('d-none');
+    $('#option').removeClass('d-none');
+    $('#dropdownOptionButton').removeClass('d-none');
     $('#login').addClass('d-none');
     /**
      * Adicione aqui todos os elementos que só aparecerão apois login
@@ -26,9 +23,6 @@ window.openSubscribe = () => {
 };
 
 window.logged = (adm) => {
-  $('#dropdown').removeClass('d-md-block d-lg-none');
-  $('#dropdown').addClass('d-none d-lg-block');
-
   $('#logout').removeClass('d-none');
   $('#option').removeClass('d-md-block d-lg-none');
   $('#dropdownMenuButton').removeClass('d-none');
