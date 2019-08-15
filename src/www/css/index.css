@@ -129,6 +129,7 @@
 .texto-noticia-adm{
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 500px;
 }
 
 

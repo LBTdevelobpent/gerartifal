@@ -5,8 +5,8 @@
           <img src="<%- 'data:image/webp;base64,'+posts.image.toString('base64') %>" class="img-thumbnail border border-primary">
           <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2><%- posts.title %></h2></a>
           <p><%- posts.body %></p>
-          <button class="btn btn-danger" ng-click="removePost('<%- posts.date %>', '<%- posts.archiName %>')"><i class="fas fa-trash"></i></button>
         </div>
+        <button class="btn d-inline-flex btn-danger" ng-click="removePost('<%- posts.date %>', '<%- posts.archiName %>')"><i class="fas fa-trash"></i></button>
   <% }) %>
   </div>
 </div>

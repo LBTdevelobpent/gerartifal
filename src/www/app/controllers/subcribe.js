@@ -51,8 +51,53 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
   // Criação da ficha de inscrição
 
   $scope.submit = () => {
-    const { name, age, cpf } = $scope;
-    const data = { name, age, cpf };
+    const {
+      name,
+      birthDate,
+      cpf,
+      curso,
+      turno,
+      hasInstrument,
+      memberCommunity,
+      birthState,
+      birthCity,
+      rg,
+      orgaoEmissor,
+      email,
+      phone,
+      address,
+      city,
+      state,
+      cep,
+      deficiency,
+      schoolingDegree,
+      howDiscovered,
+      whyWants,
+    } = $scope;
+
+    const data = {
+      name,
+      birthDate,
+      cpf,
+      curso,
+      turno,
+      hasInstrument,
+      memberCommunity,
+      birthState,
+      birthCity,
+      rg,
+      orgaoEmissor,
+      email,
+      phone,
+      address,
+      city,
+      state,
+      cep,
+      deficiency,
+      schoolingDegree,
+      howDiscovered,
+      whyWants,
+    };
 
     $http.post('/subcribe/create', data, {
       headers: { Authorization: `Bearer ${token}` },
@@ -61,6 +106,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     }).error((response) => {
       console.log(response.error);
     });
+
   };
   // Mostrar ficha de inscrição
 
@@ -99,7 +145,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     const { nome, cpf } = $scope;
 
     // Caso não tenha nos campos de Busca, ele pega todas as fichas
-    if (nome === '' && cpf === undefined) {
+    if (nome === undefined && cpf === undefined) {
       $http.get('/subcribe/findAll', {
         headers: { Authorization: `Bearer ${token}` },
       }).success((response) => {
@@ -111,7 +157,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       });
       // Pega fichas específicas
     } else {
-      const data = { nome, CPF }
+      const data = { nome, cpf };
       $http.put('/subcribe/find_subscription', data, {
         headers: { Authorization: `Bearer ${token}` },
       })

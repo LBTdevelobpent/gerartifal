@@ -1,5 +1,7 @@
 <div ng-app="subcribe" ng-controller="subcribe" ng-init="sessionAdm()">
-    <form ng-submit="openSub()">
+  <div class="container" style="height: 50%">
+  <h1>Abertura de Inscrições</h1>
+  <form ng-submit="openSub()">
       <div class="form-group">
         <label for="fromDate">Data de Abertura: </label>
         <input type="date" id="fromDate" ng-model="from">
@@ -8,6 +10,8 @@
         <label for="untilDate">Data de Encerramento: </label>
         <input type="date" id="untilDate" ng-model="until">
       </div>
-      <input type="submit" class="btn btn-primary" value="submit">
+      <input type="submit" class="btn btn-primary" value="Abrir Inscrições">
     </form>
+    <br>
+  </div>
 </div>

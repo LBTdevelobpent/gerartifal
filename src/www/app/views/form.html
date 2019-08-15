@@ -3,14 +3,14 @@
       	<div class="container" align="center" id="formzao">
       		<h1><i class="fas fa-clipboard"></i> Formulário de Inscrição</i></h1>
       <br>
-      	<form class="needs-validation" action="/auth/register"  novalidate>
+      	<form class="needs-validation" ng-submit="submit()"  novalidate>
       <hr>
       		<h2><i class="fas fa-play"></i> Curso Desejado</i></i></h2>
       <br>
       		<div class="form-row">
       			<div class="col-md-4 mb-3">
       				<label>Selecione um Curso</label>
-      				<select class="custom-select" required>
+      				<select class="custom-select" ng-model="curso" required>
       					<option selected value="">Selecione</option>
       					<option value="violin">Violino</option>
       					<option value="viola">Viola</option>
@@ -25,7 +25,7 @@
       			</div>
       			<div class="col-md-4 mb-3">
       				<label>Selecione um Turno</label>
-      				<select class="custom-select" required>
+      				<select class="custom-select" ng-model="turno" required>
       					<option selected value="">Selecione</option>
       					<option value="matutino">Matutino</option>
       					<option value="vespertino">Vespertino</option>
@@ -36,10 +36,10 @@
       			</div>
       			<div class="col-md-4 mb-3">
       				<label>Você Possui o Instrumento Do Curso? <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Instrumento Do Curso" data-content="Você Possui o Instrumento ao qual deseja aprender?"><i class="fas fa-info fa-sm"></i></a></label>
-      				<select class="custom-select" required>
+      				<select class="custom-select" ng-model="hasInstrument" required>
       					<option selected value="">Selecione</option>
-      					<option value="sim">Sim</option>
-      					<option value="nao">Não</option>
+      					<option value="true">Sim</option>
+      					<option value="false">Não</option>
       				</select>
       				<div class="invalid-feedback">
       					Por Favor, Selecione uma opção.
@@ -53,11 +53,11 @@
       			<div class="col-md-12 mb-3">
       				<label>Membro Da Comunidade:  </label>
       				<div class="custom-control custom-radio custom-control-inline">
-          			<input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+          			<input type="radio" ng-model="memberCommunity" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
           			<label class="custom-control-label" for="customControlValidation2">Interna <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Comunidade Interna" data-content="É estudante ou trabalha no campus."><i class="fas fa-info fa-sm"></i></a></label>
         			</div>
         			<div class="custom-control custom-radio mb-3 custom-control-inline">
-          			<input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+          			<input type="radio" ng-model="memberCommunity" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
           			<label class="custom-control-label" for="customControlValidation3">Externa <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Comunidade Externa" data-content="Não tem ligação com o campus."><i class="fas fa-info fa-sm"></i></a></label>
         			</div>
       			</div>
@@ -67,7 +67,7 @@
         	<div class="form-row">
           	<div class="col-md-12 mb-3">
             	<label>Nome Completo</label>
-            	<input type="text" class="form-control" id="validationCustom01" placeholder="Nome Completo" autocomplete="on" required>
+            	<input type="text" ng-model="name" class="form-control" id="validationCustom01" placeholder="Nome Completo" autocomplete="on" required>
             	<div class="invalid-feedback">
                 	Por Favor, Digite seu nome.
             	</div>
@@ -76,14 +76,14 @@
         	<div class="form-row">
           	<div class="col-md-5 mb-3">
             	<label>Data de Nascimento</label>
-            	<input type="date" class="form-control" max="2999-12-31" required>
+            	<input type="date" ng-model="birthDate" class="form-control" max="2999-12-31" required>
             	<div class="invalid-feedback">
               	Por Favor, Digite Sua Data De Nascimento.
             	</div>
           	</div>
           	<div class="col-md-3 mb-3">
             	<label>Estado De Naturalidade <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Estado De Naturalidade" data-content="Selecione o estado no qual você nasceu."><i class="fas fa-info fa-sm"></i></a></label>
-              <select class="custom-select" id="estado1" required>
+              <select class="custom-select" ng-model="birthState" id="estado1" required>
                 <script language="JavaScript" type="text/javascript" charset="utf-8">
                   new dgCidadesEstados({
                   estado: document.getElementById('estado1')
@@ -94,7 +94,7 @@
           	</div>
           	<div class="col-md-4 mb-3">
             	<label>Cidade De Naturalidade <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Cidade De Naturalidade" data-content="Selecione primeiro o estado no qual você nasceu, e em seguida selecione aqui a cidade no qual você nasceu."><i class="fas fa-info fa-sm"></i></a></label>
-              <select class="custom-select" id="cidade1" required>
+              <select class="custom-select" ng-model="birthCity" id="cidade1" required>
                 <script language="JavaScript" type="text/javascript" charset="utf-8">
                   new dgCidadesEstados({
                   estado: document.getElementById('estado1'),
@@ -109,21 +109,21 @@
       	<div class="form-row">
       		<div class="col-md-5 mb-3">
       			<label>Registro Geral</label>
-      			<input type="text" class="form-control" pattern="[0-9]+$" maxlength="12" placeholder="Numero De RG" autocomplete="on" required>
+      			<input type="text" ng-model="rg" class="form-control" pattern="[0-9]+$" maxlength="12" placeholder="Numero De RG" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por Favor, Digite Seu RG Corretamente.
       			</div>
       		</div>
       		<div class="col-md-3 mb-3">
       			<label>Órgão Emissor</label>
-      			<input type="text" class="form-control" placeholder="SSP" required>
+      			<input type="text" ng-model="orgaoEmissor" class="form-control" placeholder="SSP" required>
       			<div class="invalid-feedback">
       				Por Favor, Digite o Órgão Emissor.
       			</div>
       		</div>
       		<div class="col-md-4 mb-3">
       			<label>CPF</label>
-      			<input type="text" class="form-control" placeholder="CPF"  id="CPF" maxlength="14" minlength="15" autocomplete="on" required>
+      			<input type="text" ng-model="cpf" class="form-control" placeholder="CPF"  id="CPF" minlength="11" maxlength="11" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por Favor, Digite Seu CPF.
       			</div>
@@ -133,21 +133,21 @@
       	<div class="form-row">
       		<div class="col-md-5 mb-3">
       			<label>Email</label>
-      			<input type="email" class="form-control" type="email" placeholder="email@mail.com" autocomplete="on" required>
+      			<input type="email" ng-model="email" class="form-control"  placeholder="email@mail.com" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por favor, Digite um email válido.
       			</div>
       		</div>
       		<div class="col-md-3 mb-3">
       			<label>Telefone</label>
-      			<input type="text" class="form-control" maxlength="14" id="NUM" placeholder="082 91234-5678" autocomplete="on" required>
+      			<input type="text" ng-model="phone" class="form-control" maxlength="14" id="NUM" placeholder="082 91234-5678" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por favor, Digite um telefone para contato.
       			</div>
       		</div>
       		<div class="col-md-4 mb-3">
       			<label>Endereço</label>
-      			<input type="text" class="form-control" placeholder="Digite Seu Endereço Residêncial" autocomplete="on" required>
+      			<input type="text" ng-model="address" class="form-control" placeholder="Digite Seu Endereço Residêncial" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por favor, Digite seu endereço residêncial.
       			</div>
@@ -157,7 +157,7 @@
       	<div class="form-row">
       		<div class="col-md-3 mb-3">
       			<label>Estado <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Estado" data-content="Estado No Qual Você Mora Atualmente"><i class="fas fa-info fa-sm"></i></a></label>
-      			<select class="custom-select" id="estado2" required>
+      			<select class="custom-select" ng-model="state" id="estado2" required>
       				<script language="JavaScript" type="text/javascript" charset="utf-8">
       					new dgCidadesEstados({
       					estado: document.getElementById('estado2')
@@ -169,7 +169,7 @@
 
       		<div class="col-md-3 mb-3">
       			<label>Cidade <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Cidade" data-content="Cidade No Qual Você Mora."><i class="fas fa-info fa-sm"></i></a></label>
-      			<select class="custom-select" id="cidade2" required>
+      			<select class="custom-select" ng-model="city" id="cidade2" required>
       				<script language="JavaScript" type="text/javascript" charset="utf-8">
       					new dgCidadesEstados({
       					estado: document.getElementById('estado2'),
@@ -183,7 +183,7 @@
       		</div>
       		<div class="col-md-3 mb-3">
       			<label>CEP</label>
-      			<input class="form-control" id="CEP" maxlength="10" minlength="10" autocomplete="on" required>
+      			<input class="form-control" ng-model="cep" id="CEP" maxlength="10" minlength="10" autocomplete="on" required>
       			<div class="invalid-feedback">
       				Por favor, Digite seu CEP.
       			</div>
@@ -191,7 +191,7 @@
 
       		<div class="col-md-3 mb-3">
       			<label>Possui Deficiência?</label>
-      			<select class="custom-select" required>
+      			<select class="custom-select" ng-model="deficiency" required>
       				<option selected value="">Selecione</option>
       				<option value="nao">Não</option>
       				<option value="fisica">Física</option>
@@ -212,7 +212,7 @@
       <div class="form-row">
       	<div class="col-md-12 mb-3">
       		<label>Informe Seu Grau De Escolaridade</label>
-      		<select class="custom-select" required>
+      		<select class="custom-select" ng-model="schoolingDegree" required>
       			<option selected value="">Selecione</option>
       			<option value="medio_inc">Ensino médio Incompleto</option>
       			<option value="medio_com">Ensino Médio Completo</option>
@@ -233,7 +233,7 @@
       <div class="form-row">
       	<div class="col-md-12 mb-3">
       		<label>Como Ficou Sabendo Sobre o Projeto?</label>
-      		<select class="custom-select">
+      		<select class="custom-select" ng-model="howDiscovered">
       			<option selected value="">Selecione</option>
       			<option value="gerart">Site Gerartifal</option>
       			<option value="folder">Folder</option>
@@ -248,7 +248,7 @@
       	</div>
       		<div class="col-md-12 mb-3">
       			<label>Porque Deseja Fazer Este Curso?</label>
-      			<textarea class="form-control" placeholder="Descreva em poucas palavras o motivo de seu interesse neste curso" rows="3"></textarea>
+      			<textarea class="form-control" ng-model="whyWants" placeholder="Descreva em poucas palavras o motivo de seu interesse neste curso" rows="3"></textarea>
       		</div>
       </div>
 
@@ -297,13 +297,9 @@
     $(document).ready(function () {
         var $seuCampoCpf = $("#CPF");
         $seuCampoCpf.mask('000.000.000-00', {reverse: true});
-    });
-		$(document).ready(function () {
-        var $seuCampoCpf = $("#NUM");
+        var $seuCampoNum = $("#NUM");
         $seuCampoCpf.mask('000 00000-0000', {reverse:true});
-    });
-		$(document).ready(function () {
-        var $seuCampoCpf = $("#CEP");
+        var $seuCampoCep = $("#CEP");
         $seuCampoCpf.mask('00.000-000', {reverse:true});
     });
 		$(function () {

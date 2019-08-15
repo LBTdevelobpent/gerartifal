@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth.js');
+const admAuthMiddleware = require('../middlewares/admAuth');
 const Subcribe = require('../models/subcribe.js');
 const User = require('../models/user.js');
 
@@ -11,7 +12,6 @@ router.use(authMiddleware);
 router.post('/create', async (req, res) => {
   try {
     const { cpf } = req.body;
-
     if (await Subcribe.findOne({ cpf })) {
       return res.status(400).send({ error: 'Inscrição já feita' });
     }
@@ -54,23 +54,29 @@ router.delete('/:subId', async (req, res) => {
 // ========================================================================================//
 
 // ================================================ADM======================================//
+function listItems(items, pageActual, limitItems) {
+  const result = [];
+  const totalPage = Math.ceil(items.length / limitItems);
+  let count = (pageActual * limitItems) - limitItems;
+  const delimiter = count + limitItems;
 
+  if (pageActual <= totalPage) {
+    for (let i = count; i < delimiter; i += 1) {
+      if (items[i] != null) {
+        result.push(items[i]);
+      }
+      count += 1;
+    }
+  }
+  return result;
+}
 // ======================================Busca todas as fichas==============================//
-
+router.use('/findAll', admAuthMiddleware);
 router.get('/findAll', async (req, res) => {
   try {
-    const { adm } = await User.findById(req.userId);
-    if (adm) {
-      return res.status(401).send({ error: 'Apenas ADM' });
-    }
-
-    if (adm === false) {
-      return res.status(401).send({ error: 'Apenas ADM' });
-    }
-
     const subcribe = await Subcribe.find().populate('user');
 
-    return res.send({ subcribe });
+    return res.send({ subcribe: listItems(subcribe, 1, 10) });
   } catch (err) {
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }
