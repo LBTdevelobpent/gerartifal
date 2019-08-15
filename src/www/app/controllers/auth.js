@@ -51,6 +51,7 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
       const date = Date.now();
       if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
         window.localStorage.setItem('openSub', true);
+        openSubscribe();
       }
     });
     // ===============================================================//

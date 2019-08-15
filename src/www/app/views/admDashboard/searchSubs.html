@@ -1,0 +1,52 @@
+<div ng-app="subcribe" ng-controller="subcribe" ng-init="showAllSub()">
+  <div ng-repeat="x in subcribe">
+    <input type="text" ng-model="nome">
+    <input type="number" ng-model="cpf">
+
+    <div ng-repeat="x in subcribe">
+        <div id="{{ x.cpf }}" style="border: 1px solid; border-radius: 6px; border-color: #cccccc;">
+          <label><strong>Nome Completo:</strong> {{ x.name }}</label><br>
+          <label><strong>CPF:</strong> {{ x.cpf }}</label><br>
+          <label><strong>Curso:</strong> {{ x.curso }}</label><br>
+          <label><strong>Turno:</strong> {{ x.turno }}</label><br>
+          <label><strong>Possui Instrumento?</strong> {{ x.hasInstrument }}</label><br>
+          <label><strong>Estado Natal:</strong> {{ x.birthState }}</label><br>
+          <label><strong>Cidade Natal:</strong> {{ x.birthCity }}</label><br>
+          <label><strong>Registro Geral:</strong> {{ x.rg }}</label><br>
+          <label><strong>Orgão Emissor:</strong> {{ x.orgaoEmissor }}</label><br>
+          <label><strong>Email:</strong> {{ x.email }}</label><br>
+          <label><strong>Telefone:</strong> {{ x.phone }}</label><br>
+          <label><strong>Endereço:</strong> {{ x.address }}</label><br>
+          <label><strong>Cidade Atual:</strong> {{ x.city }}</label><br>
+          <label><strong>Estado Atual:</strong> {{ x.state }}</label><br>
+          <label><strong>CEP:</strong> {{ x.cep }}</label><br>
+          <label><strong>Possui Deficiência:</strong> {{ x.deficiency }}</label><br>
+          <label><strong>Nivel Escolar:</strong> {{ x.schoolingDegree }}</label><br>
+          <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> {{ x.howDiscovered }}</label><br>
+          <label><strong>Porque Deseja Fazer Este Curso?</strong> {{ x.whyWants }}</label><br>
+
+        </div>
+
+        <button onclick="btGerarPDF(this.id)" id="{{ x.cpf }}">gerar PDF</button>
+    </div>
+
+      <script>
+        function btGerarPDF(cpf) {
+
+          var user = document.getElementById(`${cpf}`).innerHTML;
+          var win = window.open('', '', 'height=700,width=700');
+          win.document.write('<html><head>');
+          win.document.write('<title>Usuarios</title>');
+          win.document.write('</head>');
+          win.document.write('<body>');
+          win.document.write(user);
+          win.document.write('</body></html>');
+          win.document.close();
+          win.print();
+
+        }
+
+      </script>
+
+  </div>
+</div>

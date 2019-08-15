@@ -77,6 +77,10 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
       templateUrl: 'app/views/admDashboard/posts.html',
       controller: 'MainCtrl',
     })
+    .when('/adm/searchSubs', {
+      templateUrl: 'app/views/admDashboard/searchSubs.html',
+      controller: 'MainCtrl',
+    })
     .when('/:date/:post', {
       templateUrl: (params) => { return `/blog/getPost/${params.date}/${params.post}`; },
       controller: 'AllCtrl',
