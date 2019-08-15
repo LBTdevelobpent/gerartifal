@@ -121,8 +121,15 @@
   margin-right: auto;
   padding:10px;
 }
-
-
+.texto-noticia{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 500px;
+}
+.texto-noticia-adm{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 
 @media only screen and (max-width: 600px) {

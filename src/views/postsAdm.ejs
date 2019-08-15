@@ -1,7 +1,7 @@
 <div class="container-fluid d-none d-md-block" id="news2">
   <div class="row">
   <% post.forEach(function(posts, index) { %>
-        <div class="col-lg-5 noticia">
+        <div class=" texto-noticia-adm col-lg-5 noticia">
           <img src="<%- 'data:image/webp;base64,'+posts.image.toString('base64') %>" class="img-thumbnail border border-primary">
           <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2><%- posts.title %></h2></a>
           <p><%- posts.body %></p>
