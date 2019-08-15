@@ -14,75 +14,75 @@ const subcribeSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  class:{
+  curso: {
     type: String,
     require: true,
   },
-  turno:{
+  turno: {
     type: String,
     require: true,
   },
-  hasInstrument:{
+  hasInstrument: {
     type: Boolean,
     require: true,
   },
-  memberCommunity:{
+  memberCommunity: {
     type: String,
     require: true,
   },
-  birthState:{
+  birthState: {
     type: String,
     require: true,
   },
-  birthCity:{
+  birthCity: {
     type: String,
     require: true,
   },
-  rg:{
+  rg: {
     type: String,
     require: true,
   },
-  orgaoEmissor:{
+  orgaoEmissor: {
     type: String,
     require: true,
   },
-  email:{
+  email: {
     type: String,
     require: true,
   },
-  phone:{
+  phone: {
     type: Number,
     require: true,
   },
-  address:{
+  address: {
     type: String,
     require: true,
   },
-  city:{
+  city: {
     type: String,
     require: true,
   },
-  state:{
+  state: {
     type: String,
     require: true,
   },
-  cep:{
+  cep: {
     type: Number,
     require: true,
   },
-  deficiency:{
+  deficiency: {
     type: String,
     require: true,
   },
-  schoolingDegree:{
+  schoolingDegree: {
     type: String,
     require: true,
   },
-  howDiscovered:{
+  howDiscovered: {
     type: String,
     require: true,
   },
-  whyWants:{
+  whyWants: {
     type: String,
     require: true,
   },

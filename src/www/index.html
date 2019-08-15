@@ -77,7 +77,7 @@
             </li>
 
             <li class="nav-item"  ng-class="{active: activetab == '/form'}">
-              <a class="btn disabled nav-link" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+              <a id="subButton" class="btn disabled nav-link" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
             </li>
 
 
@@ -103,6 +103,7 @@
                     <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
                     <a ng-class="{active: activetab == '/adm/posts'}" id="postsOp" class="dropdown-item" href="/adm/posts">Adicionar posts</a>
                     <a ng-class="{active: activetab == '/adm/subscribe'}" id="subsOp" class="dropdown-item" href="/adm/subscribe">Abrir Inscrições</a>
+                    <a ng-class="{active: activetab == '/adm/searchSubs'}" id="searchOp" class="dropdown-item" href="/adm/searchSubs">Visualizar Inscrições</a>
                   </div>
                 </div>
                 <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
@@ -245,6 +246,8 @@
   <script src="app/controllers/blog.js"></script>
   <script src="js/session.js"></script>
   <script src="app/spa.js"></script>
+  <script src="js/cidades-estados-1.4-utf8.js"></script>
+
 
 
 </html>

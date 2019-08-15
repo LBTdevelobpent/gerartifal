@@ -19,6 +19,12 @@ $(document).ready(() => {
   }
 });
 
+window.openSubscribe = () => {
+  if (user) {
+    $('#subButton').removeClass('disabled');
+  }
+};
+
 window.logged = (adm) => {
   $('#dropdown').removeClass('d-md-block d-lg-none');
   $('#dropdown').addClass('d-none d-lg-block');
@@ -34,5 +40,6 @@ window.logged = (adm) => {
   if (!adm) {
     $('#postsOp').hide();
     $('#subsOp').hide();
+    $('#searchOp').hide();
   }
 };
