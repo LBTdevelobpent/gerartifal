@@ -1,6 +1,11 @@
 <div ng-app="blog" ng-controller="post" ng-init="init()">
-  <div ng-include="'/blog/getPostsAdm'"></div>
-
+  <div style="
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;"
+  ng-include="'/blog/getPostsAdm'"></div>
+  <br>
   <form method="POST" action="/blog/addPost" enctype='multipart/form-data'>
     <div class="form-group">
       <label for="title">Título</label>
