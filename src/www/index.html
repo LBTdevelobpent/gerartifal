@@ -3,8 +3,7 @@
   <head>
     <title>Inicio</title>
     <base href="/">
-
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--SCRIPTS-->
@@ -66,22 +65,22 @@
 
       <!-- ========== Botões Que Ficarão dentro do menuBar ==========-->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav m-auto">
 
-            <li class="nav-item active" ng-class="{active: activetab == '/'}">
+            <li class=" btn nav-item active" ng-class="{active: activetab == '/'}">
               <a class="nav-link" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
             </li>
 
-            <li class="nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
+            <li class="btn nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
               <a id="project" class="nav-link" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
             </li>
 
-            <li class="nav-item"  ng-class="{active: activetab == '/form'}">
-              <a id="subButton" class="btn disabled nav-link" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+            <li class="btn nav-item"  ng-class="{active: activetab == '/form'}">
+              <a id="subButton" role="button" class="btn disabled nav-link" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
             </li>
 
 
-            <li class="nav-item dropdown" id="dropdown">
+            <li class="btn nav-item" id="dropdown">
               <div class="dropdown">
                 <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -91,25 +90,25 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item">
-              <div ng-controller="auth">
-                <div class="btn-group" role="group" aria-label="grupoButtons">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
-                <div id="option" class="dropdown d-md-block d-lg-none">
-                  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Opções
-                  </button>
-                  <div class="btn dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li class=" btn nav-item active">
+            <div ng-controller="auth">
+              <button type="button" class="btn nav-item btn-primary" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
+              <div id="option" class="btn dropdown d-none">
+                <button class="btn btn-info dropdown-toggle d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Opções
+                </button>
+                <div class="btn dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
                     <a ng-class="{active: activetab == '/adm/posts'}" id="postsOp" class="dropdown-item" href="/adm/posts">Adicionar posts</a>
                     <a ng-class="{active: activetab == '/adm/subscribe'}" id="subsOp" class="dropdown-item" href="/adm/subscribe">Abrir Inscrições</a>
                     <a ng-class="{active: activetab == '/adm/searchSubs'}" id="searchOp" class="dropdown-item" href="/adm/searchSubs">Visualizar Inscrições</a>
-                  </div>
                 </div>
-                <input type="button" class="btn btn-danger d-md-block d-lg-none" id="logout" ng-click="logout()" value="Log Out"/>
               </div>
-              </div>
+
+              <input type="button" class="btn btn-danger d-none" id="logout" ng-click="logout()" value="Log Out"/>
+            </div>
             </li>
+
           </ul>
         </div>
 
