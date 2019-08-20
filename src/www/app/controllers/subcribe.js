@@ -1,7 +1,7 @@
 //
 //  Este script é responsável pelas fichas de inscrição
 //
-const app = angular.module('subcribe', []);
+const app = angular.module('subcribe', ['angularUtils.directives.dirPagination']);
 // ===================== Controlador de validação de sessão - cookies ========================
 app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $window) => {
   const token = (document.cookie).split('=', 2)[1];
@@ -106,22 +106,8 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     }).error((response) => {
       console.log(response.error);
     });
-
   };
-  // Mostrar ficha de inscrição
 
-  $scope.showSub = () => {
-    $http.get('/subcribe/find', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).success((response) => {
-      const { name, age, cpf } = response.subcribe;
-      $scope.nome = name;
-      $scope.idade = age;
-      $scope.CPF = cpf;
-    }).error((response) => {
-      console.log(response.error);
-    });
-  };
   // Apagar inscrição
 
   $scope.delete = () => {
@@ -138,19 +124,18 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     });
   };
 
-  // ----------------------------ADM APENAS --------------------------
+  // ======================= Página de visualizar Incrições ============//
 
   // Mostrar todas as fichas de inscrições
   $scope.showAllSub = () => {
     const { nome, cpf } = $scope;
-
+    $scope.sessionAdm();
     // Caso não tenha nos campos de Busca, ele pega todas as fichas
     if (nome === undefined && cpf === undefined) {
       $http.get('/subcribe/findAll', {
         headers: { Authorization: `Bearer ${token}` },
       }).success((response) => {
-        const { subcribe } = response;
-        $scope.subcribe = subcribe;
+        $scope.subscribe = response.subscribe;
       }).error((response) => {
         alert(response.error);
         console.log(response.error);
@@ -170,6 +155,13 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
         });
     }
   };
+
+  $scope.order = (keyname) => {
+    $scope.sortKey = keyname;
+    $scope.reverse = !$scope.reverse;
+  };
+
+  // ===================================================================//
 
   $scope.openSub = () => {
     const { from, until } = $scope;

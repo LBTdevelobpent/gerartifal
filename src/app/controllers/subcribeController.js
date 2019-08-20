@@ -54,29 +54,14 @@ router.delete('/:subId', async (req, res) => {
 // ========================================================================================//
 
 // ================================================ADM======================================//
-function listItems(items, pageActual, limitItems) {
-  const result = [];
-  const totalPage = Math.ceil(items.length / limitItems);
-  let count = (pageActual * limitItems) - limitItems;
-  const delimiter = count + limitItems;
 
-  if (pageActual <= totalPage) {
-    for (let i = count; i < delimiter; i += 1) {
-      if (items[i] != null) {
-        result.push(items[i]);
-      }
-      count += 1;
-    }
-  }
-  return result;
-}
 // ======================================Busca todas as fichas==============================//
 router.use('/findAll', admAuthMiddleware);
 router.get('/findAll', async (req, res) => {
   try {
-    const subcribe = await Subcribe.find().populate('user');
+    const subscribe = await Subcribe.find().populate('user');
 
-    return res.send({ subcribe: listItems(subcribe, 1, 10) });
+    return res.send({ subscribe });
   } catch (err) {
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }

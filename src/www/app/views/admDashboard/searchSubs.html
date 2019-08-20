@@ -1,55 +1,84 @@
 <div ng-app="subcribe" ng-controller="subcribe" ng-init="showAllSub()">
-  <div ng-repeat="x in subcribe">
-    <h4>Digite o nome:</h4>
-    <input type="text" ng-model="nome">
-    <h4>Digite o cpf:</h4>
-    <input class="cpf-mask" type="number" ng-model="cpf">
-    
-    
-
-    <div ng-repeat="x in subcribe">
-        <div id="{{ x.cpf }}" class="container border">
-          <label><strong>Nome Completo:</strong> {{ x.name }}</label><br>
-          <label><strong>CPF:</strong> {{ x.cpf }}</label><br>
-          <label><strong>Curso:</strong> {{ x.curso }}</label><br>
-          <label><strong>Turno:</strong> {{ x.turno }}</label><br>
-          <label><strong>Possui Instrumento?</strong> {{ x.hasInstrument }}</label><br>
-          <label><strong>Estado Natal:</strong> {{ x.birthState }}</label><br>
-          <label><strong>Cidade Natal:</strong> {{ x.birthCity }}</label><br>
-          <label><strong>Registro Geral:</strong> {{ x.rg }}</label><br>
-          <label><strong>Orgão Emissor:</strong> {{ x.orgaoEmissor }}</label><br>
-          <label><strong>Email:</strong> {{ x.email }}</label><br>
-          <label><strong>Telefone:</strong> {{ x.phone }}</label><br>
-          <label><strong>Endereço:</strong> {{ x.address }}</label><br>
-          <label><strong>Cidade Atual:</strong> {{ x.city }}</label><br>
-          <label><strong>Estado Atual:</strong> {{ x.state }}</label><br>
-          <label><strong>CEP:</strong> {{ x.cep }}</label><br>
-          <label><strong>Possui Deficiência:</strong> {{ x.deficiency }}</label><br>
-          <label><strong>Nivel Escolar:</strong> {{ x.schoolingDegree }}</label><br>
-          <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> {{ x.howDiscovered }}</label><br>
-          <label><strong>Porque Deseja Fazer Este Curso?</strong> {{ x.whyWants }}</label><br>
-        </div>
-        <br>
-        <button class="btn" onclick="btGerarPDF(this.id)" id="{{ x.cpf }}">Gerar PDF</button>
+  <form class="form-inline">
+    <div class="form-group">
+      <label>Procurar</label>
+      <input type="text" ng-model="search" class="form-control" placeholder="Procurar...">
+      <small class="form-text text-muted">Digite um Nome, CPF, Telefone, etc.</small>
     </div>
-
+  </form>
+  <br>
+  <table class="table">
+    <thead>
+        <tr>
+          <th>Id</th>
+          <th ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
+          <th ng-click="order('cpf')" onclick="turnArrow(this)">CPF <i class="fas fa-arrow-down"></i></th>
+          <th ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
+          <th ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
+          <th ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr dir-paginate="info in subscribe|filter:search|orderBy:sortKey:reverse|itemsPerPage:1">
+          <td>{{$index}}</td>
+          <td>{{info.name}}</td>
+          <td>{{info.cpf}}</td>
+          <td>{{info.email}}</td>
+          <td>{{info.phone}}</td>
+          <td>{{info.curso}}</td>
+          <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
+        </tr>
+    </tbody>
+  </table>
+  <div>
+    <dir-pagination-controls
+            max-size="8"
+            direction-links="true"
+            boundary-links="true"></dir-pagination-controls>
+  </div>
       <script>
-        function btGerarPDF(cpf) {
-
-          var user = document.getElementById(`${cpf}`).innerHTML;
+        function btGerarPDF(item) {
+          const obj = JSON.parse(item);
+          var body = `
+            <label><strong>Nome Completo:</strong> ${ obj.name }</label><br>
+            <label><strong>CPF:</strong> ${ obj.cpf }</label><br>
+            <label><strong>Curso:</strong> ${ obj.curso }</label><br>
+            <label><strong>Turno:</strong> ${ obj.turno }</label><br>
+            <label><strong>Possui Instrumento?</strong> ${ obj.hasInstrument }</label><br>
+            <label><strong>Estado Natal:</strong> ${ obj.birthState }</label><br>
+            <label><strong>Cidade Natal:</strong> ${ obj.birthCity }</label><br>
+            <label><strong>Registro Geral:</strong> ${ obj.rg }</label><br>
+            <label><strong>Orgão Emissor:</strong> ${ obj.orgaoEmissor }</label><br>
+            <label><strong>Email:</strong> ${ obj.email }</label><br>
+            <label><strong>Telefone:</strong> ${ obj.phone }</label><br>
+            <label><strong>Endereço:</strong> ${ obj.address }</label><br>
+            <label><strong>Cidade Atual:</strong> ${ obj.city }</label><br>
+            <label><strong>Estado Atual:</strong> ${ obj.state }</label><br>
+            <label><strong>CEP:</strong> ${ obj.cep }</label><br>
+            <label><strong>Possui Deficiência:</strong> ${ obj.deficiency }</label><br>
+            <label><strong>Nivel Escolar:</strong> ${ obj.schoolingDegree }</label><br>
+            <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> ${ obj.howDiscovered }</label><br>
+            <label><strong>Porque Deseja Fazer Este Curso?</strong> ${ obj.whyWants }</label><br>
+          `;
           var win = window.open('', '', 'height=700,width=700');
           win.document.write('<html><head>');
           win.document.write('<title>Usuarios</title>');
           win.document.write('</head>');
           win.document.write('<body>');
-          win.document.write(user);
+          win.document.write(body);
           win.document.write('</body></html>');
           win.document.close();
           win.print();
 
         }
 
-      </script>
+        function turnArrow(that) {
+          if($(that).find('i').attr('class') === 'fas fa-arrow-up') {
+            $(that).find('i').attr('class', 'fas fa-arrow-down');
+          } else {
+            $(that).find('i').attr('class', 'fas fa-arrow-up');
+          }
+        }
 
-  </div>
+      </script>
 </div>
