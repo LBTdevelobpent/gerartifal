@@ -12,12 +12,12 @@
       				<label>Selecione um Curso</label>
       				<select class="custom-select" ng-model="curso" required>
       					<option selected value="">Selecione</option>
-      					<option value="violin">Violino</option>
-      					<option value="viola">Viola</option>
-      					<option value="cello">Cello</option>
-      					<option value="baixo">Baixo Acústico</option>
-      					<option value="tecvocal">Tec.Vocal</option>
-      					<option value="music">Musicalização</option>
+      					<option value="Violino">Violino</option>
+      					<option value="Viola">Viola</option>
+      					<option value="Cello">Cello</option>
+      					<option value="Baixo Acústico">Baixo Acústico</option>
+      					<option value="Tec.Vocal">Tec.Vocal</option>
+      					<option value="Musicalização">Musicalização</option>
       	     	</select>
       			 	<div class="invalid-feedback">
       				 	Por Favor, Selecione um Curso.
@@ -27,8 +27,8 @@
       				<label>Selecione um Turno</label>
       				<select class="custom-select" ng-model="turno" required>
       					<option selected value="">Selecione</option>
-      					<option value="matutino">Matutino</option>
-      					<option value="vespertino">Vespertino</option>
+      					<option value="Matutino">Matutino</option>
+      					<option value="Vespertino">Vespertino</option>
       				</select>
       				<div class="invalid-feedback">
       					Por Favor, Selecione um Turno.
@@ -38,8 +38,8 @@
       				<label>Você Possui o Instrumento Do Curso? <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Instrumento Do Curso" data-content="Você Possui o Instrumento ao qual deseja aprender?"><i class="fas fa-info fa-sm"></i></a></label>
       				<select class="custom-select" ng-model="hasInstrument" required>
       					<option selected value="">Selecione</option>
-      					<option value="true">Sim</option>
-      					<option value="false">Não</option>
+      					<option value="Sim">Sim</option>
+      					<option value="Não">Não</option>
       				</select>
       				<div class="invalid-feedback">
       					Por Favor, Selecione uma opção.
@@ -193,12 +193,12 @@
       			<label>Possui Deficiência?</label>
       			<select class="custom-select" ng-model="deficiency" required>
       				<option selected value="">Selecione</option>
-      				<option value="nao">Não</option>
-      				<option value="fisica">Física</option>
-      				<option value="auditiva">Auditiva</option>
-      				<option value="visual">Visual</option>
-      				<option value="mental">Mental</option>
-      				<option value="multipla">Múltipla</option>
+      				<option value="Não">Não</option>
+      				<option value="Física">Física</option>
+      				<option value="Auditiva">Auditiva</option>
+      				<option value="Visual">Visual</option>
+      				<option value="Mental">Mental</option>
+      				<option value="Múltipla">Múltipla</option>
       			</select>
       			<div class="invalid-feedback">
       				Por favor, Selecione Alguma Opção.
@@ -214,12 +214,12 @@
       		<label>Informe Seu Grau De Escolaridade</label>
       		<select class="custom-select" ng-model="schoolingDegree" required>
       			<option selected value="">Selecione</option>
-      			<option value="medio_inc">Ensino médio Incompleto</option>
-      			<option value="medio_com">Ensino Médio Completo</option>
-      			<option value="fundamental_inc">Fundamental Incompleto</option>
-      			<option value="fundamental_com">Fundamental Completo</option>
-      			<option value="superior_inc">Ensino Superior Incompleto</option>
-      			<option value="superior_com">Ensino Superior Completo</option>
+      			<option value="Ensino médio Incompleto">Ensino médio Incompleto</option>
+      			<option value="Ensino Médio Completo">Ensino Médio Completo</option>
+      			<option value="Fundamental Incompleto">Fundamental Incompleto</option>
+      			<option value="Fundamental Completo">Fundamental Completo</option>
+      			<option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+      			<option value="Ensino Superior Completo">Ensino Superior Completo</option>
       		</select>
       		<div class="invalid-feedback">
       			Por favor, Selecione Alguma Opção.
@@ -235,15 +235,15 @@
       		<label>Como Ficou Sabendo Sobre o Projeto?</label>
       		<select class="custom-select" ng-model="howDiscovered">
       			<option selected value="">Selecione</option>
-      			<option value="gerart">Site Gerartifal</option>
-      			<option value="folder">Folder</option>
-      			<option value="mail">E-mail</option>
-      			<option value="mural">Divulgação Mural</option>
-      			<option value="site">Site do campus</option>
-      			<option value="jornal">Jornal/Revista</option>
-      			<option value="radio">Rádio Local</option>
-      			<option value="amigos">Através de Amigos</option>
-      			<option value="outros">Outros</option>
+      			<option value="Site Gerartifal">Site Gerartifal</option>
+      			<option value="Folder">Folder</option>
+      			<option value="E-mail">E-mail</option>
+      			<option value="Divulgação Mural">Divulgação Mural</option>
+      			<option value="Site do campus">Site do campus</option>
+      			<option value="Jornal/Revista">Jornal/Revista</option>
+      			<option value="Rádio Local">Rádio Local</option>
+      			<option value="Através de Amigos">Através de Amigos</option>
+      			<option value="Outros">Outros</option>
       		</select>
       	</div>
       		<div class="col-md-12 mb-3">
@@ -251,21 +251,6 @@
       			<textarea class="form-control" ng-model="whyWants" placeholder="Descreva em poucas palavras o motivo de seu interesse neste curso" rows="3"></textarea>
       		</div>
       </div>
-
-
-
-      <!--  <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-            <label class="form-check-label" for="invalidCheck">
-              Agree to terms and conditions
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-      	-->
       <hr>
       <br>
         <button class="btn btn-success" type="submit">Submit form</button>

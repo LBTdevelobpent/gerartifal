@@ -2,6 +2,26 @@
 //  Este script é responsável pelas fichas de inscrição
 //
 const app = angular.module('subcribe', ['angularUtils.directives.dirPagination']);
+
+app.filter('datafilter', () => {
+  return (items, from, to) => {
+    if ((from === undefined || to === undefined) || (from === null || to === null)) {
+      return items;
+    }
+    const df = from;
+    const dt = to;
+    const result = [];
+    for (let i = 0; i < items.length; i += 1) {
+      const tf = new Date(items[i].createAt);
+      const tt = new Date(items[i].createAt);
+      if (tf > df && tt < dt) {
+        result.push(items[i]);
+      }
+    }
+    return result;
+  };
+});
+
 // ===================== Controlador de validação de sessão - cookies ========================
 app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $window) => {
   const token = (document.cookie).split('=', 2)[1];
