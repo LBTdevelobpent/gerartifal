@@ -1,12 +1,28 @@
 <div ng-app="subcribe" ng-controller="subcribe" ng-init="showAllSub()">
-  <form class="form-inline">
-    <div class="form-group">
-      <label>Procurar</label>
-      <input type="text" ng-model="search" class="form-control" placeholder="Procurar...">
-      <small class="form-text text-muted">Digite um Nome, CPF, Telefone, etc.</small>
-    </div>
-  </form>
-  <br>
+  <div class="">
+    <form class="form row">
+      <div class="col-sm-6 form-group">
+        <label>Procurar por campo:</label>
+        <input type="text" ng-model="search" class="form-control" placeholder="Procurar...">
+        <small class="form-text text-muted">Digite um Nome, CPF, Telefone, etc.</small>
+      </div>
+      <div class="col-xs-6 form-group">
+        <label>Procurar por Data:</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="date" ng-model="dateFrom" class="form-control">
+            <small class="form-text text-muted">Escolha a data inicial</small>
+          </div>
+          <div>
+            <input type="date" ng-model="dateTo" class="form-control">
+            <small class="form-text text-muted">Escolha a data final</small>
+          </div>
+        </div>
+      </div>
+    </form>
+    <br>
+  </div>
+
   <table class="table">
     <thead>
         <tr>
@@ -16,16 +32,18 @@
           <th ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
+          <th ng-click="order('createAt')" onclick="turnArrow(this)">Data de Inscrição <i class="fas fa-arrow-down"></i></th>
         </tr>
     </thead>
     <tbody>
-        <tr dir-paginate="info in subscribe|filter:search|orderBy:sortKey:reverse|itemsPerPage:1">
-          <td>{{$index}}</td>
-          <td>{{info.name}}</td>
-          <td>{{info.cpf}}</td>
-          <td>{{info.email}}</td>
-          <td>{{info.phone}}</td>
-          <td>{{info.curso}}</td>
+        <tr dir-paginate="info in subscribe | filter:search | datafilter:dateFrom:dateTo | orderBy:sortKey:reverse|itemsPerPage:1">
+          <td>{{ $index }}</td>
+          <td>{{ info.name }}</td>
+          <td>{{ info.cpf }}</td>
+          <td>{{ info.email }}</td>
+          <td>{{ info.phone }}</td>
+          <td>{{ info.curso }}</td>
+          <td>{{ info.createAt | date: "dd.MM.y" }}</td>
           <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
         </tr>
     </tbody>

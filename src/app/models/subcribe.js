@@ -23,7 +23,7 @@ const subcribeSchema = new mongoose.Schema({
     require: true,
   },
   hasInstrument: {
-    type: Boolean,
+    type: String,
     require: true,
   },
   memberCommunity: {
