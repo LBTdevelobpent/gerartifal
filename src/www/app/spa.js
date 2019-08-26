@@ -88,7 +88,10 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
     .otherwise({ redirectTo: '/' });
 }]);
 
-app1.controller('MainCtrl', ['$rootScope', '$location', ($rootScope, $location) => {
+app1.controller('MainCtrl', ['$rootScope', '$location', 'authentication', ($rootScope, $location, authentication) => {
+
+  authentication.openSubscribes();
+  authentication.isAuthenticate();
 
   if ($location.path() !== '/') {
     $('#spanInit').slideUp('slow');

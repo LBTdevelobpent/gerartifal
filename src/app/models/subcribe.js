@@ -11,7 +11,7 @@ const subcribeSchema = new mongoose.Schema({
     required: true,
   },
   cpf: {
-    type: Number,
+    type: String,
     required: true,
   },
   curso: {
@@ -67,7 +67,7 @@ const subcribeSchema = new mongoose.Schema({
     require: true,
   },
   cep: {
-    type: Number,
+    type: String,
     require: true,
   },
   deficiency: {
