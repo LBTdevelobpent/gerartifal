@@ -97,6 +97,12 @@ const subcribeSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
+  valid: {
+    type: Boolean,
+    default: false,
+  },
+
 });
 
 // Exportação do Schema do Usuario

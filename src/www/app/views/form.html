@@ -8,31 +8,34 @@
       		<h2><i class="fas fa-play"></i> Curso Desejado</i></i></h2>
       <br>
       		<div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label>Selecione um Turno</label>
+              <select class="custom-select" ng-model="turno" required>
+                <option selected value="">Selecione</option>
+                <option value="Matutino">Matutino</option>
+                <option value="Vespertino">Vespertino</option>
+              </select>
+              <div class="invalid-feedback">
+                Por Favor, Selecione um Turno.
+              </div>
+            </div>
       			<div class="col-md-4 mb-3">
       				<label>Selecione um Curso</label>
       				<select class="custom-select" ng-model="curso" required>
-      					<option selected value="">Selecione</option>
-      					<option value="Violino">Violino</option>
-      					<option value="Viola">Viola</option>
-      					<option value="Cello">Cello</option>
-      					<option value="Baixo Acústico">Baixo Acústico</option>
-      					<option value="Tec.Vocal">Tec.Vocal</option>
-      					<option value="Musicalização">Musicalização</option>
+                <option selected value="">Selecione</option>
+                <div>
+                    {{ (turno == 'Matutino' ? x = morning : turno == 'Vespertino' ? x = evening : null) }}
+                  <option value="Violino">Violino ({{ x.Violino }})</option>
+                  <option value="Viola">Viola ({{ x.Viola }})</option>
+                  <option value="Cello">Cello ({{ x.Cello }})</option>
+                  <option value="Baixo Acústico">Baixo Acústico ({{ x.Baixo_Acustico }})</option>
+                  <option value="Tec.Vocal">Tec.Vocal ({{ x.Tec_Vocal }})</option>
+                  <option value="Musicalização">Musicalização ({{ x.Musicalizacao }})</option>
+                </div>
       	     	</select>
       			 	<div class="invalid-feedback">
       				 	Por Favor, Selecione um Curso.
       			 	</div>
-      			</div>
-      			<div class="col-md-4 mb-3">
-      				<label>Selecione um Turno</label>
-      				<select class="custom-select" ng-model="turno" required>
-      					<option selected value="">Selecione</option>
-      					<option value="Matutino">Matutino</option>
-      					<option value="Vespertino">Vespertino</option>
-      				</select>
-      				<div class="invalid-feedback">
-      					Por Favor, Selecione um Turno.
-      				</div>
       			</div>
       			<div class="col-md-4 mb-3">
       				<label>Você Possui o Instrumento Do Curso? <a id="pop" href="" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" title="Instrumento Do Curso" data-content="Você Possui o Instrumento ao qual deseja aprender?"><i class="fas fa-info fa-sm"></i></a></label>
@@ -253,7 +256,7 @@
       </div>
       <hr>
       <br>
-        <button class="btn btn-success" type="submit">Submit form</button>
+        <button class="btn btn-success" type="submit">Se Inscrever</button>
       </form>
       </div>
       <br>
@@ -277,18 +280,5 @@
     });
   }, false);
 })();
-</script>
-<script>
-    $(document).ready(function () {
-        var $seuCampoCpf = $("#CPF");
-        $seuCampoCpf.mask('000.000.000-00', {reverse: true});
-        var $seuCampoNum = $("#NUM");
-        $seuCampoCpf.mask('000 00000-0000', {reverse:true});
-        var $seuCampoCep = $("#CEP");
-        $seuCampoCpf.mask('00.000-000', {reverse:true});
-    });
-		$(function () {
-  $('[data-toggle="popover"]').popover()
-})
 </script>
 </div>
