@@ -23,7 +23,7 @@ app.filter('datafilter', () => {
 });
 
 // ===================== Controlador de validação de sessão - cookies ========================
-app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $window) => {
+app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($scope, $http, $window, authentication) => {
   const token = (document.cookie).split('=', 2)[1];
   const openSub =  $window.localStorage.getItem('openSub');
 
@@ -58,6 +58,12 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       $window.localStorage.setItem('openSub', false);
       $window.location.href = '/';
     }
+
+    const socket = io.connect('http://localhost:3000/');
+    socket.on('openF', (data) => {
+      $scope.morning = data.morning;
+      $scope.evening = data.evening;
+    });
 
     $http.get('/valid', {
       headers: { Authorization: `Bearer ${token}` },
@@ -181,12 +187,47 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     $scope.reverse = !$scope.reverse;
   };
 
+  $scope.validSubs = (id) => {
+    console.log(id);
+  };
+
   // ===================================================================//
 
   $scope.openSub = () => {
     const { from, until } = $scope;
-    const data = { from, until };
-    const socket = io.connect('http://localhost:3000/');
-    socket.emit('open', data);
+    const morning = {
+      Violino: $scope.Mviolin,
+      Viola: $scope.Mviola,
+      Cello: $scope.Mcello,
+      Baixo_Acustico: $scope.Mbaixo,
+      Tec_Vocal: $scope.Mvocal,
+      Musicalizacao: $scope.Mmusical,
+    };
+
+    const evening = {
+      Violino: $scope.Vviolin,
+      Viola: $scope.Vviola,
+      Cello: $scope.Vcello,
+      Baixo_Acustico: $scope.Vbaixo,
+      Tec_Vocal: $scope.Vvocal,
+      Musicalizacao: $scope.Vmusical,
+    };
+
+    const data = {
+      from,
+      until,
+      morning,
+      evening,
+    };
+
+    $http.post('/openSubs', data, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .success((response) => {
+        console.log(response);
+      })
+      .error((err) => {
+        console.log(err);
+      });
   };
 }]);

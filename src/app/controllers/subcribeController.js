@@ -4,7 +4,7 @@ const router = express.Router();
 const authMiddleware = require('../middlewares/auth.js');
 const admAuthMiddleware = require('../middlewares/admAuth');
 const Subcribe = require('../models/subcribe.js');
-const User = require('../models/user.js');
+const Opsub = require('../models/openSub.js');
 
 router.use(authMiddleware);
 
@@ -67,43 +67,28 @@ router.get('/findAll', async (req, res) => {
   }
 });
 // ======================================================================================//
-
-// =====================================Busca uma ficha específica=======================//
-router.put('/find_subscription', async (req, res) => {
+/*
+router.use('/validSubscribe', admAuthMiddleware);
+router.get('/validSubscribe', async (req, res) => {
   try {
-    const { adm } = await User.findById(req.userId);
+    const { id } = req.body;
+    const subscribe = await Subcribe.findById(id);
+    const openSub = await Opsub.findOne({ unique: true });
 
-    if (adm) {
-      return res.status(401).send({ error: 'Apenas ADM' });
+    const turno = subscribe.turno === 'Matutino' ? morning : evening;
+
+
+    if (!subscribe) {
+      res.send(400).send({ error: 'Ficha de inscrição inexistente' });
     }
 
-    if (adm === false) {
-      return res.status(401).send({ error: 'Apenas ADM' });
-    }
+    subscribe.valid = true;
+    subscribe.save();
 
-    const { nome, CPF } = req.body;
-
-    // Script para buscar a ficha letra por letra, caso não tenha CPF sendo passado
-    if (CPF === 0) {
-      const subcribe = await Subcribe.find().populate('user');
-
-      for (let c = 0; c < subcribe.length; c += 1) {
-        const { name } = subcribe[c];
-        if (!(nome.split('').join('') === name.split('', nome.length).join(''))) {
-          subcribe.splice(subcribe.indexOf(subcribe[c]), 1);
-          c -= 1;
-        }
-      }
-      return res.send({ subcribe });
-    }
-    // ----------------------------------------------------------------------------//
-
-    const subcribe = await Subcribe.find({ $or: [{ name: nome }, { cpf: CPF }] }).populate('user');
-    return res.send({ subcribe });
-  } catch (err) {
-    return res.status(400).send({ error: 'Error em encontrar inscrição' });
+    res.send({ ok: 'Inscrição validada' });
+  } catch (error) {
+    res.send(400).send({ error: 'Erro em validar a inscrição' });
   }
 });
-// ======================================================================================//
-
+*/
 module.exports = app => app.use('/subcribe', router);

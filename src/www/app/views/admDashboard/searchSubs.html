@@ -26,7 +26,6 @@
   <table class="table">
     <thead>
         <tr>
-          <th>Id</th>
           <th ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('cpf')" onclick="turnArrow(this)">CPF <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
@@ -36,14 +35,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr dir-paginate="info in subscribe | filter:search | datafilter:dateFrom:dateTo | orderBy:sortKey:reverse|itemsPerPage:1">
-          <td>{{ $index }}</td>
+        <tr dir-paginate="info in subscribe | filter:search | datafilter:dateFrom:dateTo | orderBy:sortKey:reverse|itemsPerPage:10">
           <td>{{ info.name }}</td>
           <td>{{ info.cpf }}</td>
           <td>{{ info.email }}</td>
           <td>{{ info.phone }}</td>
           <td>{{ info.curso }}</td>
           <td>{{ info.createAt | date: "dd.MM.y" }}</td>
+          <td><button class="btn btn-success" ng-click="validSubs( info._id )" >Validar Inscrição</button></td>
           <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
         </tr>
     </tbody>
