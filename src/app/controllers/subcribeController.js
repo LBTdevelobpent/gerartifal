@@ -134,4 +134,46 @@ router.post('/validSubscribe', async (req, res) => {
   }
 });
 
+router.use('/invalidSubscribe', admAuthMiddleware);
+router.post('/invalidSubscribe', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const subscribe = await Subcribe.findById(id);
+    const openSub = await Opsub.findOne({ unique: true });
+
+    if (!subscribe) {
+      res.send(400).send({ error: 'Ficha de inscrição inexistente' });
+    }
+
+    const turno = subscribe.turno === 'Matutino' ? openSub.morning : openSub.evening;
+
+    if (subscribe.curso === 'Baixo Acústico') {
+      turno.Baixo_Acustico += 1;
+    }
+    if (subscribe.curso === 'Técnica Vocal') {
+      turno.Tec_Vocal += 1;
+    }
+    if (subscribe.curso === 'Musicalização') {
+      turno.Musicalizacao += 1;
+    }
+    if (subscribe.curso === 'Violino') {
+      turno.Violino += 1;
+    }
+    if (subscribe.curso === 'Cello') {
+      turno.Cello += 1;
+    }
+    if (subscribe.curso === 'Viola') {
+      turno.Viola += 1;
+    }
+
+    subscribe.valid = false;
+    subscribe.save();
+    openSub.save();
+
+    res.send({ ok: 'Inscrição invalidada' });
+  } catch (error) {
+    res.send(400).send({ error: 'Erro em invalidar a inscrição' });
+  }
+});
+
 module.exports = app => app.use('/subcribe', router);
