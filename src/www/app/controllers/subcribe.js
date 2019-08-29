@@ -227,10 +227,10 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
       headers: { Authorization: `Bearer ${token}` },
     })
       .success((response) => {
-        console.log(response);
+        alert('Inscrições abertas');
       })
       .error((err) => {
-        console.log(err);
+        alert(err);
       });
   };
 }]);
