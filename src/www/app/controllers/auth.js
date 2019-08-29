@@ -104,7 +104,33 @@ auth.controller('auth', ['$scope', '$http', 'authentication', ($scope, $http, au
         $('#include').html(response);
       });
 
+<<<<<<< HEAD
     authentication.openSubscribes();
+=======
+    // ===============Checkagem de abertura de incrição===============//
+    const openSub = window.localStorage.getItem('openSub');
+    if (!openSub) {
+      window.localStorage.setItem('openSub', false);
+    }
+    const socket = io.connect('http://gerartifal-com.umbler.net/');
+    socket.on('openF', (data) => {
+      const date = Date.now();
+      if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
+        window.localStorage.setItem('openSub', true);
+        openSubscribe();
+      }
+    });
+    // ===============================================================//
+
+    const token = (document.cookie).split('=', 2)[1];
+    if (!token) { // caso não exista token, desvalida a sessão
+      console.log('no session');
+      document.cookie = 'token=; path=/';
+      window.localStorage.clear();
+      return;
+    }
+    const { _id, email, adm } = JSON.parse(window.localStorage.getItem('user'));
+>>>>>>> 68b3ad3ecab2f94465fd861705bcd0ee80eeab2e
 
     authentication.isAuthenticate();
   };

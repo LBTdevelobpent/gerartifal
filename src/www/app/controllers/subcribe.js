@@ -184,6 +184,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
 
   $scope.openSub = () => {
     const { from, until } = $scope;
+<<<<<<< HEAD
     const morning = {
       Violino: $scope.Mviolin,
       Viola: $scope.Mviola,
@@ -218,5 +219,10 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
       .error((err) => {
         console.log(err);
       });
+=======
+    const data = { from, until };
+    const socket = io.connect('http://gerartifal-com.umbler.net/');
+    socket.emit('open', data);
+>>>>>>> 68b3ad3ecab2f94465fd861705bcd0ee80eeab2e
   };
 }]);
