@@ -3,8 +3,7 @@
 //
 const app = angular.module('subcribe', ['angularUtils.directives.dirPagination']);
 
-app.filter('datafilter', () => {
-  return (items, from, to) => {
+app.filter('datafilter', () => (items, from, to) => {
     if ((from === undefined || to === undefined) || (from === null || to === null)) {
       return items;
     }
@@ -19,13 +18,12 @@ app.filter('datafilter', () => {
       }
     }
     return result;
-  };
-});
+  });
 
 // ===================== Controlador de validação de sessão - cookies ========================
 app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($scope, $http, $window, authentication) => {
   const token = (document.cookie).split('=', 2)[1];
-  const openSub =  $window.localStorage.getItem('openSub');
+  const openSub = $window.localStorage.getItem('openSub');
 
   // ---------------Validação de sessão como adm---------------//
   $scope.sessionAdm = () => {
@@ -184,7 +182,6 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
 
   $scope.openSub = () => {
     const { from, until } = $scope;
-<<<<<<< HEAD
     const morning = {
       Violino: $scope.Mviolin,
       Viola: $scope.Mviola,
@@ -219,10 +216,5 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
       .error((err) => {
         console.log(err);
       });
-=======
-    const data = { from, until };
-    const socket = io.connect('http://gerartifal-com.umbler.net/');
-    socket.emit('open', data);
->>>>>>> 68b3ad3ecab2f94465fd861705bcd0ee80eeab2e
   };
 }]);
