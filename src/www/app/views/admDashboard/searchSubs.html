@@ -23,16 +23,17 @@
     <br>
   </div>
 
-  <table class="table text-center">
+  <table class="table ">
     <thead>
         <tr>
-          <th ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
-          <th ng-click="order('cpf')" onclick="turnArrow(this)">CPF <i class="fas fa-arrow-down"></i></th>
-          <th ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
-          <th ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
-          <th ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
-          <th ng-click="order('createAt')" onclick="turnArrow(this)">Data de Inscrição <i class="fas fa-arrow-down"></i></th>
-          <th class="text-center" ng-click="order('valid')" onclick="turnArrow(this)">Validar Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('cpf')" onclick="turnArrow(this)">CPF <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('createAt')" onclick="turnArrow(this)">Data de Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th class="text-center pointCur" ng-click="order('valid')" onclick="turnArrow(this)">Validar Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th></th>
         </tr>
     </thead>
     <tbody>
