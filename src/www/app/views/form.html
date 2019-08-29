@@ -22,15 +22,15 @@
       			<div class="col-md-4 mb-3">
       				<label>Selecione um Curso</label>
       				<select class="custom-select" ng-model="curso" required>
-                <option selected value="">Selecione</option>
                 <div>
+                  <option selected value="">Selecione</option>
                     {{ (turno == 'Matutino' ? x = morning : turno == 'Vespertino' ? x = evening : null) }}
-                  <option value="Violino">Violino ({{ x.Violino }})</option>
-                  <option value="Viola">Viola ({{ x.Viola }})</option>
-                  <option value="Cello">Cello ({{ x.Cello }})</option>
-                  <option value="Baixo Acústico">Baixo Acústico ({{ x.Baixo_Acustico }})</option>
-                  <option value="Tec.Vocal">Tec.Vocal ({{ x.Tec_Vocal }})</option>
-                  <option value="Musicalização">Musicalização ({{ x.Musicalizacao }})</option>
+                  <option value="Violino">Violino há {{ x.Violino }} vagas</option>
+                  <option value="Viola">Viola há {{ x.Viola }} vagas</option>
+                  <option value="Cello">Cello há {{ x.Cello }} vagas</option>
+                  <option value="Baixo Acústico">Baixo Acústico há {{ x.Baixo_Acustico }} vagas</option>
+                  <option value="Técnica Vocal">Técnica Vocal há {{ x.Tec_Vocal }} vagas</option>
+                  <option value="Musicalização">Musicalização há {{ x.Musicalizacao }} vagas</option>
                 </div>
       	     	</select>
       			 	<div class="invalid-feedback">

@@ -3,7 +3,6 @@ const authConfig = require('../../config/auth.json');
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   // Verifica se algum token foi enviado
   if (!authHeader) {
     return res.status(401).send({ error: 'Sem token enviado' });

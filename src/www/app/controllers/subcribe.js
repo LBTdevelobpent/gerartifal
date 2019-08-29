@@ -154,32 +154,15 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
 
   // Mostrar todas as fichas de inscrições
   $scope.showAllSub = () => {
-    const { nome, cpf } = $scope;
     $scope.sessionAdm();
-    // Caso não tenha nos campos de Busca, ele pega todas as fichas
-    if (nome === undefined && cpf === undefined) {
-      $http.get('/subcribe/findAll', {
-        headers: { Authorization: `Bearer ${token}` },
-      }).success((response) => {
-        $scope.subscribe = response.subscribe;
-      }).error((response) => {
-        alert(response.error);
-        console.log(response.error);
-      });
-      // Pega fichas específicas
-    } else {
-      const data = { nome, cpf };
-      $http.put('/subcribe/find_subscription', data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .success((response) => {
-          const { subcribe } = response;
-          $scope.subcribe = subcribe;
-        }).error((response) => {
-          alert(response.error);
-          console.log(response);
-        });
-    }
+
+    $http.get('/subcribe/findAll', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).success((response) => {
+      $scope.subscribe = response.subscribe;
+    }).error((response) => {
+      console.error(response.error);
+    });
   };
 
   $scope.order = (keyname) => {
@@ -188,7 +171,13 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
   };
 
   $scope.validSubs = (id) => {
-    console.log(id);
+    $http.post('/subcribe/validSubscribe', { id }, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).success(() => {
+      $scope.showAllSub();
+    }).error((err) => {
+      console.error(err);
+    });
   };
 
   // ===================================================================//

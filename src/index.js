@@ -15,7 +15,7 @@ const User = require('./app/models/user.js');
 const Opsub = require('./app/models/openSub.js');
 
 const subscribeMiddleware = require('./app/middlewares/subscribeMiddleware.js');
-const admAuthMiddleware = require('./app/middlewares/admAuth');
+const authMiddleware = require('./app/middlewares/auth');
 
 // =================== Configurações servidor ==============//
 require('./config/passport.js')(passport);
@@ -41,7 +41,7 @@ app.use(session({
 // ========================================================//
 
 // -------------------------Para abrir inscrições------------------//
-app.use('/openSubs', admAuthMiddleware);
+app.use('/openSubs', authMiddleware);
 app.post('/openSubs', async (req, res) => {
   try {
     const {
@@ -51,12 +51,16 @@ app.post('/openSubs', async (req, res) => {
       evening,
     } = req.body;
     const opensub = await Opsub.findOne({ unique: true });
-    opensub.from = from;
-    opensub.until = until;
-    opensub.morning = morning;
-    opensub.evening = evening;
+    if (!opensub) {
+      await Opsub.create(req.body);
+    } else {
+      opensub.from = from;
+      opensub.until = until;
+      opensub.morning = morning;
+      opensub.evening = evening;
+      opensub.save();
+    }
 
-    opensub.save();
     res.send(opensub);
   } catch (error) {
     res.status(400).send({ error });
