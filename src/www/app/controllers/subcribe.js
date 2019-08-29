@@ -171,13 +171,29 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
   };
 
   $scope.validSubs = (id) => {
-    $http.post('/subcribe/validSubscribe', { id }, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).success(() => {
-      $scope.showAllSub();
-    }).error((err) => {
-      console.error(err);
-    });
+    const conf = confirm('Precione OK para validar a inscrição');
+    if (conf === true) {
+      $http.post('/subcribe/validSubscribe', { id }, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success(() => {
+        $scope.showAllSub();
+      }).error((err) => {
+        alert(err.error);
+      });
+    }
+  };
+
+  $scope.invalidSubs = (id) => {
+    const conf = confirm('Precione OK para invalidar a inscrição');
+    if (conf === true) {
+      $http.post('/subcribe/invalidSubscribe', { id }, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success(() => {
+        $scope.showAllSub();
+      }).error((err) => {
+        alert(err.error);
+      });
+    }
   };
 
   // ===================================================================//

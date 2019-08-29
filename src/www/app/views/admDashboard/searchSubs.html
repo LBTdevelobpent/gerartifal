@@ -49,7 +49,7 @@
               <button class="btn btn-success" ng-click="validSubs( info._id )" >Validar Inscrição</button>
             </div>
             <div ng-if="info.valid">
-              <i style="color: #04ba31;" class="fas fa-check fa-2x"></i>
+              <i style="color: #04ba31;" ng-click="invalidSubs( info._id )" class="fas fa-check fa-2x"></i>
             </div>
           </td>
           <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
@@ -99,11 +99,15 @@
         }
 
         function turnArrow(that) {
-          if($(that).find('i').attr('class') === 'fas fa-arrow-up') {
-            $(that).find('i').attr('class', 'fas fa-arrow-down');
-          } else {
-            $(that).find('i').attr('class', 'fas fa-arrow-up');
+          if ($(that).data('clicked')) {
+            if($(that).find('i').attr('class') === 'fas fa-arrow-up') {
+              $(that).find('i').attr('class', 'fas fa-arrow-down');
+            } else {
+              $('.fas.fa-arrow-up').attr('class', 'fas fa-arrow-down');
+              $(that).find('i').attr('class', 'fas fa-arrow-up');
+            }
           }
+          $(that).data('clicked', true);
         }
 
       </script>
