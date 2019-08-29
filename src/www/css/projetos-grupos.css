@@ -18,3 +18,10 @@
   font-family: 'Coiny', cursive;
 
 }
+fill-div {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+}
+

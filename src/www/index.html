@@ -83,21 +83,15 @@
             </li>
 
 
-            <li class="btn nav-item" id="dropdown">
-              <div class="dropdown">
-                <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
-                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
-                  <a class="dropdown-item" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
-                </div>
-              </div>
+            <li class="btn nav-item" ng-class="{active: activetab == '/sobre'}">
+                 <a class="nav-link" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
             </li>
+
             <li class=" btn nav-item active">
             <div ng-controller="auth">
-              <button type="button" class="btn nav-item btn-primary" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
+              <button type="button" class="btn nav-link" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
               <div id="option" class="btn dropdown d-none">
-                <button class="btn btn-info dropdown-toggle d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn nav-link dropdown-toggle d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opções
                 </button>
                 <div class="btn dropdown-menu" aria-labelledby="dropdownMenuLink">
