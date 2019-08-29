@@ -3,29 +3,27 @@
 //
 const app = angular.module('subcribe', ['angularUtils.directives.dirPagination']);
 
-app.filter('datafilter', () => {
-  return (items, from, to) => {
-    if ((from === undefined || to === undefined) || (from === null || to === null)) {
-      return items;
+app.filter('datafilter', () => (items, from, to) => {
+  if ((from === undefined || to === undefined) || (from === null || to === null)) {
+    return items;
+  }
+  const df = from;
+  const dt = to;
+  const result = [];
+  for (let i = 0; i < items.length; i += 1) {
+    const tf = new Date(items[i].createAt);
+    const tt = new Date(items[i].createAt);
+    if (tf > df && tt < dt) {
+      result.push(items[i]);
     }
-    const df = from;
-    const dt = to;
-    const result = [];
-    for (let i = 0; i < items.length; i += 1) {
-      const tf = new Date(items[i].createAt);
-      const tt = new Date(items[i].createAt);
-      if (tf > df && tt < dt) {
-        result.push(items[i]);
-      }
-    }
-    return result;
-  };
+  }
+  return result;
 });
 
 // ===================== Controlador de validação de sessão - cookies ========================
 app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($scope, $http, $window, authentication) => {
   const token = (document.cookie).split('=', 2)[1];
-  const openSub =  $window.localStorage.getItem('openSub');
+  const openSub = $window.localStorage.getItem('openSub');
 
   // ---------------Validação de sessão como adm---------------//
   $scope.sessionAdm = () => {
@@ -59,7 +57,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
       $window.location.href = '/';
     }
 
-    const socket = io.connect('http://localhost:3000/');
+    const socket = io.connect('http://gerartifal-com.umbler.net/');
     socket.on('openF', (data) => {
       $scope.morning = data.morning;
       $scope.evening = data.evening;
