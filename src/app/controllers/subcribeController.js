@@ -67,28 +67,71 @@ router.get('/findAll', async (req, res) => {
   }
 });
 // ======================================================================================//
-/*
+
 router.use('/validSubscribe', admAuthMiddleware);
-router.get('/validSubscribe', async (req, res) => {
+router.post('/validSubscribe', async (req, res) => {
   try {
     const { id } = req.body;
     const subscribe = await Subcribe.findById(id);
     const openSub = await Opsub.findOne({ unique: true });
 
-    const turno = subscribe.turno === 'Matutino' ? morning : evening;
-
-
     if (!subscribe) {
       res.send(400).send({ error: 'Ficha de inscrição inexistente' });
     }
 
+    const turno = subscribe.turno === 'Matutino' ? openSub.morning : openSub.evening;
+
+    if (subscribe.curso === 'Baixo Acústico') {
+      if (turno.Baixo_Acustico === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Baixo_Acustico -= 1;
+      }
+    }
+    if (subscribe.curso === 'Técnica Vocal') {
+      if (turno.Tec_Vocal === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Tec_Vocal -= 1;
+      }
+    }
+    if (subscribe.curso === 'Musicalização') {
+      if (turno.Musicalizacao === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Musicalizacao -= 1;
+      }
+    }
+    if (subscribe.curso === 'Violino') {
+      if (turno.Violino === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Violino -= 1;
+      }
+    }
+    if (subscribe.curso === 'Cello') {
+      if (turno.Cello === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Cello -= 1;
+      }
+    }
+    if (subscribe.curso === 'Viola') {
+      if (turno.Viola === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Viola -= 1;
+      }
+    }
+
     subscribe.valid = true;
     subscribe.save();
+    openSub.save();
 
     res.send({ ok: 'Inscrição validada' });
   } catch (error) {
     res.send(400).send({ error: 'Erro em validar a inscrição' });
   }
 });
-*/
+
 module.exports = app => app.use('/subcribe', router);

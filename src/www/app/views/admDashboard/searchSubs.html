@@ -23,7 +23,7 @@
     <br>
   </div>
 
-  <table class="table">
+  <table class="table text-center">
     <thead>
         <tr>
           <th ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
@@ -32,6 +32,7 @@
           <th ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
           <th ng-click="order('createAt')" onclick="turnArrow(this)">Data de Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th class="text-center" ng-click="order('valid')" onclick="turnArrow(this)">Validar Inscrição <i class="fas fa-arrow-down"></i></th>
         </tr>
     </thead>
     <tbody>
@@ -42,7 +43,14 @@
           <td>{{ info.phone }}</td>
           <td>{{ info.curso }}</td>
           <td>{{ info.createAt | date: "dd.MM.y" }}</td>
-          <td><button class="btn btn-success" ng-click="validSubs( info._id )" >Validar Inscrição</button></td>
+          <td>
+            <div ng-if="!info.valid">
+              <button class="btn btn-success" ng-click="validSubs( info._id )" >Validar Inscrição</button>
+            </div>
+            <div ng-if="info.valid">
+              <i style="color: #04ba31;" class="fas fa-check fa-2x"></i>
+            </div>
+          </td>
           <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
         </tr>
     </tbody>
