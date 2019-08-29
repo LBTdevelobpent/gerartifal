@@ -61,7 +61,7 @@ app.post('/openSubs', async (req, res) => {
       opensub.save();
     }
 
-    res.send(opensub);
+    res.send({ mensagem: 'Inscrições abertas' });
   } catch (error) {
     res.status(400).send({ error });
   }

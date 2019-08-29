@@ -3,17 +3,20 @@
   <h1>Abertura de Inscrições</h1>
   <form class="form" ng-submit="openSub()">
       <div class="col-xs-6 form-group">
-        <label for="fromDate">Data de Abertura: </label>
+        <label for="fromDate">Data de Abertura: </label><br>
+        <small>Insira uma data de abertura para as Inscrições</small>
         <input type="date" class="form-control" id="fromDate" ng-model="from">
       </div>
       <div class="col-xs-6 form-group">
-        <label for="untilDate">Data de Encerramento: </label>
+        <label for="untilDate">Data de Encerramento: </label><br>
+        <small>Insira uma data de encerramento para as Inscrições</small>
         <input type="date" class="form-control" id="untilDate" ng-model="until">
       </div>
       <hr>
       <div class="row">
         <div class="col-sm-6 form-group">
           <h5>Limite de Inscrições Matutinas</h5>
+          <small>Insira valores para definir limite de vagas nas turmas</small>
           <br>
           <label for="Mviolin">Violino:</label>
           <input type="number" id="Mviolin" class="form-control" maxlength="3" ng-model="Mviolin">
@@ -29,20 +32,21 @@
           <input type="number" id="Mmusical" class="form-control" maxlength="3" ng-model="Mmusical">
         </div>
         <div class="col-sm-6 form-group">
-            <h5>Limite de Inscrições Vespertinas</h5>
-            <br>
-            <label for="Vviolin">Violino:</label>
-            <input type="number" id="Vviolin" class="form-control" maxlength="3" ng-model="Vviolin">
-            <label for="Vviola">Viola:</label>
-            <input type="number" id="Vviola" class="form-control" maxlength="3" ng-model="Vviola">
-            <label for="Vcello">Cello:</label>
-            <input type="number" id="Vcello" class="form-control" maxlength="3" ng-model="Vcello">
-            <label for="Vbaixo">Baixo Arcústico:</label>
-            <input type="number" id="Vbaixo" class="form-control" maxlength="3" ng-model="Vbaixo">
-            <label for="Vvocal">Tecnica Vocal:</label>
-            <input type="number" id="Vvocal" class="form-control" maxlength="3" ng-model="Vvocal">
-            <label for="Vmusical">Musicalização:</label>
-            <input type="number" id="Vmusical" class="form-control" maxlength="3" ng-model="Vmusical">
+          <h5>Limite de Inscrições Vespertinas</h5>
+          <small>Insira valores para definir limite de vagas nas turmas</small>
+          <br>
+          <label for="Vviolin">Violino:</label>
+          <input type="number" id="Vviolin" class="form-control" maxlength="3" ng-model="Vviolin">
+          <label for="Vviola">Viola:</label>
+          <input type="number" id="Vviola" class="form-control" maxlength="3" ng-model="Vviola">
+          <label for="Vcello">Cello:</label>
+          <input type="number" id="Vcello" class="form-control" maxlength="3" ng-model="Vcello">
+          <label for="Vbaixo">Baixo Arcústico:</label>
+          <input type="number" id="Vbaixo" class="form-control" maxlength="3" ng-model="Vbaixo">
+          <label for="Vvocal">Tecnica Vocal:</label>
+          <input type="number" id="Vvocal" class="form-control" maxlength="3" ng-model="Vvocal">
+          <label for="Vmusical">Musicalização:</label>
+          <input type="number" id="Vmusical" class="form-control" maxlength="3" ng-model="Vmusical">
         </div>
       </div>
       <input type="submit" class="btn btn-primary" value="Abrir Inscrições">
