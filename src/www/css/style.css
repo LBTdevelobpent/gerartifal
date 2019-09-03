@@ -5,7 +5,9 @@ body {
   background-color:rgb(152,251,152,0.5);
   font-family: 'Noto Sans HK', sans-serif;
 }
-
+p {
+  font-size: 18px;
+}
 
 #include p {
   overflow: hidden;
@@ -67,8 +69,11 @@ body {
 #containerGrupo img{
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
   display: block;
+  overflow: hidden;
+  max-height: 200px;
+  min-width: 300px;
+
 }
 #gallery{
   background-color: rgba(46, 230, 0, 0.438);
@@ -76,21 +81,9 @@ body {
   margin-bottom: 2%;
 }
 
-/* galeria grupos */
-.gallery {
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
-  column-count: 3;
-  -webkit-column-width: 33%;
-  -moz-column-width: 33%;
-  column-width: 33%; }
-  .gallery .pics {
-  -webkit-transition: all 350ms ease;
-  transition: all 350ms ease; }
-  .gallery .animation {
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1); }
+
+
+  
 
   @media (max-width: 450px) {
   .gallery {

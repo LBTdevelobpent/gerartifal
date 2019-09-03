@@ -15,6 +15,9 @@ $(document).ready(() => {
      * */
   }
 });
+$(window).on('beforeunload', function(){
+  $(window).scrollTop(0);
+});
 
 window.openSubscribe = () => {
   if (user) {

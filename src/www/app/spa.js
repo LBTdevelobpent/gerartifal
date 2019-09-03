@@ -93,11 +93,6 @@ app1.controller('MainCtrl', ['$rootScope', '$location', 'authentication', ($root
   authentication.openSubscribes();
   authentication.isAuthenticate();
 
-  if ($location.path() !== '/') {
-    $('#spanInit').slideUp('slow');
-  } else {
-    $('#spanInit').slideDown('slow');
-  }
 
   // eslint-disable-next-line no-param-reassign
   $rootScope.activetab = $location.path();
