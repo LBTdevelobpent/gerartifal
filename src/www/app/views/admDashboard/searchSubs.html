@@ -85,16 +85,19 @@
             <label><strong>Nivel Escolar:</strong> ${ obj.schoolingDegree }</label><br>
             <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> ${ obj.howDiscovered }</label><br>
             <label><strong>Porque Deseja Fazer Este Curso?</strong> ${ obj.whyWants }</label><br>
+
           `;
           var win = window.open('', '', 'height=700,width=700');
           win.document.write('<html><head>');
           win.document.write('<title>Usuarios</title>');
+          win.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">');
           win.document.write('</head>');
           win.document.write('<body>');
           win.document.write(body);
           win.document.write('</body></html>');
-          win.document.close();
+          win.focus();
           win.print();
+          win.close();
 
         }
 

@@ -1,8 +1,7 @@
 {
-  "service": "mailtrap",
-  "host": "smtp.mailtrap.io",
-  "port": 2525,
+  "host": "smtp.gmail.com",
+  "port": 587,
   "secure": false,
-  "user": "eadbf94253ca9d",
-  "pass": "05a8fd01ffb61f"
+  "user": "gerartifal@gmail.com",
+  "pass": "g3r4rt11f4l"
 }
