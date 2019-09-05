@@ -8,7 +8,6 @@
   background-size:cover;
   background-blend-mode:darken;
   background-repeat:no-repeat;
-  font-family: 'Coiny', cursive;
   background-color: rgba(0.0, 0.0, 0.0, 0.7);
 }
 .container h1{
@@ -18,7 +17,14 @@
   font-family: 'Coiny', cursive;
 
 }
-fill-div {
+.container h1{
+  text-align: center;
+  padding:2%;
+  padding-bottom:3%;
+  font-family: 'Coiny', cursive;
+
+}
+.fill-div {
   display: block;
   height: 100%;
   width: 100%;
@@ -41,6 +47,16 @@ fill-div {
   padding-top:40px;
   color:inherit;
 }
+.underline{
+  text-decoration: none;
+}
+.underline:hover{
+  text-decoration: none;
+}
+.ob-fit{
+  object-fit: cover;
+}
+
 
 
 @media (max-width:767px) {
@@ -50,17 +66,6 @@ fill-div {
     font-size:24px;
   }
 }
-
-.photo-gallery .intro {
-  font-size:16px;
-  max-width:500px;
-  margin:0 auto 40px;
-}
-
-.photo-gallery .intro p {
-  margin-bottom:0;
-}
-
 .photo-gallery .photos {
   padding-bottom:20px;
 }

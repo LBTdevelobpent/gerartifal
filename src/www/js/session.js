@@ -15,7 +15,7 @@ $(document).ready(() => {
      * */
   }
 });
-$(window).on('beforeunload', function(){
+$(window).on('beforeunload', () => {
   $(window).scrollTop(0);
 });
 

@@ -57,7 +57,7 @@ app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($sc
       $window.location.href = '/';
     }
 
-    const socket = io.connect('http://gerartifal-com.umbler.net/');
+    const socket = io.connect('http://localhost:3000/');
     socket.on('openF', (data) => {
       $scope.morning = data.morning;
       $scope.evening = data.evening;
