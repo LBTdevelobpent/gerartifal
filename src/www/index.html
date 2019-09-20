@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="app">
+<html lang="pt-BR" ng-app="app">
   <head>
     <title>Inicio</title>
     <base href="/">
@@ -11,10 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/scrollBrand.js"></script>
+    <script src="./vendor/dirPagination.js"></script>
+
+
 
     <!-- CSS -->
     <!--fontawesome chave de acesso-->
@@ -42,6 +45,8 @@
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/js/froala_editor.pkgd.min.js'></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+
   </head>
 
   <body>
@@ -56,48 +61,43 @@
     <!-- ===============  Navbar =================-->
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top ">
-      <div class="container">
+    <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark p-md-2 p-lg-0">
+      <div class="container-fluid">
       <!--========== Toggler/collapsibe Button ========== -->
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
-			</button>
+      </button>
+
 
       <!-- ========== Botões Que Ficarão dentro do menuBar ==========-->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav m-auto">
+          <ul class=" navbar navbar-nav m-auto p-0">
 
             <li class=" btn nav-item active" ng-class="{active: activetab == '/'}">
-              <a class="nav-link" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
+              <a class="nav-link p-2" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
             </li>
 
             <li class="btn nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
-              <a id="project" class="nav-link" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
+              <a id="project" class="nav-link p-2" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
             </li>
 
             <li class="btn nav-item"  ng-class="{active: activetab == '/form'}">
-              <a id="subButton" role="button" class="btn disabled nav-link" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+              <a id="subButton" role="button" class="btn disabled nav-link p-2" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
             </li>
 
 
-            <li class="btn nav-item" id="dropdown">
-              <div class="dropdown">
-                <a ng-class="validDrop()"  id="dropdownMenuLink" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i> Mais</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-book-reader fa-md"></i> Materiais</a>
-                  <a class="dropdown-item" href="#" onclick="alert('É preciso fazer o cadastro ou login para entrar neste campo')"><i class="fas fa-clock fa-md"></i> Turmas e Horários</a>
-                  <a class="dropdown-item" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
-                </div>
-              </div>
+            <li class="btn nav-item" ng-class="{active: activetab == '/sobre'}">
+                 <a class="nav-link p-2" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site</a>
             </li>
+
             <li class=" btn nav-item active">
             <div ng-controller="auth">
-              <button type="button" class="btn nav-item btn-primary" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
+              <button type="button" class="btn nav-link center p-2" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
               <div id="option" class="btn dropdown d-none">
-                <button class="btn btn-info dropdown-toggle d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn nav-link dropdown-toggle p-1 pb-2 pt-2 d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opções
                 </button>
-                <div class="btn dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-menu " aria-labelledby="dropdownOptionButton">
                     <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
                     <a ng-class="{active: activetab == '/adm/posts'}" id="postsOp" class="dropdown-item" href="/adm/posts">Adicionar posts</a>
                     <a ng-class="{active: activetab == '/adm/subscribe'}" id="subsOp" class="dropdown-item" href="/adm/subscribe">Abrir Inscrições</a>
@@ -109,6 +109,7 @@
             </div>
             </li>
 
+
           </ul>
         </div>
 
@@ -117,10 +118,11 @@
     </nav>
 
 
+
     <!--==================== FIM DO NAVBAR    ===================-->
 
     <div class="container">
-    <div  class="container" id="contNoticias" ng-view ></div>
+    <div  class="container" id="contNoticias" ng-view autoscroll="true" ></div>
 
     <!-- ==========Desenvolvedores ==========-->
 
@@ -203,8 +205,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="vendor/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     <script>
       $(window).scroll(function() {
         if ($('nav').scrollTop() > 100) {

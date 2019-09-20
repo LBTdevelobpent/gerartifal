@@ -27,6 +27,12 @@ router.put('/modify', async (req, res) => {
     const { userId } = req.userId;
     const user = await User.findOne({ _id: userId }).select('+password');
 
+    const exist = await User.findOne({ name: userModify.name });
+
+    if (exist) {
+      return res.status(400).send({ error: 'Nome de Usuario já está sendo usado' });
+    }
+
     if (!user) {
       return res.status(400).send({ error: 'Usuario inexistente' });
     }

@@ -24,7 +24,7 @@ app3.controller('register', ['$scope', '$http', ($scope, $http) => {
     };
 
     if (name === 'undefined' || !email || !password) {
-      alert('Campos inválidos');
+      $('.errorCamp.register').hide().html('Campos inválidos').fadeIn(200);
     } else if (password.length < 8) {
       document.getElementById('senha-invalida').innerHTML = 'Senha invalida: A senha deve conter no mínimo 8 dígitos';
     } else {
@@ -34,7 +34,7 @@ app3.controller('register', ['$scope', '$http', ($scope, $http) => {
           window.location.href = '/';
         })
         .error((response) => {
-          alert(response.error);
+          $('.errorCamp.register').hide().html(response.error).fadeIn(200);
         });
     }
   };
@@ -46,7 +46,7 @@ app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window)
     const data = { emailOrUser, password };
 
     if (emailOrUser === 'undefined' || !password) {
-      alert('Há campos vazios');
+      $('.errorCamp.login').html('Há Campos vazios');
     } else {
       $http.post('/auth/authenticate', data)
         .success((response) => {
@@ -65,7 +65,7 @@ app3.controller('login', ['$scope', '$http', '$window', ($scope, $http, $window)
           return 0;
         })
         .error((response) => {
-          alert(response.error);
+          $('.errorCamp.login').hide().html(response.error).fadeIn(200);
         });
     }
   };
@@ -85,7 +85,7 @@ app3.controller('forgotPassword', ['$scope', '$http', ($scope, $http) => {
           $('#forgotButton').prop('disabled', false);
         })
         .error((response) => {
-          console.error(response);
+          $('.errorCamp.forgotPassword').hide().html(response.error).fadeIn(200);
           $('#forgotButton').prop('disabled', false);
         });
     }

@@ -23,15 +23,20 @@
                       <div class="form-row">
                         <div class="col-md-12 mb-3">
                           <label>Senha</label>
-                          <input type="password" class="form-control" ng-model="password" placeholder="Digite sua senha" required>
+                          <input type="password" id="inputPassword" class="form-control" ng-model="password" placeholder="Digite sua senha" required>
                         </div>
                       </div>
+                      <small style="color: red;" class="errorCamp login"></small>
+                      <br>
                       <span style="color: #3399ff;">
                         <label data-toggle="collapse" style="text-decoration: underline; cursor: pointer;" href="#collapseThree">Esqueci minha senha</label>
                       </span>
                       <br>
+                      <br>
                       <button type="submit" class="btn btn-primary">Entrar</button>
                   </form>
+                  <br>
+                  <a href="/googleAuth"><img src="img/google/web/1x/btn_google_signin_dark_normal_web.png"></a>
 
             </div>
             <div ng-controller="register" id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -54,10 +59,13 @@
                           <label>Senha</label>
                           <input type="password" class="form-control" placeholder="Digite uma senha" ng-model="password" required>
                         </div>
-                    </div>
-
+                    </div><br>
+                    <small style="color: red;" class="errorCamp register"></small>
+                    <br>
                     <div class="g-recaptcha" data-sitekey="6LeJD5UUAAAAAIJiM8AcfqBgaJ5EK4_Kbj4HVMmf">
+
                   </div>
+                  <br>
                   <button type="submit" class="btn btn-primary">Cadastrar-se</button>
 
                 </form>
@@ -70,15 +78,15 @@
                       <label>Insira o Email para recuperar sua senha</label>
                       <hr>
                       <label>Email</label>
-                      <input type="email" class="form-control" placeholder="Digite seu email" ng-model="email" autocomplete="on" required>
+                      <input type="email" class="form-control" placeholder="Digite seu email" ng-model="email" autocomplete="on" required><br>
+                      <small style="color: red;" class="errorCamp forgotPassword"></small>
+                      <br>
                     </div>
                     <button type="submit" class="btn btn-primary" id="forgotButton">Enviar</button>
                   </div>
                 </form>
             </div>
-            <hr>
-            <br>
-            <a href="/googleAuth"><img src="img/google/web/1x/btn_google_signin_dark_normal_web.png"></a>
+
           </div>
         </div>
       </div>

@@ -14,6 +14,48 @@ const OpsubSchema = new mongoose.Schema({
     type: Date,
   },
 
+  morning: {
+    Violino: {
+      type: Number,
+    },
+    Viola: {
+      type: Number,
+    },
+    Cello: {
+      type: Number,
+    },
+    Baixo_Acustico: {
+      type: Number,
+    },
+    Tec_Vocal: {
+      type: Number,
+    },
+    Musicalizacao: {
+      type: Number,
+    },
+  },
+
+  evening: {
+    Violino: {
+      type: Number,
+    },
+    Viola: {
+      type: Number,
+    },
+    Cello: {
+      type: Number,
+    },
+    Baixo_Acustico: {
+      type: Number,
+    },
+    Tec_Vocal: {
+      type: Number,
+    },
+    Musicalizacao: {
+      type: Number,
+    },
+  },
+
 });
 
 const Opsub = mongoose.model('Opsub', OpsubSchema);

@@ -3,13 +3,15 @@
 <br>
  <div class="row">
   <% post.forEach(function(posts, index) { %>
-    <div class=" texto-noticia col-12 col-md-6 d-none d-md-block">
+    <div class=" texto-noticia col-12 col-md-12 col-lg-6 d-none d-md-block">
       <img src="<%- 'data:image/webp;base64,'+posts.image.toString('base64') %>" height="200" width="200" class="img-responsive rounded">
       <br>
       <a href="/<%- posts.date %>/<%- posts.archiName %>"><h2><%- posts.title %></h2></a>
+      <h6 class="text-center">Publicado em <%- posts.date %></h6>
       <p class="a">
         <%- posts.body %>
       </p>
+      <hr width="25%">
     </div>
   <% }) %>
   <br>

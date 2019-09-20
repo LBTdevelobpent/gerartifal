@@ -88,13 +88,11 @@ app1.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPr
     .otherwise({ redirectTo: '/' });
 }]);
 
-app1.controller('MainCtrl', ['$rootScope', '$location', ($rootScope, $location) => {
+app1.controller('MainCtrl', ['$rootScope', '$location', 'authentication', ($rootScope, $location, authentication) => {
 
-  if ($location.path() !== '/') {
-    $('#spanInit').slideUp('slow');
-  } else {
-    $('#spanInit').slideDown('slow');
-  }
+  authentication.openSubscribes();
+  authentication.isAuthenticate();
+
 
   // eslint-disable-next-line no-param-reassign
   $rootScope.activetab = $location.path();

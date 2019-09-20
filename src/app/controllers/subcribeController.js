@@ -4,7 +4,7 @@ const router = express.Router();
 const authMiddleware = require('../middlewares/auth.js');
 const admAuthMiddleware = require('../middlewares/admAuth');
 const Subcribe = require('../models/subcribe.js');
-const User = require('../models/user.js');
+const Opsub = require('../models/openSub.js');
 
 router.use(authMiddleware);
 
@@ -54,71 +54,126 @@ router.delete('/:subId', async (req, res) => {
 // ========================================================================================//
 
 // ================================================ADM======================================//
-function listItems(items, pageActual, limitItems) {
-  const result = [];
-  const totalPage = Math.ceil(items.length / limitItems);
-  let count = (pageActual * limitItems) - limitItems;
-  const delimiter = count + limitItems;
 
-  if (pageActual <= totalPage) {
-    for (let i = count; i < delimiter; i += 1) {
-      if (items[i] != null) {
-        result.push(items[i]);
-      }
-      count += 1;
-    }
-  }
-  return result;
-}
 // ======================================Busca todas as fichas==============================//
 router.use('/findAll', admAuthMiddleware);
 router.get('/findAll', async (req, res) => {
   try {
-    const subcribe = await Subcribe.find().populate('user');
+    const subscribe = await Subcribe.find().populate('user');
 
-    return res.send({ subcribe: listItems(subcribe, 1, 10) });
+    return res.send({ subscribe });
   } catch (err) {
     return res.status(400).send({ error: 'Error em encontrar inscrição' });
   }
 });
 // ======================================================================================//
 
-// =====================================Busca uma ficha específica=======================//
-router.put('/find_subscription', async (req, res) => {
+router.use('/validSubscribe', admAuthMiddleware);
+router.post('/validSubscribe', async (req, res) => {
   try {
-    const { adm } = await User.findById(req.userId);
+    const { id } = req.body;
+    const subscribe = await Subcribe.findById(id);
+    const openSub = await Opsub.findOne({ unique: true });
 
-    if (adm) {
-      return res.status(401).send({ error: 'Apenas ADM' });
+    if (!subscribe) {
+      res.send(400).send({ error: 'Ficha de inscrição inexistente' });
     }
 
-    if (adm === false) {
-      return res.status(401).send({ error: 'Apenas ADM' });
-    }
+    const turno = subscribe.turno === 'Matutino' ? openSub.morning : openSub.evening;
 
-    const { nome, CPF } = req.body;
-
-    // Script para buscar a ficha letra por letra, caso não tenha CPF sendo passado
-    if (CPF === 0) {
-      const subcribe = await Subcribe.find().populate('user');
-
-      for (let c = 0; c < subcribe.length; c += 1) {
-        const { name } = subcribe[c];
-        if (!(nome.split('').join('') === name.split('', nome.length).join(''))) {
-          subcribe.splice(subcribe.indexOf(subcribe[c]), 1);
-          c -= 1;
-        }
+    if (subscribe.curso === 'Baixo Acústico') {
+      if (turno.Baixo_Acustico === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Baixo_Acustico -= 1;
       }
-      return res.send({ subcribe });
     }
-    // ----------------------------------------------------------------------------//
+    if (subscribe.curso === 'Técnica Vocal') {
+      if (turno.Tec_Vocal === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Tec_Vocal -= 1;
+      }
+    }
+    if (subscribe.curso === 'Musicalização') {
+      if (turno.Musicalizacao === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Musicalizacao -= 1;
+      }
+    }
+    if (subscribe.curso === 'Violino') {
+      if (turno.Violino === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Violino -= 1;
+      }
+    }
+    if (subscribe.curso === 'Cello') {
+      if (turno.Cello === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Cello -= 1;
+      }
+    }
+    if (subscribe.curso === 'Viola') {
+      if (turno.Viola === 0) {
+        res.send(400).send({ error: 'Turma Já está cheia' });
+      } else {
+        turno.Viola -= 1;
+      }
+    }
 
-    const subcribe = await Subcribe.find({ $or: [{ name: nome }, { cpf: CPF }] }).populate('user');
-    return res.send({ subcribe });
-  } catch (err) {
-    return res.status(400).send({ error: 'Error em encontrar inscrição' });
+    subscribe.valid = true;
+    subscribe.save();
+    openSub.save();
+
+    res.send({ ok: 'Inscrição validada' });
+  } catch (error) {
+    res.send(400).send({ error: 'Erro em validar a inscrição' });
   }
 });
-// ======================================================================================//
+
+router.use('/invalidSubscribe', admAuthMiddleware);
+router.post('/invalidSubscribe', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const subscribe = await Subcribe.findById(id);
+    const openSub = await Opsub.findOne({ unique: true });
+
+    if (!subscribe) {
+      res.send(400).send({ error: 'Ficha de inscrição inexistente' });
+    }
+
+    const turno = subscribe.turno === 'Matutino' ? openSub.morning : openSub.evening;
+
+    if (subscribe.curso === 'Baixo Acústico') {
+      turno.Baixo_Acustico += 1;
+    }
+    if (subscribe.curso === 'Técnica Vocal') {
+      turno.Tec_Vocal += 1;
+    }
+    if (subscribe.curso === 'Musicalização') {
+      turno.Musicalizacao += 1;
+    }
+    if (subscribe.curso === 'Violino') {
+      turno.Violino += 1;
+    }
+    if (subscribe.curso === 'Cello') {
+      turno.Cello += 1;
+    }
+    if (subscribe.curso === 'Viola') {
+      turno.Viola += 1;
+    }
+
+    subscribe.valid = false;
+    subscribe.save();
+    openSub.save();
+
+    res.send({ ok: 'Inscrição invalidada' });
+  } catch (error) {
+    res.send(400).send({ error: 'Erro em invalidar a inscrição' });
+  }
+});
 
 module.exports = app => app.use('/subcribe', router);

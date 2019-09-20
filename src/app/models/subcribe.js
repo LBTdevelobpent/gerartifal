@@ -11,7 +11,7 @@ const subcribeSchema = new mongoose.Schema({
     required: true,
   },
   cpf: {
-    type: Number,
+    type: String,
     required: true,
   },
   curso: {
@@ -23,7 +23,7 @@ const subcribeSchema = new mongoose.Schema({
     require: true,
   },
   hasInstrument: {
-    type: Boolean,
+    type: String,
     require: true,
   },
   memberCommunity: {
@@ -67,7 +67,7 @@ const subcribeSchema = new mongoose.Schema({
     require: true,
   },
   cep: {
-    type: Number,
+    type: String,
     require: true,
   },
   deficiency: {
@@ -97,6 +97,12 @@ const subcribeSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
+  valid: {
+    type: Boolean,
+    default: false,
+  },
+
 });
 
 // Exportação do Schema do Usuario

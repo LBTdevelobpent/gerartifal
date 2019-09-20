@@ -54,6 +54,7 @@
 }
 .navbar .navbar-toggler {
   background-color: hsl(116, 100%, 22%);
+  color: #ffffff;
 }
 .navbar .navbar-toggle:hover,
 .navbar .navbar-toggle:focus {

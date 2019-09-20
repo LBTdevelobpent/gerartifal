@@ -1,55 +1,121 @@
 <div ng-app="subcribe" ng-controller="subcribe" ng-init="showAllSub()">
-  <div ng-repeat="x in subcribe">
-    <h4>Digite o nome:</h4>
-    <input type="text" ng-model="nome">
-    <h4>Digite o cpf:</h4>
-    <input class="cpf-mask" type="number" ng-model="cpf">
-    
-    
-
-    <div ng-repeat="x in subcribe">
-        <div id="{{ x.cpf }}" class="container border">
-          <label><strong>Nome Completo:</strong> {{ x.name }}</label><br>
-          <label><strong>CPF:</strong> {{ x.cpf }}</label><br>
-          <label><strong>Curso:</strong> {{ x.curso }}</label><br>
-          <label><strong>Turno:</strong> {{ x.turno }}</label><br>
-          <label><strong>Possui Instrumento?</strong> {{ x.hasInstrument }}</label><br>
-          <label><strong>Estado Natal:</strong> {{ x.birthState }}</label><br>
-          <label><strong>Cidade Natal:</strong> {{ x.birthCity }}</label><br>
-          <label><strong>Registro Geral:</strong> {{ x.rg }}</label><br>
-          <label><strong>Orgão Emissor:</strong> {{ x.orgaoEmissor }}</label><br>
-          <label><strong>Email:</strong> {{ x.email }}</label><br>
-          <label><strong>Telefone:</strong> {{ x.phone }}</label><br>
-          <label><strong>Endereço:</strong> {{ x.address }}</label><br>
-          <label><strong>Cidade Atual:</strong> {{ x.city }}</label><br>
-          <label><strong>Estado Atual:</strong> {{ x.state }}</label><br>
-          <label><strong>CEP:</strong> {{ x.cep }}</label><br>
-          <label><strong>Possui Deficiência:</strong> {{ x.deficiency }}</label><br>
-          <label><strong>Nivel Escolar:</strong> {{ x.schoolingDegree }}</label><br>
-          <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> {{ x.howDiscovered }}</label><br>
-          <label><strong>Porque Deseja Fazer Este Curso?</strong> {{ x.whyWants }}</label><br>
+  <div class="">
+    <form class="form row">
+      <div class="col-sm-12 col-md-6 form-group">
+        <label>Procurar por campo:</label>
+        <input type="text" ng-model="search" class="form-control" placeholder="Procurar...">
+        <small class="form-text text-muted">Digite um Nome, CPF, Telefone, etc.</small>
+      </div>
+      <div class="col-sm-12 col-md-6 form-group">
+        <label>Procurar por Data:</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <input type="date" ng-model="dateFrom" class="form-control">
+            <small class="form-text text-muted">Escolha a data inicial</small>
+          </div>
+          <div class="col-sm-6">
+            <input type="date" ng-model="dateTo" class="form-control">
+            <small class="form-text text-muted">Escolha a data final</small>
+          </div>
         </div>
-        <br>
-        <button class="btn" onclick="btGerarPDF(this.id)" id="{{ x.cpf }}">Gerar PDF</button>
-    </div>
-
+      </div>
+    </form>
+    <br>
+  </div>
+  <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th class="pointCur" ng-click="order('name')" onclick="turnArrow(this)">Nome <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('cpf')" onclick="turnArrow(this)">CPF <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('email')" onclick="turnArrow(this)">E-mail <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('phone')" onclick="turnArrow(this)">Telefone <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('curso')" onclick="turnArrow(this)">Curso <i class="fas fa-arrow-down"></i></th>
+          <th class="pointCur" ng-click="order('createAt')" onclick="turnArrow(this)">Data de Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th class="text-center pointCur" ng-click="order('valid')" onclick="turnArrow(this)">Validar Inscrição <i class="fas fa-arrow-down"></i></th>
+          <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr dir-paginate="info in subscribe | filter:search | datafilter:dateFrom:dateTo | orderBy:sortKey:reverse|itemsPerPage:10">
+          <td>{{ info.name }}</td>
+          <td>{{ info.cpf }}</td>
+          <td>{{ info.email }}</td>
+          <td>{{ info.phone }}</td>
+          <td>{{ info.curso }}</td>
+          <td>{{ info.createAt | date: "dd.MM.y" }}</td>
+          <td>
+            <div ng-if="!info.valid">
+              <button class="btn btn-success" ng-click="validSubs( info._id )" >Validar Inscrição</button>
+            </div>
+            <div ng-if="info.valid">
+              <i style="color: #04ba31;" ng-click="invalidSubs( info._id )" class="fas fa-check fa-2x"></i>
+            </div>
+          </td>
+          <td><button class="btn" id="{{ info }}" onclick="btGerarPDF(this.id)">Gerar PDF</button></td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+  <div>
+    <dir-pagination-controls
+            max-size="8"
+            direction-links="true"
+            boundary-links="true"></dir-pagination-controls>
+  </div>
       <script>
-        function btGerarPDF(cpf) {
-
-          var user = document.getElementById(`${cpf}`).innerHTML;
+        function btGerarPDF(item) {
+          const obj = JSON.parse(item);
+          var body = `
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+            <label><strong>Nome Completo:</strong> ${ obj.name }</label><br>
+            <label><strong>CPF:</strong> ${ obj.cpf }</label><br>
+            <label><strong>Curso:</strong> ${ obj.curso }</label><br>
+            <label><strong>Turno:</strong> ${ obj.turno }</label><br>
+            <label><strong>Possui Instrumento?</strong> ${ obj.hasInstrument }</label><br>
+            <label><strong>Estado Natal:</strong> ${ obj.birthState }</label><br>
+            <label><strong>Cidade Natal:</strong> ${ obj.birthCity }</label><br>
+            <label><strong>Registro Geral:</strong> ${ obj.rg }</label><br>
+            <label><strong>Orgão Emissor:</strong> ${ obj.orgaoEmissor }</label><br>
+            <label><strong>Email:</strong> ${ obj.email }</label><br>
+            <label><strong>Telefone:</strong> ${ obj.phone }</label><br>
+            <label><strong>Endereço:</strong> ${ obj.address }</label><br>
+            <label><strong>Cidade Atual:</strong> ${ obj.city }</label><br>
+            <label><strong>Estado Atual:</strong> ${ obj.state }</label><br>
+            <label><strong>CEP:</strong> ${ obj.cep }</label><br>
+            <label><strong>Possui Deficiência:</strong> ${ obj.deficiency }</label><br>
+            <label><strong>Nivel Escolar:</strong> ${ obj.schoolingDegree }</label><br>
+            <label><strong>Como Ficou Sabendo Sobre o Projeto:</strong> ${ obj.howDiscovered }</label><br>
+            <label><strong>Porque Deseja Fazer Este Curso?</strong> ${ obj.whyWants }</label><br>
+            <br>
+            <hr class="border border-dark" width="50%">
+            <p class="text-center">Assinatura do responsável pela inscrição</p><br>
+            <hr class="border border-dark" width="50%">
+            <p class="text-center" >Assinatura do responsável do núcleo</p>
+          `;
           var win = window.open('', '', 'height=700,width=700');
           win.document.write('<html><head>');
           win.document.write('<title>Usuarios</title>');
           win.document.write('</head>');
           win.document.write('<body>');
-          win.document.write(user);
+          win.document.write(body);
           win.document.write('</body></html>');
           win.document.close();
           win.print();
 
         }
 
-      </script>
+        function turnArrow(that) {
+          if ($(that).data('clicked')) {
+            if($(that).find('i').attr('class') === 'fas fa-arrow-up') {
+              $(that).find('i').attr('class', 'fas fa-arrow-down');
+            } else {
+              $('.fas.fa-arrow-up').attr('class', 'fas fa-arrow-down');
+              $(that).find('i').attr('class', 'fas fa-arrow-up');
+            }
+          }
+          $(that).data('clicked', true);
+        }
 
-  </div>
+      </script>
 </div>

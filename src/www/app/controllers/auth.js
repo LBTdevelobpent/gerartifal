@@ -1,9 +1,11 @@
-const app2 = angular.module('auth', []);
+const auth = angular.module('auth', []);
 
 // =======================Get Parametros da URL====================//
 const getUrlParameter = function getUrlParameter(sParam) {
-  const sPageURL = window.location.search.substring(1),
-      sURLVariables = sPageURL.split('&');
+  const sPageURL = window.location.search.substring(1);
+
+
+  const sURLVariables = sPageURL.split('&');
   let sParameterName;
   for (let i = 0; i < sURLVariables.length; i += 1) {
     sParameterName = sURLVariables[i].split('=');
@@ -63,6 +65,7 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
       window.localStorage.clear();
       return;
     }
+
     const { _id, email, adm } = JSON.parse(window.localStorage.getItem('user'));
 
     if (adm) {
@@ -93,6 +96,56 @@ app2.controller('auth', ['$scope', '$http', ($scope, $http) => {
         window.localStorage.clear();
       });
     }
+  },
+
+  openSubscribes: () => {
+    // ===============Checkagem de abertura de incrição===============//
+    const openSub = window.localStorage.getItem('openSub');
+    if (!openSub) {
+      window.localStorage.setItem('openSub', false);
+    }
+    const socket = io.connect('http://localhost:3000/');
+    socket.on('openF', (data) => {
+      const date = Date.now();
+      if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
+        window.localStorage.setItem('openSub', true);
+        openSubscribe();
+      }
+    });
+    // ===============================================================//
+  },
+
+})]);
+
+// ==================================== Para validar uma sessão ==========================
+auth.controller('auth', ['$scope', '$http', 'authentication', ($scope, $http, authentication) => {
+  $scope.session = () => {
+    if (getUrlParameter('token')) {
+      const user = {
+        _id: getUrlParameter('id'),
+        name: getUrlParameter('name'),
+        email: getUrlParameter('email'),
+        adm: getUrlParameter('adm'),
+        social: true,
+      };
+      window.localStorage.clear();
+      window.localStorage.setItem('user', JSON.stringify(user));
+      document.cookie = `token=${getUrlParameter('token')}; path=/`;
+      window.location.href = '/';
+    }
+
+    $http.get('/blog/getCarrousel')
+      .success((response) => {
+        $scope.carrousel = response;
+      });
+    $http.get('/blog/getPosts')
+      .success((response) => {
+        $('#include').html(response);
+      });
+
+    authentication.openSubscribes();
+
+    authentication.isAuthenticate();
   };
 
   $scope.logout = () => {

@@ -1,11 +1,29 @@
 //
 //  Este script é responsável pelas fichas de inscrição
 //
-const app = angular.module('subcribe', []);
+const app = angular.module('subcribe', ['angularUtils.directives.dirPagination']);
+
+app.filter('datafilter', () => (items, from, to) => {
+  if ((from === undefined || to === undefined) || (from === null || to === null)) {
+    return items;
+  }
+  const df = from;
+  const dt = to;
+  const result = [];
+  for (let i = 0; i < items.length; i += 1) {
+    const tf = new Date(items[i].createAt);
+    const tt = new Date(items[i].createAt);
+    if (tf > df && tt < dt) {
+      result.push(items[i]);
+    }
+  }
+  return result;
+});
+
 // ===================== Controlador de validação de sessão - cookies ========================
-app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $window) => {
+app.controller('subcribe', ['$scope', '$http', '$window', 'authentication', ($scope, $http, $window, authentication) => {
   const token = (document.cookie).split('=', 2)[1];
-  const openSub =  $window.localStorage.getItem('openSub');
+  const openSub = $window.localStorage.getItem('openSub');
 
   // ---------------Validação de sessão como adm---------------//
   $scope.sessionAdm = () => {
@@ -38,6 +56,12 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
       $window.localStorage.setItem('openSub', false);
       $window.location.href = '/';
     }
+
+    const socket = io.connect('http://localhost:3000/');
+    socket.on('openF', (data) => {
+      $scope.morning = data.morning;
+      $scope.evening = data.evening;
+    });
 
     $http.get('/valid', {
       headers: { Authorization: `Bearer ${token}` },
@@ -106,22 +130,8 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     }).error((response) => {
       console.log(response.error);
     });
-
   };
-  // Mostrar ficha de inscrição
 
-  $scope.showSub = () => {
-    $http.get('/subcribe/find', {
-      headers: { Authorization: `Bearer ${token}` },
-    }).success((response) => {
-      const { name, age, cpf } = response.subcribe;
-      $scope.nome = name;
-      $scope.idade = age;
-      $scope.CPF = cpf;
-    }).error((response) => {
-      console.log(response.error);
-    });
-  };
   // Apagar inscrição
 
   $scope.delete = () => {
@@ -138,38 +148,53 @@ app.controller('subcribe', ['$scope', '$http', '$window', ($scope, $http, $windo
     });
   };
 
-  // ----------------------------ADM APENAS --------------------------
+  // ======================= Página de visualizar Incrições ============//
 
   // Mostrar todas as fichas de inscrições
   $scope.showAllSub = () => {
-    const { nome, cpf } = $scope;
+    $scope.sessionAdm();
 
-    // Caso não tenha nos campos de Busca, ele pega todas as fichas
-    if (nome === undefined && cpf === undefined) {
-      $http.get('/subcribe/findAll', {
+    $http.get('/subcribe/findAll', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).success((response) => {
+      $scope.subscribe = response.subscribe;
+    }).error((response) => {
+      console.error(response.error);
+    });
+  };
+
+  $scope.order = (keyname) => {
+    $scope.sortKey = keyname;
+    $scope.reverse = !$scope.reverse;
+  };
+
+  $scope.validSubs = (id) => {
+    const conf = confirm('Precione OK para validar a inscrição');
+    if (conf === true) {
+      $http.post('/subcribe/validSubscribe', { id }, {
         headers: { Authorization: `Bearer ${token}` },
-      }).success((response) => {
-        const { subcribe } = response;
-        $scope.subcribe = subcribe;
-      }).error((response) => {
-        alert(response.error);
-        console.log(response.error);
+      }).success(() => {
+        $scope.showAllSub();
+      }).error((err) => {
+        alert(err.error);
       });
-      // Pega fichas específicas
-    } else {
-      const data = { nome, cpf };
-      $http.put('/subcribe/find_subscription', data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .success((response) => {
-          const { subcribe } = response;
-          $scope.subcribe = subcribe;
-        }).error((response) => {
-          alert(response.error);
-          console.log(response);
-        });
     }
   };
+
+  $scope.invalidSubs = (id) => {
+    const conf = confirm('Precione OK para invalidar a inscrição');
+    if (conf === true) {
+      $http.post('/subcribe/invalidSubscribe', { id }, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).success(() => {
+        $scope.showAllSub();
+      }).error((err) => {
+        alert(err.error);
+      });
+    }
+  };
+
+  // ===================================================================//
 
   $scope.openSub = () => {
     const { from, until } = $scope;
