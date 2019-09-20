@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap');
+/* Cor Do Background */
+
+body {
+  background-color:rgb(152,251,152,0.5);
+  font-family: 'Noto Sans HK', sans-serif;
+}
+p {
+  font-size: 18px;
+}
+
+#include p {
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative;
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 3.6em;
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+  text-overflow: ellipsis;
+}
+.linkInit{
+  display: none;
+}
+
+
+.navbar{
+  align-items:center;
+}
+
+#contNoticias{
+  padding-top: 1%;
+  background-color: #ffffff
+}
+
+#pesquisa {
+  margin-left:10px;
+}
+
+
+.footer{
+  padding-top:2%;
+  background-color:#00FF3E;
+}
+
+.footer p{
+  border:0px;
+  margin-top:0%;
+  margin-right:0%;
+  margin-left:2%;
+  color:white;
+}
+
+
+#containerGrupo{
+  padding: 3%;
+
+}
+#containerGrupo h1, h2, h3{
+  text-align:center;
+  font-family: 'Noto Sans HK', sans-serif;
+  margin-bottom: 3%;
+}
+#containerGrupo img{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  overflow: hidden;
+  max-height: 200px;
+  min-width: 300px;
+
+}
+#gallery{
+  background-color: rgba(46, 230, 0, 0.438);
+  padding:5%;
+  margin-bottom: 2%;
+}
+
+
+
+
+  @media (max-width: 450px) {
+  .gallery {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-width: 100%;
+  -moz-column-width: 100%;
+  column-width: 100%;
+  }
+  }
+
+  @media (max-width: 400px) {
+  .btn.filter {
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+  }
+
+
+
+
+
+/*Telas  Super Pequenas (Telefones, 600px e menor)*/
+@media only screen and (max-width: 600px) {
+  .linkInit{
+    display: block;
+  }
+  .first {
+    height: 40vh;
+    min-height:40vh;
+    min-width:40vw;
+    background-position: center;
+    background-size:cover;
+    background-image:url('../img/orquestra.jpg');
+    }
+
+}
+/* Pequenos dispositivos (tablets e celulares largos, 600px pra cima) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medios dispositivos (tablets em paisagem, 768px pra cima) */
+@media only screen and (min-width: 768px) {
+
+
+}
+
+/* Large devices (laptops/desktops, 992px pra cima) */
+@media only screen and (min-width: 992px) {
+
+
+
+
+}
+
+/* Extra large devices (laptopes largos e telas grandes, 1200px pra cima) */
+@media only screen and (min-width: 1200px) {
+}
+
+
+/* Fonte Tamanho */
+html {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}

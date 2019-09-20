@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" ng-app="app">
+  <head>
+    <title>Inicio</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--SCRIPTS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./vendor/dirPagination.js"></script>
+
+
+
+    <!-- CSS -->
+    <!--fontawesome chave de acesso-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!--links bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css/animate.css">
+
+    <!--links google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran|Coiny|Noto+Sans+JP" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+
+    <!--links dos nossos arquivos css-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/projetos-grupos.css">
+
+    <!-- Froala Text Editor. -->
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.0/js/froala_editor.pkgd.min.js'></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+
+  </head>
+
+  <body>
+
+    <!-- Primeira Imagem Topo -->
+    <div id="spanInit">
+      <div class="container">
+       <img  src="./img/2.png">
+      </div>
+    </div>
+
+    <!-- ===============  Navbar =================-->
+
+
+    <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark p-md-2 p-lg-0">
+      <div class="container-fluid">
+      <!--========== Toggler/collapsibe Button ========== -->
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- ========== Botões Que Ficarão dentro do menuBar ==========-->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class=" navbar navbar-nav m-auto p-0">
+
+            <li class=" btn nav-item active" ng-class="{active: activetab == '/'}">
+              <a class="nav-link p-2" href="/" ><i class="fas fa-home fa-lg"></i> Página Inicial</a>
+            </li>
+
+            <li class="btn nav-item" ng-class="{active: activetab == '/projetos-grupos'}">
+              <a id="project" class="nav-link p-2" href="/projetos-grupos"><i class="fas fa-users fa-lg"></i> Projetos e Grupos Artísticos</a>
+            </li>
+
+            <li class="btn nav-item"  ng-class="{active: activetab == '/form'}">
+              <a id="subButton" role="button" class="btn disabled nav-link p-2" href="/form"><i class="fas fa-clipboard fa-lg"></i> Inscrições on-line</a>
+            </li>
+
+
+            <li class="btn nav-item" ng-class="{active: activetab == '/sobre'}">
+                 <a class="nav-link p-2" href="/sobre"><i class="fas fa-info-circle fa-md"></i> Sobre o Site </a>
+            </li>
+
+            <li class=" btn nav-item active">
+            <div ng-controller="auth">
+              <button type="button" class="btn nav-link center p-2" data-toggle="modal" data-target="#exampleModal" id="login">Entrar/Cadastrar-se</button>
+              <div id="option" class="btn dropdown d-none">
+                <button class="btn nav-link dropdown-toggle p-1 pb-2 pt-2 d-none" type="button" id="dropdownOptionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Opções
+                </button>
+                <div class="dropdown-menu " aria-labelledby="dropdownOptionButton">
+                    <a ng-class="{active: activetab == '/option'}" class="dropdown-item" href="/option">Editar Perfil</a>
+                    <a ng-class="{active: activetab == '/adm/posts'}" id="postsOp" class="dropdown-item" href="/adm/posts">Adicionar posts</a>
+                    <a ng-class="{active: activetab == '/adm/subscribe'}" id="subsOp" class="dropdown-item" href="/adm/subscribe">Abrir Inscrições</a>
+                    <a ng-class="{active: activetab == '/adm/searchSubs'}" id="searchOp" class="dropdown-item" href="/adm/searchSubs">Visualizar Inscrições</a>
+                </div>
+              </div>
+
+              <input type="button" class="btn btn-danger d-none" id="logout" ng-click="logout()" value="Log Out"/>
+            </div>
+            </li>
+
+
+          </ul>
+        </div>
+
+
+
+    </nav>
+
+
+
+    <!--==================== FIM DO NAVBAR    ===================-->
+
+    <div class="container">
+    <div  class="container" id="contNoticias" ng-view autoscroll="true" ></div>
+
+    <!-- ==========Desenvolvedores ==========-->
+
+    <section id="services" class="d-none d-lg-block">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase"><i class="fas fa-code fa-md"></i> <strong>Sobre os Desenvolvedores</strong> <i class="fas fa-code fa-md"></i></h2>
+              <h3 class="section-subheading text-muted">Este projeto foi desenvolvido pela equipe DuckDev em parceria com o IFAL, Campus Maceió.</h3>
+              <br>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                 <img src="img/lucas.jpeg">
+              </span>
+              <h4 class="service-heading">Lucas Amorim</h4>
+              <p class="text-muted"><i class="fas fa-sitemap"></i> Analista <i class="fas fa-sitemap"></i></p>
+            </div>
+            <div class="col">
+                <span class="fa-stack fa-4x circle">
+                    <img src="img/jerlysson.jpeg">
+                 </span>
+              <h4 class="service-heading">Jerlyson Feliciano</h4>
+              <p class="text-muted"><i class="fas fa-microchip"></i> Desenvolvedor Back-End <i class="fas fa-microchip"></i></p>
+            </div>
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                  <img src="img/eduardo.jpeg">
+               </span>
+            <h4 class="service-heading">Eduardo Moraes</h4>
+            <p class="text-muted"><i class="fas fa-users"></i> Orientador <i class="fas fa-users"></i></p>
+          </div>
+            <div class="col">
+              <span class="fa-stack fa-4x circle">
+                  <img src="img/matheus.jpeg">
+               </span>
+            <h4 class="service-heading">Matheus Silva</h4>
+            <p class="text-muted"><i class="fas fa-laptop-code"></i> Designer/ Desenvolvedor Front-End <i class="fas fa-laptop-code"></i></p>
+        </div>
+            <div class="col">
+                <span class="fa-stack fa-4x circle">
+                    <img src="img/gabriel.jpeg">
+                 </span>
+              <h4 class="service-heading">Gabriel Henrique</h4>
+              <p class="text-muted"><i class="fas fa-laptop-code"></i> Desenvolvedor Front-End <i class="fas fa-laptop-code"></i></p>
+            </div>
+
+
+          </div>
+        </div>
+      </section>
+
+<!-- ========== footer ==========-->
+    <footer id="myFooter">
+      <div class="container">
+        <div class="row">
+
+<!-- ========== Google Maps API ========== -->
+        </div>
+        <iframe class="d-none d-md-block" id="map-container" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.1989023512087!2d-35.732519584780675!3d-9.664039593081965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x701457996307ad5%3A0x1d22c2c44f26f853!2sInstituto+Federal+de+Alagoas+-+Campus+Macei%C3%B3!5e0!3m2!1spt-BR!2sbr!4v1545226271030" >
+        </iframe>
+      </div>
+<!-- ========== Social media ==========-->
+
+      <div class="social-networks">
+        <a href=""><i class="fa fa-instagram"></i></a>
+        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+      </div>
+      <div class="footer-copyright" id="copy">
+        <p>© 2019</p>
+      </div>
+    </footer>
+  </div>
+
+    <!-- ==================== FIM DO FOOTER ==================== -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script>
+      $(window).scroll(function() {
+        if ($('nav').scrollTop() > 100) {
+            $('.navbar-brand img').attr('src','./img/1_1.png'); //change src
+        } else {
+            $('.navbar-brand img').attr('src','');
+        }
+      });
+    </script>
+
+  </body>
+
+  <!-- ========== Modal ========== -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Entrar / Cadastrar-se</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div ng-include="'/login'"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--- ========== Bloco para inserção de todos os scripts ========== -->
+  <script src="app/controllers/login.js"></script>
+  <script src="app/controllers/subcribe.js"></script>
+  <script src="app/controllers/auth.js"></script>
+  <script src="app/controllers/options.js"></script>
+  <script src="app/controllers/blog.js"></script>
+  <script src="js/session.js"></script>
+  <script src="app/spa.js"></script>
+  <script src="js/cidades-estados-1.4-utf8.js"></script>
+
+
+
+</html>

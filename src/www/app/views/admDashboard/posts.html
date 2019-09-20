@@ -1,0 +1,41 @@
+<div ng-app="blog" ng-controller="post" ng-init="init()">
+
+  <form method="POST" action="/blog/addPost" enctype='multipart/form-data'>
+    <div class="form-group">
+      <label for="title">Título</label><br>
+      <small>Insira um título para a notícia</small>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title" required><br>
+      <small>Insira o conteúdo da sua notícia</small>
+      <textarea name="body" id="froala-editor" placeholder="text" required></textarea><br>
+      <small>Selecione uma fota para capa da notícia</small><br>
+
+      <div class="custom-file">
+          <input
+          type="file"
+          name="image"
+          class="custom-file-input"
+          id="inputGroupFile01"
+          accept="image/*"
+          required
+          />
+        <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
+      </div>
+    </div>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Inserir Notícia"/>
+  </form>
+  <br>
+  <div ng-include="'/blog/getPostsAdm'"></div>
+  <br>
+  <script>
+      new FroalaEditor('textarea#froala-editor', {
+        toolbarButtons: ['bold', 'italic'],
+        quickInsertTags: [''],
+      });
+
+      $('#inputGroupFile01').on('change',function(){
+              var fileName = $(this).val();
+              $(this).next('.custom-file-label').html(fileName.replace('C:\\fakepath\\', " "));
+          })
+    </script>
+  </div>

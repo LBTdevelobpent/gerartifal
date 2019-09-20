@@ -1,0 +1,75 @@
+
+
+.jumbotron{
+  max-width: 100%;
+  height: auto;
+  color: #FFFFFF;
+  background-position: 50% 35%;
+  background-size:cover;
+  background-blend-mode:darken;
+  background-repeat:no-repeat;
+  background-color: rgba(0.0, 0.0, 0.0, 0.7);
+}
+.container h1{
+  text-align: center;
+  padding:2%;
+  padding-bottom:3%;
+  font-family: 'Coiny', cursive;
+
+}
+.container h1{
+  text-align: center;
+  padding:2%;
+  padding-bottom:3%;
+  font-family: 'Coiny', cursive;
+
+}
+.fill-div {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+}
+
+.photo-gallery {
+  color:#313437;
+  background-color:rgba(46, 230, 0, 0.438);
+  padding-top: 5%;
+}
+
+.photo-gallery p {
+  color:#7d8285;
+}
+
+.photo-gallery h2 {
+  font-weight:bold;
+  margin-bottom:40px;
+  padding-top:40px;
+  color:inherit;
+}
+.underline{
+  text-decoration: none;
+}
+.underline:hover{
+  text-decoration: none;
+}
+.ob-fit{
+  object-fit: cover;
+}
+
+
+
+@media (max-width:767px) {
+  .photo-gallery h2 {
+    margin-bottom:25px;
+    padding-top:25px;
+    font-size:24px;
+  }
+}
+.photo-gallery .photos {
+  padding-bottom:20px;
+}
+
+.photo-gallery .item {
+  padding-bottom:30px;
+}

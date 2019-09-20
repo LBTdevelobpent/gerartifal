@@ -1,0 +1,51 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "db": "mongod --dbpath=src/database/data"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "(eng) Develop an online system that helps in the dissemination and automation of ARTIFAL- Campus Maceió program (focused on the teaching of singing techniques for choral and musical instruments), using concepts and tools of web programming, system analysis and bank to create a system that encompasses a series of tools for dedicated and specific ARTIFAL management, focusing on the user experience and making it practical and attractive both visually and functionally // (pt-br) Desenvolver um sistema on-line que auxilie na divulgação e realize a automação de processos do programa ARTIFAL- Campus Maceió (focado no ensino de técnicas de canto para coral e instrumentos musicais), utilizando conceitos e ferramentas de programação web, análise de sistemas e banco de dados para criar um sistema que englobe uma série de ferramentas para um gerenciamento dedicado e específico do ARTIFAL, com foco na experiência do usuário devendo tornar-se prático e atrativo tanto visualmente como funcionalmente.",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parse": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "ekko-lightbox": "^5.3.0",
+    "express": "^4.17.0",
+    "express-session": "^1.16.1",
+    "file-system": "^2.2.2",
+    "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.10",
+    "nodemailer": "^5.1.1",
+    "nodemailer-express-handlebars": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "password-generator": "^2.2.0",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "sharp": "^0.23.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LBTdevelobpent/gerartifal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LBTdevelobpent/gerartifal/issues"
+  },
+  "homepage": "https://github.com/LBTdevelobpent/gerartifal#readme"
+}
