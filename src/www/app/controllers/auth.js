@@ -65,7 +65,7 @@ auth.factory('authentication', ['$http', $http => ({
     if (!openSub) {
       window.localStorage.setItem('openSub', false);
     }
-    const socket = io.connect('http://localhost:3000/');
+    const socket = io.connect('http://gerartifalmc-com.umbler.net/');
     socket.on('openF', (data) => {
       const date = Date.now();
       if (date >= Date.parse(data.from) && date <= Date.parse(data.until)) {
