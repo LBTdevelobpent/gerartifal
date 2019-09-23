@@ -13,6 +13,7 @@ $(document).ready(() => {
     /**
      * Adicione aqui todos os elementos que só aparecerão apois login
      * */
+    console.log('carregado');
   }
 });
 $(window).on('beforeunload', () => {
