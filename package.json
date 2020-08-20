@@ -12,7 +12,7 @@
   "license": "ISC",
   "description": "(eng) Develop an online system that helps in the dissemination and automation of ARTIFAL- Campus Maceió program (focused on the teaching of singing techniques for choral and musical instruments), using concepts and tools of web programming, system analysis and bank to create a system that encompasses a series of tools for dedicated and specific ARTIFAL management, focusing on the user experience and making it practical and attractive both visually and functionally // (pt-br) Desenvolver um sistema on-line que auxilie na divulgação e realize a automação de processos do programa ARTIFAL- Campus Maceió (focado no ensino de técnicas de canto para coral e instrumentos musicais), utilizando conceitos e ferramentas de programação web, análise de sistemas e banco de dados para criar um sistema que englobe uma série de ferramentas para um gerenciamento dedicado e específico do ARTIFAL, com foco na experiência do usuário devendo tornar-se prático e atrativo tanto visualmente como funcionalmente.",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parse": "^0.1.0",
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
