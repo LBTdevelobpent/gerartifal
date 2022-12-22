@@ -22,7 +22,7 @@
     "file-system": "^2.2.2",
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.10",
     "nodemailer": "^5.1.1",
     "nodemailer-express-handlebars": "^3.1.0",
